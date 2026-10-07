@@ -1,0 +1,62 @@
+name: Deploy website via FTP
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Preview the FTP sync without uploading or deleting files
+        type: boolean
+        required: true
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-ftp-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # Enable only after the FTP credentials and destination directory are confirmed.
+    if: vars.FTP_DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out website files
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Check FTP settings are present
+        shell: bash
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          missing=0
+          for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD; do
+            if [[ -z "${!name}" ]]; then
+              echo "Missing GitHub Actions secret: ${name}"
+              missing=1
+            fi
+          done
+          if [[ "$missing" -ne 0 ]]; then
+            exit 1
+          fi
+
+      - name: Sync website files to the FTP host
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          port: ${{ vars.FTP_PORT || 21 }}
+          server-dir: ${{ vars.FTP_SERVER_DIR || './' }}
+          dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+          log-level: standard
