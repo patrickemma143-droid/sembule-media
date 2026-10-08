@@ -92,10 +92,10 @@ body.home-page { font-family: Arial, Helvetica, sans-serif; }
 .home .portfolio-copy p { margin: 0; color: #626962; font-size: 12px; }
 .home .proof-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
 .home .proof { min-width: 120px; flex: 1; padding: 18px 10px; border: 1px dashed #a4b5a7; border-radius: 8px; color: #405044; background: #f8faf8; font-size: 11px; text-align: center; }
-.home .cta-band { display: flex; align-items: center; justify-content: space-between; gap: 22px; margin-inline: 0; padding: 35px var(--home-gutter); border-radius: 0; color: #fff; background: #04592a; }
-.home .cta-band h2 { margin: 0 0 5px; font-size: 26px; line-height: 1.1; }
-.home .cta-band p { margin: 0; color: #e0e5df; font-size: 13px; }
-.home .cta-band .button { white-space: nowrap; border-color: #bf9000; color: #151915; background: #bf9000; }
+.home .cta-band { display: flex; align-items: center; justify-content: space-between; gap: 32px; min-height: 250px; margin-inline: 0; padding: 58px var(--home-gutter); border-radius: 0; color: #fff; background: #04592a; }
+.home .cta-band h2 { max-width: 700px; margin: 0 0 10px; font-size: clamp(32px, 3.5vw, 46px); line-height: 1.04; letter-spacing: -.035em; }
+.home .cta-band p { margin: 0; color: #e0e5df; font-size: 15px; line-height: 1.55; }
+.home .cta-band .button { min-height: 56px; padding: 17px 25px; white-space: nowrap; border-color: #bf9000; border-radius: 10px; color: #151915; background: #bf9000; font-size: 14px; }
 .testimonial-showcase { --carousel-time: 280ms; margin: 44px 0 0; padding: 44px var(--home-gutter); overflow: hidden; border-radius: 0; color: #171917; background: var(--green-tint); }
 .testimonial-frame { max-width: 1020px; margin: auto; display: grid; grid-template-columns: minmax(0, .93fr) minmax(0, 1.07fr); align-items: center; gap: 7%; }
 .testimonial-visual { position: relative; width: 100%; height: 390px; display: grid; place-items: center; perspective: 1100px; touch-action: pan-y; user-select: none; cursor: grab; }
@@ -183,8 +183,10 @@ body.home-page { font-family: Arial, Helvetica, sans-serif; }
   .home .tile h3 { font-size: 14px; }
   .home .tile p { font-size: 11px; }
   .home .proof { min-width: calc(50% - 6px); padding: 12px 5px; }
-  .home .cta-band { display: block; padding: 24px 18px; border-radius: 0; }
-  .home .cta-band .button { margin-top: 15px; }
+  .home .cta-band { display: block; min-height: 0; padding: 42px 18px; border-radius: 0; }
+  .home .cta-band h2 { max-width: 440px; font-size: clamp(29px, 8vw, 36px); }
+  .home .cta-band p { max-width: 38ch; font-size: 14px; }
+  .home .cta-band .button { margin-top: 22px; }
   .testimonial-showcase { margin: 34px 0 0; padding: 32px 18px; }
   .testimonial-frame { grid-template-columns: 1fr; gap: 12px; }
   .testimonial-visual { height: clamp(265px, 76vw, 340px); }
