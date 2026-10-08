@@ -42,9 +42,13 @@ jobs:
         run: |
           missing=0
           for name in FTP_DEPLOY_ENABLED FTP_DEPLOY_READY; do
-            value="${!name,,}"
+            value="${!name}"
+            value="${value#"${value%%[![:space:]]*}"}"
+            value="${value%"${value##*[![:space:]]}"}"
+            value="${value,,}"
             if [[ "$value" != "true" ]]; then
-              echo "Deployment blocked: ${name} must be true (received '${!name}')."
+              printf -v shown '%q' "${!name}"
+              echo "Deployment blocked: ${name} must be true (received ${shown})."
               missing=1
             fi
           done
