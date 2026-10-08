@@ -20,6 +20,40 @@
 
   document.querySelectorAll('[data-year]').forEach(node => { node.textContent = String(new Date().getFullYear()); });
 
+  const partnerBand = document.querySelector('[data-partner-band]');
+  if (partnerBand) {
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const rows = [...partnerBand.querySelectorAll('[data-client-marquee]')];
+    const pauseButton = partnerBand.querySelector('[data-client-marquee-toggle]');
+    let paused = reducedMotion.matches;
+    rows.forEach(row => {
+      const track = row.querySelector('.client-logo-track');
+      const repeat = row.querySelector('.client-logo-set').cloneNode(true);
+      repeat.classList.add('client-logo-set--repeat');
+      repeat.setAttribute('aria-hidden', 'true');
+      repeat.removeAttribute('aria-label');
+      repeat.querySelectorAll('img').forEach(image => { image.alt = ''; });
+      repeat.setAttribute('inert', '');
+      track.append(repeat);
+      if (!reducedMotion.matches) row.classList.add('is-ready');
+    });
+    const syncPausedState = () => {
+      partnerBand.classList.toggle('is-paused', paused);
+      pauseButton.setAttribute('aria-pressed', String(paused));
+      pauseButton.setAttribute('aria-label', paused ? 'Resume client and partner logo movement' : 'Pause client and partner logo movement');
+      pauseButton.textContent = paused ? 'Resume logos' : 'Pause logos';
+    };
+    pauseButton.hidden = reducedMotion.matches;
+    pauseButton.addEventListener('click', () => { paused = !paused; syncPausedState(); });
+    reducedMotion.addEventListener?.('change', event => {
+      paused = event.matches;
+      pauseButton.hidden = event.matches;
+      rows.forEach(row => row.classList.toggle('is-ready', !event.matches));
+      syncPausedState();
+    });
+    syncPausedState();
+  }
+
   const hero = document.querySelector('[data-hero-carousel]');
   if (hero) {
     const stories = [
