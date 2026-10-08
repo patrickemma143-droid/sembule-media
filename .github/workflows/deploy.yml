@@ -21,8 +21,8 @@ concurrency:
 
 jobs:
   deploy:
-    # Enable only after the FTP credentials and destination directory are confirmed.
-    if: vars.FTP_DEPLOY_ENABLED == 'true'
+    # Require confirmed FTP settings and a full backup/review of the existing Bluehost site.
+    if: vars.FTP_DEPLOY_ENABLED == 'true' && vars.FTP_DEPLOY_READY == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -57,6 +57,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
           port: ${{ vars.FTP_PORT || 21 }}
+          local-dir: ./site/
           server-dir: ${{ vars.FTP_SERVER_DIR || './' }}
           dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
           log-level: standard
