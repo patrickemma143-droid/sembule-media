@@ -246,7 +246,7 @@ h3 { font-size: clamp(24px, 3vw, 34px); }
 .footer-col a { display: table; margin: 9px 0; color: #f2f4f0; font-size: 13px; text-decoration: none; }
 .footer-col a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .footer-socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-.footer-socials a { width: 44px; height: 44px; display: grid; place-items: center; margin: 0; border: 1px solid #ffffff45; border-radius: 12px; color: #f2f4f0; background: #ffffff08; transition: color 180ms var(--ease), background-color 180ms var(--ease), border-color 180ms var(--ease), transform 180ms var(--ease); }
+.footer-socials a { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin: 0; padding: 0 11px; border: 1px solid #ffffff45; border-radius: 12px; color: #f2f4f0; background: #ffffff08; font-size: 11px; font-weight: 600; text-decoration: none; transition: color 180ms var(--ease), background-color 180ms var(--ease), border-color 180ms var(--ease), transform 180ms var(--ease); }
 .footer-socials a:hover { color: var(--black); background: #f1cc55; border-color: #f1cc55; text-decoration: none; transform: translateY(-2px); }
 .footer-socials svg { width: 20px; height: 20px; display: block; }
 .footer-socials a:focus-visible { outline-color: #f1cc55; outline-offset: 4px; }
