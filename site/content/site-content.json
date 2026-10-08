@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "home": {
+    "hero": {
+      "slides": [
+        {
+          "eyebrow": "Livestream · sound · PA",
+          "title": "Bring the room to the world.\nKeep the story.",
+          "description": "From live events to weddings and documentaries, one crew captures the moment and the story that follows.",
+          "image": "./assets/brand/camera-viewfinder.jpg",
+          "imageAlt": "Camera viewfinder image, in black and white"
+        },
+        {
+          "eyebrow": "Weddings · photography · film",
+          "title": "A day that keeps unfolding.",
+          "description": "Thoughtful photography and film for a celebration you want to remember.",
+          "image": "https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/msg680180638-10205.jpg?resize=580%2C435&ssl=1",
+          "imageAlt": "Wedding and celebration photography from the Sembule Media archive"
+        },
+        {
+          "eyebrow": "Documentaries · field stories",
+          "title": "Stories worth carrying forward.",
+          "description": "Documentary work shaped around real people, places and purpose.",
+          "image": "https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/msg680180638-10213-Copy.jpg?resize=580%2C435&ssl=1",
+          "imageAlt": "Documentary field story from the Sembule Media archive"
+        },
+        {
+          "eyebrow": "Live production · watch a sample",
+          "title": "See Sembule live in action.",
+          "description": "A livestream sample published by Sembule Media.",
+          "image": "https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/DSC_6029-2-scaled.jpg?fit=1200%2C800&ssl=1",
+          "imageAlt": "Event-production still used as a livestream sample poster"
+        }
+      ],
+      "videoUrl": "https://www.youtube-nocookie.com/embed/rktDjkqMZaY?rel=0&playsinline=1&controls=1&autoplay=1",
+      "primaryAction": { "label": "Plan your production", "url": "./contact.html" },
+      "secondaryAction": { "label": "See the work", "url": "./portfolio.html" }
+    },
+    "servicesIntro": {
+      "label": "What we produce",
+      "title": "Production that brings people together.",
+      "description": "Lead with the three growth services, then introduce the full service range.",
+      "cards": [
+        { "title": "Livestreaming", "description": "Multi-camera event coverage and broadcast support.", "imageLabel": "Livestream image" },
+        { "title": "Sound & PA", "description": "Audio support for indoor and outdoor events.", "imageLabel": "Sound / PA image" },
+        { "title": "Documentaries", "description": "Story-led filming and post-production.", "imageLabel": "Documentary image" }
+      ],
+      "serviceList": "Also: photography · videography · podcast · event coverage · 65” TV display hire"
+    },
+    "aboutIntro": {
+      "label": "Sembule Media · Kampala, Uganda",
+      "title": "A thoughtful crew for moments that matter.",
+      "description": "Since 2022, Sembule Media has brought live video, streaming, sound, photography and film together—from conferences and weddings to documentary stories across Uganda.",
+      "image": "https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/DSC_6029-2-scaled.jpg?fit=1400%2C875&ssl=1",
+      "imageAlt": "Sembule Media crew producing a live event in the field",
+      "linkLabel": "Get to know Sembule"
+    },
+    "callToAction": {
+      "title": "Planning an event or production?",
+      "description": "Tell us the date, service, location and audience size.",
+      "actionLabel": "Start an enquiry",
+      "actionUrl": "./contact.html"
+    }
+  },
+  "about": {
+    "hero": {
+      "label": "About Sembule Media",
+      "title": "Local production experience. A wider view of every story.",
+      "description": "Based in Bunamwaya, Kampala, Sembule Media works with events, organizations and communities across Uganda."
+    },
+    "story": {
+      "label": "Since 2022",
+      "title": "Bring the production together, so people can stay with the moment.",
+      "paragraphs": [
+        "Sembule Media was established in 2022 to provide live video production, streaming, sound and PA, photography, videography and documentary services.",
+        "From conferences and hybrid events to weddings and field stories, the work begins by understanding the room, the audience and what should be remembered."
+      ],
+      "image": "https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/DSC_6029-2-scaled.jpg?fit=1100%2C1200&ssl=1",
+      "imageAlt": "A live production taking place at an event",
+      "actionLabel": "Explore services",
+      "actionUrl": "./services.html"
+    },
+    "values": [
+      { "title": "Plan for the room", "description": "Venue, audience and running order shape the equipment and crew." },
+      { "title": "Coordinate the details", "description": "Align production needs with the event team before the day begins." },
+      { "title": "Deliver with clarity", "description": "Confirm formats, timing and scope before the final work is handed over." }
+    ],
+    "coverage": {
+      "label": "Where we work",
+      "title": "Based in Kampala. Available for productions across Uganda.",
+      "description": "Tell us where your event or story is taking place and what you need produced. We’ll confirm availability and logistics with you."
+    },
+    "statement": {
+      "titlePrefix": "Different productions. One thoughtful ",
+      "titleEmphasis": "plan.",
+      "description": "Livestreaming, sound, event photography and documentary work are connected by the same essentials: clear preparation, capable coordination and an agreed delivery."
+    },
+    "callToAction": {
+      "label": "Start a conversation",
+      "title": "Tell us what you’re planning.",
+      "actionLabel": "Plan a production",
+      "actionUrl": "./contact.html"
+    }
+  },
+  "services": {
+    "hero": {
+      "label": "Sembule Media services",
+      "title": "Production support for the moments that matter.",
+      "description": "From the first sound check to the final edit, bring your event or story to a crew that can shape the whole production."
+    },
+    "items": [
+      { "title": "Livestreaming & broadcast", "description": "Multi-camera event coverage, live switching, broadcast support and recording for in-person and hybrid audiences.", "actionLabel": "See production work", "actionUrl": "./portfolio.html" },
+      { "title": "Sound & PA", "description": "Sound reinforcement and event crew for indoor and outdoor venues. We’ll scope the setup around your space and audience.", "actionLabel": "Request a quote", "actionUrl": "./contact.html" },
+      { "title": "Corporate events", "description": "Production support for conferences, meetings, launches, workshops and gatherings that need clear sound and dependable coverage.", "actionLabel": "Request a quote", "actionUrl": "./contact.html" },
+      { "title": "Weddings & celebrations", "description": "Photography and film for a day you want to experience fully and return to afterwards.", "actionLabel": "See selected work", "actionUrl": "./portfolio.html" },
+      { "title": "Photography & videography", "description": "Event and production photography, video coverage and edited deliverables shaped around your brief.", "actionLabel": "Request a quote", "actionUrl": "./contact.html" },
+      { "title": "Documentaries & field stories", "description": "Story-led filming and post-production for organizations, communities and the people behind the work.", "actionLabel": "See selected work", "actionUrl": "./portfolio.html" },
+      { "title": "Podcast production", "description": "Recording and production support for a conversation that needs to sound as considered as it feels.", "actionLabel": "Request a quote", "actionUrl": "./contact.html" },
+      { "title": "65-inch TV display hire", "description": "Display hire for suitable events and venues. Availability, transport and setup are confirmed with each enquiry.", "actionLabel": "Ask about availability", "actionUrl": "./contact.html" }
+    ],
+    "callout": {
+      "title": "Let’s shape the right setup for your event.",
+      "description": "Share the date, venue, audience and what you need covered. We’ll follow up to confirm the scope.",
+      "actionLabel": "Plan a production",
+      "actionUrl": "./contact.html"
+    }
+  }
+}

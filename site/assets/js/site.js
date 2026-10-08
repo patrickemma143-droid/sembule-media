@@ -1,4 +1,67 @@
-(() => {
+(async () => {
+  const contentMeta = document.querySelector('meta[name="sembule-site-content"]');
+  let siteContent = null;
+  if (contentMeta?.content) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 1500);
+    try {
+      const response = await fetch(contentMeta.content, { cache: 'no-store', signal: controller.signal });
+      if (response.ok) {
+        const candidate = await response.json();
+        if (candidate && candidate.schemaVersion === 1) siteContent = candidate;
+      }
+    } catch {
+      // Keep the HTML copy as the working fallback when content storage is unavailable.
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+  window.SEMBULE_SITE_CONTENT = siteContent;
+
+  const readContent = path => path.split('.').reduce((value, key) => value?.[key], siteContent);
+  const publicUrl = value => {
+    if (typeof value !== 'string' || !value.trim() || value.trim().startsWith('//')) return null;
+    try {
+      const parsed = new URL(value, window.location.href);
+      return parsed.protocol === 'https:' || parsed.origin === window.location.origin ? value : null;
+    } catch {
+      return null;
+    }
+  };
+  document.querySelectorAll('[data-cms-text]').forEach(node => {
+    const value = readContent(node.dataset.cmsText);
+    if (typeof value === 'string' || typeof value === 'number') node.textContent = String(value);
+  });
+  document.querySelectorAll('[data-cms-href]').forEach(node => {
+    const value = publicUrl(readContent(node.dataset.cmsHref));
+    if (value) node.setAttribute('href', value);
+  });
+  document.querySelectorAll('[data-cms-src]').forEach(node => {
+    const value = publicUrl(readContent(node.dataset.cmsSrc));
+    if (value) node.setAttribute('src', value);
+  });
+  document.querySelectorAll('[data-cms-alt]').forEach(node => {
+    const value = readContent(node.dataset.cmsAlt);
+    if (typeof value === 'string') node.setAttribute('alt', value);
+  });
+  const configuredHeroSlides = siteContent?.home?.hero?.slides;
+  if (Array.isArray(configuredHeroSlides)) {
+    document.querySelectorAll('[data-hero-slide]').forEach((slide, index) => {
+      const story = configuredHeroSlides[index];
+      if (!story || typeof story !== 'object') return;
+      if (typeof story.eyebrow === 'string') slide.dataset.storyEyebrow = story.eyebrow;
+      if (typeof story.title === 'string') slide.dataset.storyTitle = story.title;
+      if (typeof story.description === 'string') slide.dataset.storyDescription = story.description;
+      const image = slide.querySelector('img');
+      const imageUrl = publicUrl(story.image);
+      if (image && imageUrl) image.src = imageUrl;
+      if (image && typeof story.imageAlt === 'string') image.alt = story.imageAlt;
+      const marker = document.querySelector(`[data-hero-goto="${index}"]`);
+      if (marker && typeof story.title === 'string') marker.setAttribute('aria-label', `Show story ${index + 1}: ${story.title}`);
+    });
+  }
+  window.SEMBULE_HERO_VIDEO_URL = publicUrl(siteContent?.home?.hero?.videoUrl);
+
   const toggle = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-main-nav]');
   if (toggle && nav) {
@@ -56,12 +119,11 @@
 
   const hero = document.querySelector('[data-hero-carousel]');
   if (hero) {
-    const stories = [
-      { eyebrow: 'Livestream · sound · PA', title: 'Bring the room to the world. Keep the story.', description: 'From live events to weddings and documentaries, one crew captures the moment and the story that follows.' },
-      { eyebrow: 'Weddings · photography · film', title: 'A day that keeps unfolding.', description: 'Thoughtful photography and film for a celebration you want to remember.' },
-      { eyebrow: 'Documentaries · field stories', title: 'Stories worth carrying forward.', description: 'Documentary work shaped around real people, places and purpose.' },
-      { eyebrow: 'Live production · watch a sample', title: 'See Sembule live in action.', description: 'A livestream sample published by Sembule Media.' }
-    ];
+    const stories = [...hero.querySelectorAll('[data-hero-slide]')].map(slide => ({
+      eyebrow: slide.dataset.storyEyebrow || '',
+      title: slide.dataset.storyTitle || '',
+      description: slide.dataset.storyDescription || ''
+    }));
     const track = hero.querySelector('.hero-slides');
     const slides = [...hero.querySelectorAll('[data-hero-slide]')];
     const markers = [...hero.querySelectorAll('[data-hero-goto]')];
@@ -75,7 +137,7 @@
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
     let current = 0, paused = reducedMotion.matches, pointerInside = false, focusInside = false;
     let timer, copyTimer, scrollTimer, wheelResetTimer, wheelUnlockTimer, wheelTotal = 0, wheelLocked = false, pointerStart = null, draggingMouse = false;
-    const videoEmbed = 'https://www.youtube-nocookie.com/embed/rktDjkqMZaY?rel=0&playsinline=1&controls=1&autoplay=1';
+    const videoEmbed = window.SEMBULE_HERO_VIDEO_URL || 'https://www.youtube-nocookie.com/embed/rktDjkqMZaY?rel=0&playsinline=1&controls=1&autoplay=1';
     const stopVideo = () => { video.removeAttribute('src'); play.hidden = false; };
     const setPausedState = () => {
       pauseButton.setAttribute('aria-pressed', String(paused));
