@@ -32,7 +32,7 @@ Use a dedicated website directory, not the FTP account root. The FTP sync can re
 
 ### How it runs
 
-- Pushes to `main` deploy only when both `FTP_DEPLOY_ENABLED` and `FTP_DEPLOY_READY` are `true`.
+- Pushes to `main` run a validation step; deployment proceeds only when both `FTP_DEPLOY_ENABLED` and `FTP_DEPLOY_READY` are `true` and all FTP settings are present.
 - **Actions → Deploy website via FTP → Run workflow** starts a manual sync. The `dry_run` option is checked by default, so the first manual run previews changes without uploading or deleting files.
 - After reviewing the dry-run output and confirming the target directory, uncheck `dry_run` for a live manual deployment.
 

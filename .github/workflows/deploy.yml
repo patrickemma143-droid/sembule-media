@@ -22,7 +22,6 @@ concurrency:
 jobs:
   deploy:
     # Require confirmed FTP settings and a full backup/review of the existing Bluehost site.
-    if: vars.FTP_DEPLOY_ENABLED == 'true' && vars.FTP_DEPLOY_READY == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -31,15 +30,24 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Check FTP settings are present
+      - name: Validate deployment flags and FTP settings
         shell: bash
         env:
+          FTP_DEPLOY_ENABLED: ${{ vars.FTP_DEPLOY_ENABLED }}
+          FTP_DEPLOY_READY: ${{ vars.FTP_DEPLOY_READY }}
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR || vars.FTP_SERVER_DIR }}
         run: |
           missing=0
+          for name in FTP_DEPLOY_ENABLED FTP_DEPLOY_READY; do
+            value="${!name,,}"
+            if [[ "$value" != "true" ]]; then
+              echo "Deployment blocked: ${name} must be true (received '${!name}')."
+              missing=1
+            fi
+          done
           for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD FTP_SERVER_DIR; do
             if [[ -z "${!name}" ]]; then
               echo "Missing GitHub Actions secret: ${name}"
