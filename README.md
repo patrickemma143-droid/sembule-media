@@ -13,6 +13,7 @@ In the repository, open **Settings → Secrets and variables → Actions → New
 - `FTP_SERVER` — FTP hostname from the hosting provider
 - `FTP_USERNAME` — FTP username
 - `FTP_PASSWORD` — FTP password
+- `FTP_SERVER_DIR` — the confirmed website folder on the server, including its trailing slash (for example, the provider-confirmed public website directory)
 
 Keep credentials in GitHub Secrets; do not put them in this repository or in chat messages.
 
@@ -20,13 +21,14 @@ Keep credentials in GitHub Secrets; do not put them in this repository or in cha
 
 In **Settings → Secrets and variables → Actions → Variables**, add:
 
-- `FTP_SERVER_DIR` — the confirmed website folder on the server, including its trailing slash (for example, the provider-confirmed public website directory)
 - `FTP_PROTOCOL` — preferably `ftps` if the host supports it; use the provider’s exact protocol setting
 - `FTP_PORT` — optional; use the provider’s port. If omitted, the workflow uses port `21`.
 - `FTP_DEPLOY_ENABLED` — set to `true` after the FTP credentials and destination are confirmed.
 - `FTP_DEPLOY_READY` — leave unset until the current Bluehost files and database have been backed up and the destination has been reviewed; set to `true` when safe to publish.
 
 Use a dedicated website directory, not the FTP account root. The FTP sync can remove remote files that were previously deployed by this workflow but no longer exist in the repository. Review the destination carefully before enabling it.
+
+`FTP_SERVER_DIR` may be stored as a repository secret or a repository variable. The workflow reads the secret first, then the variable, and stops if neither is set.
 
 ### How it runs
 
