@@ -1,0 +1,51 @@
+/* Sembule Media — "Linen & Sage" palette
+   Replaces stark #fff with warm, low-glare neutrals that sit well with the brand's deep green and gold.
+   Loaded after site.css / wireframe-home.css on every page; delete this file (and its <link>) to revert. */
+:root {
+  --linen: #f1ebdd;        /* page background */
+  --ivory: #f9f6ee;        /* header, cards, controls (replaces pure white) */
+  --sand: #ebe2c8;         /* gold-tinted band */
+  --sage: #dfe6d7;         /* green-tinted band */
+  --sage-light: #e9eee1;   /* light green wash */
+  --line-warm: #d7d0bb;
+  --muted-warm: #5a6157;
+  --paper: var(--linen);
+  --wash: #ebe4d1;
+  --line: var(--line-warm);
+  --muted: var(--muted-warm);
+}
+.home-page #main {
+  --paper: var(--linen); --wash: #ebe4d1; --soft: #dfe3d6; --line: var(--line-warm); --muted: var(--muted-warm);
+  --green-tint: var(--sage); --green-wash: var(--sage-light); --gold-tint: var(--sand);
+}
+html, body { background: var(--linen); }
+
+/* header + menu */
+.site-header { background: var(--ivory); border-bottom-color: #e0d9c4; }
+.menu-toggle { background: var(--ivory); }
+.home-page .main-nav .button { background: var(--ivory); }
+.button--outline:hover { background: var(--ivory); border-color: var(--ivory); }
+
+/* hero curve that meets the page */
+.hero-base { background: var(--linen); }
+.home .hero:after { background: var(--linen); }
+
+/* cards and controls */
+.home .tile, .home .portfolio-card { background: var(--ivory); border-color: #d3cdb6; }
+.home .media { background: #e3dcc8; border-color: #b9b39c; }
+.home .about-intro-image { background: #dcd5c0; }
+.home .work-carousel-arrow, .home .work-carousel-pause, .home .client-marquee-toggle, .testimonial-arrow { background: var(--ivory); border-color: #b4ae98; }
+.filter-button { background: var(--ivory); }
+.form-field input, .form-field select, .form-field textarea { background: var(--ivory); border-color: #b4ae98; }
+.service-callout, .contact-form { background: #ebe4d1; }
+.draft-note { background: #efe3bc; }
+
+/* strips, bands and dividers */
+.home .capability-strip { background: var(--sage-light); border-color: #cdd5c2; }
+.home .capability-strip span { border-right-color: #c3c9b6; }
+.home .services-band { border-color: #ddd1ad; }
+.home .partner-band { border-color: #cdd5c2; }
+.home .proof { background: #f1ede0; border-color: #b9b39c; }
+
+/* client logos: let white logo backgrounds melt into the warm band */
+.home .client-logo-set img { mix-blend-mode: multiply; }
