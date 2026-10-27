@@ -69,8 +69,8 @@
       "label": "Sembule Media · Kampala, Uganda",
       "title": "A thoughtful crew for moments that matter.",
       "description": "Since 2022, Sembule Media has brought live video, streaming, sound, photography and film together—from conferences and weddings to documentary stories across Uganda.",
-      "image": "https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/DSC_6029-2-scaled.jpg?fit=1400%2C875&ssl=1",
-      "imageAlt": "Sembule Media crew producing a live event in the field",
+      "image": "./assets/brand/about-crew-at-work.jpg",
+      "imageAlt": "Sembule Media crew running a multi-camera livestream from a boardroom control desk",
       "linkLabel": "Get to know Sembule"
     },
     "callToAction": {
