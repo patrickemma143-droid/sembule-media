@@ -25,6 +25,20 @@
           "imageAlt": "Documentary field story from the Sembule Media archive"
         },
         {
+          "eyebrow": "Conferences · stage · live events",
+          "title": "Every voice, heard in the room.",
+          "description": "Clear sound, sharp visuals and a calm crew for stages, conferences and celebrations.",
+          "image": "./assets/brand/hero-live-stage.jpg",
+          "imageAlt": "Speaker addressing the audience on stage at a live Sembule Media event"
+        },
+        {
+          "eyebrow": "LED screens · displays",
+          "title": "65-inch screens available.",
+          "description": "Crisp, bright screens for presentations, launches and conferences, set up and run by our crew.",
+          "image": "./assets/brand/hero-led-screen.jpg",
+          "imageAlt": "Presenter at a podium beside a large LED screen at a conference in Kampala"
+        },
+        {
           "eyebrow": "Live production · watch a sample",
           "title": "See Sembule live in action.",
           "description": "A livestream sample published by Sembule Media.",
@@ -33,17 +47,35 @@
         }
       ],
       "videoUrl": "https://www.youtube-nocookie.com/embed/rktDjkqMZaY?rel=0&playsinline=1&controls=1&autoplay=1",
-      "primaryAction": { "label": "Plan your production", "url": "./contact.html" },
-      "secondaryAction": { "label": "See the work", "url": "./portfolio.html" }
+      "primaryAction": {
+        "label": "Plan your production",
+        "url": "./contact.html"
+      },
+      "secondaryAction": {
+        "label": "See the work",
+        "url": "./portfolio.html"
+      }
     },
     "servicesIntro": {
       "label": "What we produce",
       "title": "Production that brings people together.",
       "description": "Lead with the three growth services, then introduce the full service range.",
       "cards": [
-        { "title": "Livestreaming", "description": "Multi-camera event coverage and broadcast support.", "imageLabel": "Livestream image" },
-        { "title": "Sound & PA", "description": "Audio support for indoor and outdoor events.", "imageLabel": "Sound / PA image" },
-        { "title": "Documentaries", "description": "Story-led filming and post-production.", "imageLabel": "Documentary image" }
+        {
+          "title": "Livestreaming",
+          "description": "Multi-camera event coverage and broadcast support.",
+          "imageLabel": "Livestream image"
+        },
+        {
+          "title": "Sound & PA",
+          "description": "Audio support for indoor and outdoor events.",
+          "imageLabel": "Sound / PA image"
+        },
+        {
+          "title": "Documentaries",
+          "description": "Story-led filming and post-production.",
+          "imageLabel": "Documentary image"
+        }
       ],
       "serviceList": "Also: photography · videography · podcast · event coverage · 65” TV display hire"
     },
@@ -81,9 +113,18 @@
       "actionUrl": "./services.html"
     },
     "values": [
-      { "title": "Plan for the room", "description": "Venue, audience and running order shape the equipment and crew." },
-      { "title": "Coordinate the details", "description": "Align production needs with the event team before the day begins." },
-      { "title": "Deliver with clarity", "description": "Confirm formats, timing and scope before the final work is handed over." }
+      {
+        "title": "Plan for the room",
+        "description": "Venue, audience and running order shape the equipment and crew."
+      },
+      {
+        "title": "Coordinate the details",
+        "description": "Align production needs with the event team before the day begins."
+      },
+      {
+        "title": "Deliver with clarity",
+        "description": "Confirm formats, timing and scope before the final work is handed over."
+      }
     ],
     "coverage": {
       "label": "Where we work",
@@ -109,14 +150,54 @@
       "description": "From the first sound check to the final edit, bring your event or story to a crew that can shape the whole production."
     },
     "items": [
-      { "title": "Livestreaming & broadcast", "description": "Multi-camera event coverage, live switching, broadcast support and recording for in-person and hybrid audiences.", "actionLabel": "See production work", "actionUrl": "./portfolio.html" },
-      { "title": "Sound & PA", "description": "Sound reinforcement and event crew for indoor and outdoor venues. We’ll scope the setup around your space and audience.", "actionLabel": "Request a quote", "actionUrl": "./contact.html" },
-      { "title": "Corporate events", "description": "Production support for conferences, meetings, launches, workshops and gatherings that need clear sound and dependable coverage.", "actionLabel": "Request a quote", "actionUrl": "./contact.html" },
-      { "title": "Weddings & celebrations", "description": "Photography and film for a day you want to experience fully and return to afterwards.", "actionLabel": "See selected work", "actionUrl": "./portfolio.html" },
-      { "title": "Photography & videography", "description": "Event and production photography, video coverage and edited deliverables shaped around your brief.", "actionLabel": "Request a quote", "actionUrl": "./contact.html" },
-      { "title": "Documentaries & field stories", "description": "Story-led filming and post-production for organizations, communities and the people behind the work.", "actionLabel": "See selected work", "actionUrl": "./portfolio.html" },
-      { "title": "Podcast production", "description": "Recording and production support for a conversation that needs to sound as considered as it feels.", "actionLabel": "Request a quote", "actionUrl": "./contact.html" },
-      { "title": "65-inch TV display hire", "description": "Display hire for suitable events and venues. Availability, transport and setup are confirmed with each enquiry.", "actionLabel": "Ask about availability", "actionUrl": "./contact.html" }
+      {
+        "title": "Livestreaming & broadcast",
+        "description": "Multi-camera event coverage, live switching, broadcast support and recording for in-person and hybrid audiences.",
+        "actionLabel": "See production work",
+        "actionUrl": "./portfolio.html"
+      },
+      {
+        "title": "Sound & PA",
+        "description": "Sound reinforcement and event crew for indoor and outdoor venues. We’ll scope the setup around your space and audience.",
+        "actionLabel": "Request a quote",
+        "actionUrl": "./contact.html"
+      },
+      {
+        "title": "Corporate events",
+        "description": "Production support for conferences, meetings, launches, workshops and gatherings that need clear sound and dependable coverage.",
+        "actionLabel": "Request a quote",
+        "actionUrl": "./contact.html"
+      },
+      {
+        "title": "Weddings & celebrations",
+        "description": "Photography and film for a day you want to experience fully and return to afterwards.",
+        "actionLabel": "See selected work",
+        "actionUrl": "./portfolio.html"
+      },
+      {
+        "title": "Photography & videography",
+        "description": "Event and production photography, video coverage and edited deliverables shaped around your brief.",
+        "actionLabel": "Request a quote",
+        "actionUrl": "./contact.html"
+      },
+      {
+        "title": "Documentaries & field stories",
+        "description": "Story-led filming and post-production for organizations, communities and the people behind the work.",
+        "actionLabel": "See selected work",
+        "actionUrl": "./portfolio.html"
+      },
+      {
+        "title": "Podcast production",
+        "description": "Recording and production support for a conversation that needs to sound as considered as it feels.",
+        "actionLabel": "Request a quote",
+        "actionUrl": "./contact.html"
+      },
+      {
+        "title": "65-inch TV display hire",
+        "description": "Display hire for suitable events and venues. Availability, transport and setup are confirmed with each enquiry.",
+        "actionLabel": "Ask about availability",
+        "actionUrl": "./contact.html"
+      }
     ],
     "callout": {
       "title": "Let’s shape the right setup for your event.",
