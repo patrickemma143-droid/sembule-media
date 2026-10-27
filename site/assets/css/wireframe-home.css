@@ -241,3 +241,6 @@ body.home-page { font-family: Arial, Helvetica, sans-serif; }
   .testimonial-photo { filter: none !important; }
   .testimonial-arrow { transition: background-color 100ms ease, border-color 100ms ease; }
 }
+
+/* Livestream sample button hidden at the client's request */
+.home .hero-play { display: none !important; }
