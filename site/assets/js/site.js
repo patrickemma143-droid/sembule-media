@@ -138,7 +138,7 @@
     let current = 0, paused = reducedMotion.matches, pointerInside = false, focusInside = false;
     let timer, copyTimer, scrollTimer, wheelResetTimer, wheelUnlockTimer, wheelTotal = 0, wheelLocked = false, pointerStart = null, draggingMouse = false;
     const videoEmbed = window.SEMBULE_HERO_VIDEO_URL || 'https://www.youtube-nocookie.com/embed/rktDjkqMZaY?rel=0&playsinline=1&controls=1&autoplay=1';
-    const stopVideo = () => { video.removeAttribute('src'); play.hidden = false; };
+    const stopVideo = () => { video?.removeAttribute('src'); if (play) play.hidden = false; };
     const setPausedState = () => {
       pauseButton.setAttribute('aria-pressed', String(paused));
       pauseButton.textContent = paused ? 'Play' : 'Pause';
@@ -183,7 +183,7 @@
     });
     markers.forEach(marker => marker.addEventListener('click', () => show(Number(marker.dataset.heroGoto))));
     pauseButton.addEventListener('click', () => { paused = !paused; setPausedState(); schedule(); });
-    play.addEventListener('click', () => { video.src = videoEmbed; play.hidden = true; });
+    play?.addEventListener('click', () => { if (video) video.src = videoEmbed; play.hidden = true; });
     track.addEventListener('scroll', () => { clearTimeout(scrollTimer); scrollTimer = setTimeout(settle, 120); }, { passive: true });
     track.addEventListener('keydown', event => {
       if (event.key === 'ArrowRight') { event.preventDefault(); show(current + 1); }

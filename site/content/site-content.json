@@ -4,32 +4,11 @@
     "hero": {
       "slides": [
         {
-          "eyebrow": "Livestream · sound · PA",
-          "title": "Bring the room to the world.\nKeep the story.",
-          "description": "From live events to weddings and documentaries, one crew captures the moment and the story that follows.",
-          "image": "./assets/brand/camera-viewfinder.jpg",
-          "imageAlt": "Camera viewfinder image, in black and white"
-        },
-        {
-          "eyebrow": "Weddings · photography · film",
-          "title": "A day that keeps unfolding.",
-          "description": "Thoughtful photography and film for a celebration you want to remember.",
-          "image": "https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/msg680180638-10205.jpg?resize=580%2C435&ssl=1",
-          "imageAlt": "Wedding and celebration photography from the Sembule Media archive"
-        },
-        {
           "eyebrow": "Weddings · portraits · film",
           "title": "Moments you never forget.",
           "description": "Photography and film that hold the quiet gestures, the laughter and the day exactly as it felt.",
           "image": "./assets/brand/hero-wedding-bw.jpg",
           "imageAlt": "Black and white photograph of a groom kissing his bride's hand among palm leaves"
-        },
-        {
-          "eyebrow": "Documentaries · field stories",
-          "title": "Stories worth carrying forward.",
-          "description": "Documentary work shaped around real people, places and purpose.",
-          "image": "https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/msg680180638-10213-Copy.jpg?resize=580%2C435&ssl=1",
-          "imageAlt": "Documentary field story from the Sembule Media archive"
         },
         {
           "eyebrow": "Conferences · stage · live events",
@@ -51,13 +30,6 @@
           "description": "Crisp, bright screens for presentations, launches and conferences, set up and run by our crew.",
           "image": "./assets/brand/hero-led-screen.jpg",
           "imageAlt": "Presenter at a podium beside a large LED screen at a conference in Kampala"
-        },
-        {
-          "eyebrow": "Live production · watch a sample",
-          "title": "See Sembule live in action.",
-          "description": "A livestream sample published by Sembule Media.",
-          "image": "https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/DSC_6029-2-scaled.jpg?fit=1200%2C800&ssl=1",
-          "imageAlt": "Event-production still used as a livestream sample poster"
         }
       ],
       "videoUrl": "https://www.youtube-nocookie.com/embed/rktDjkqMZaY?rel=0&playsinline=1&controls=1&autoplay=1",
