@@ -4,13 +4,6 @@
     "hero": {
       "slides": [
         {
-          "eyebrow": "Weddings · portraits · film",
-          "title": "You’ll be busy living it. We’ll keep it.",
-          "description": "On the day, a couple sees a fraction of their own wedding. Photography and film give you back the moments you were too busy to notice.",
-          "image": "./assets/work/hero-wedding-bw.jpg",
-          "imageAlt": "Black and white photograph of a groom kissing his bride's hand among palm leaves"
-        },
-        {
           "eyebrow": "Conferences · stage · live events",
           "title": "Nobody remembers good sound.",
           "description": "Everyone remembers the dead microphone. Clear sound, readable screens and a calm crew, so the room remembers what was said.",
@@ -30,6 +23,13 @@
           "description": "65-inch screens so every seat can read the slides and see the speaker. Set up and run by our crew.",
           "image": "./assets/work/hero-led-screen.jpg",
           "imageAlt": "Presenter at a podium beside a large LED screen at a conference in Kampala"
+        },
+        {
+          "eyebrow": "Weddings · portraits · film",
+          "title": "You’ll be busy living it. We’ll keep it.",
+          "description": "On the day, a couple sees a fraction of their own wedding. Photography and film give you back the moments you were too busy to notice.",
+          "image": "./assets/work/hero-wedding-bw.jpg",
+          "imageAlt": "Black and white photograph of a groom kissing his bride's hand among palm leaves"
         }
       ],
       "videoUrl": "https://www.youtube-nocookie.com/embed/rktDjkqMZaY?rel=0&playsinline=1&controls=1&autoplay=1",

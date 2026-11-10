@@ -85,17 +85,20 @@
 
 /* ---------- 1. Hero ---------- */
 .h-hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; overflow: hidden; padding: calc(var(--h-head) + clamp(20px, 4vh, 48px)) 0 clamp(28px, 4vh, 44px); background: radial-gradient(120% 80% at 80% 10%, #0d0d0b 0%, #000 60%); isolation: isolate; }
-.h-hero__ghost { bottom: 0; left: 0; font-size: clamp(170px, 30vw, 480px); }
-.h-hero__glow { position: absolute; z-index: 0; top: 4%; right: -6%; width: min(72vw, 1000px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(191, 144, 0, .26) 0%, rgba(191, 144, 0, .08) 38%, transparent 66%); pointer-events: none; }
-.h-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr); align-items: center; gap: clamp(32px, 5vw, 80px); }
+.h-hero__ghost { display: none; }
+.h-hero__glow { position: absolute; z-index: 0; bottom: -38%; left: -14%; width: min(80vw, 1100px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(191, 144, 0, .2) 0%, rgba(191, 144, 0, .06) 38%, transparent 66%); pointer-events: none; }
+/* Full-bleed hero: the photograph fills the whole section, the copy sits over it */
+.h-hero { justify-content: flex-end; }
+.h-hero__grid { position: static; display: grid; grid-template-columns: minmax(0, 1fr); }
+.h-hero__copy { position: relative; z-index: 2; max-width: 680px; }
 .h-hero__title { max-width: 13ch; margin: 0 0 22px; font-size: clamp(44px, 5.5vw, 88px); line-height: 1; transition: opacity 260ms var(--h-ease), transform 260ms var(--h-ease); }
 .h-hero__lede { max-width: 42ch; margin: 0 0 34px; color: var(--h-muted); font-size: clamp(16px, 1.3vw, 19px); line-height: 1.6; transition: opacity 260ms var(--h-ease); }
 .h-hero__copy.is-changing .h-hero__title { opacity: 0; transform: translateY(8px); }
 .h-hero__copy.is-changing .h-hero__lede, .h-hero__copy.is-changing [data-hero-eyebrow] { opacity: 0; }
 [data-hero-eyebrow] { transition: opacity 260ms var(--h-ease); }
 
-.h-hero__stage { position: relative; height: min(68svh, 660px); min-height: 420px; overflow: hidden; border-radius: 28px; background: #0b0b0a; box-shadow: 0 0 0 1px rgba(255, 255, 255, .08), 0 50px 120px -50px rgba(191, 144, 0, .45); }
-.h-hero__stage:after { position: absolute; inset: 0; content: ""; border-radius: inherit; background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, .55)), linear-gradient(145deg, rgba(255, 255, 255, .14), transparent 30%); pointer-events: none; }
+.h-hero__stage { position: absolute; z-index: -1; inset: 0; overflow: hidden; background: #0b0b0a; }
+.h-hero__stage:after { position: absolute; inset: 0; content: ""; background: linear-gradient(90deg, rgba(0, 0, 0, .9) 0%, rgba(0, 0, 0, .66) 34%, rgba(0, 0, 0, .18) 64%, rgba(0, 0, 0, .1) 100%), linear-gradient(180deg, rgba(0, 0, 0, .55) 0%, transparent 22%, transparent 62%, rgba(0, 0, 0, .85) 100%); pointer-events: none; }
 .h-slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity 900ms var(--h-ease); }
 .h-slide.is-active { opacity: 1; }
 .h-slide img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.08) brightness(.92); transform: scale(1.04); transition: transform 1800ms var(--h-ease); }
@@ -204,13 +207,9 @@
 
 @media (max-width: 820px) {
   .h-head { grid-template-columns: 1fr; align-items: start; }
-  .h-hero { justify-content: flex-end; padding-top: calc(var(--h-head) + 20px); }
-  .h-hero__grid { position: static; grid-template-columns: 1fr; }
-  .h-hero__stage { position: absolute; z-index: -1; inset: 0; height: auto; min-height: 0; border-radius: 0; box-shadow: none; }
-  .h-hero__stage:after { border-radius: 0; background: linear-gradient(180deg, rgba(0, 0, 0, .6) 0%, rgba(0, 0, 0, .3) 22%, rgba(0, 0, 0, .86) 46%, rgba(0, 0, 0, .94) 64%, #000 100%); }
-  .h-hero__copy { position: relative; z-index: 2; }
-  .h-hero__ghost { display: none; }
-  .h-hero__glow { top: auto; bottom: -20%; right: -30%; width: 120vw; }
+  .h-hero { padding-top: calc(var(--h-head) + 20px); }
+  .h-hero__stage:after { background: linear-gradient(180deg, rgba(0, 0, 0, .6) 0%, rgba(0, 0, 0, .3) 22%, rgba(0, 0, 0, .86) 46%, rgba(0, 0, 0, .94) 64%, #000 100%); }
+  .h-hero__glow { bottom: -20%; left: auto; right: -30%; width: 120vw; }
   .h-cards { grid-template-columns: 1fr; }
   .h-card__media { aspect-ratio: 16 / 10; }
   .h-about__grid { grid-template-columns: 1fr; }
