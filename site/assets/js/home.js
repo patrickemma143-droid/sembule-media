@@ -27,12 +27,14 @@
     const heroSaveData = navigator.connection?.saveData === true;
 
     // Slide videos play only while their slide is showing; reduced motion and Save-Data keep the poster
-    const syncVideos = () => slides.forEach((slide, i) => {
+    const syncVideos = (restart = false) => slides.forEach((slide, i) => {
       const video = slide.querySelector('video');
       if (!video) return;
       if (i === current && !reduced.matches && !heroSaveData && !document.hidden) {
-        if (video.preload === 'none') video.preload = 'auto';
-        video.play().then(() => slide.classList.add('has-video')).catch(() => {});
+        if (video.preload !== 'auto') video.preload = 'auto';
+        if (restart) video.currentTime = 0; // each visit to the slide starts the clip from the top
+        // The slide's clock starts once the clip is actually playing, not while it is still loading
+        video.play().then(() => { slide.classList.add('has-video'); if (restart) schedule(); }).catch(() => {});
       } else {
         video.pause();
       }
@@ -46,7 +48,9 @@
     const schedule = () => {
       clearTimeout(timer);
       if (paused || holding || document.hidden) return;
-      timer = setTimeout(() => show((current + 1) % slides.length), 7000);
+      // A slide with a video stays up longer so the clip gets a proper run before the next photo
+      const hasVideo = slides[current].querySelector('video') && !reduced.matches && !heroSaveData;
+      timer = setTimeout(() => show((current + 1) % slides.length), hasVideo ? 12000 : 7000);
     };
     const show = target => {
       if (target === current) return;
@@ -56,7 +60,7 @@
         slide.setAttribute('aria-hidden', String(i !== current));
       });
       markers.forEach((marker, i) => marker.setAttribute('aria-current', String(i === current)));
-      syncVideos();
+      syncVideos(true);
       if (index) index.textContent = String(current + 1).padStart(2, '0');
       const next = slides[current].querySelector('img');
       if (next && next.loading === 'lazy') next.loading = 'eager';
@@ -95,10 +99,10 @@
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) show((current + (dx < 0 ? 1 : slides.length - 1)) % slides.length);
     });
 
-    document.addEventListener('visibilitychange', syncVideos);
-    reduced.addEventListener?.('change', syncVideos);
+    document.addEventListener('visibilitychange', () => syncVideos());
+    reduced.addEventListener?.('change', () => syncVideos());
     setPause();
-    syncVideos();
+    syncVideos(true);
     schedule();
   }
 
