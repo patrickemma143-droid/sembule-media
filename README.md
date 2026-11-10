@@ -40,7 +40,7 @@ The workflow publishes only `site/` into the configured server directory. This k
 
 ## Website content and launch readiness
 
-The seven static pages and shared assets are in site/. The public site links to the private production workspace at os.sembulemedia.com; keep that app deployed on its own subdomain and outside this public-site FTP sync.
+The seven static pages and shared assets are in site/. The public site links to the private production workspace (Sembule Media OS) at https://nextos.nextafrica.ai/sembule/index.html. When the `os.sembulemedia.com` DNS record and SSL are set up on Bluehost, switch the "Team workspace" links in `site/*.html` to that address. Keep the OS deployed on its own subdomain and outside this public-site FTP sync.
 
 Before launch, confirm licensed font files, image and participant permissions, three approved client testimonials, partner-logo permissions, final contact details, the GA4 measurement ID and Hudson's submit_enquiry RPC. The enquiry form currently prepares a WhatsApp message and does not store the submitted details.
 

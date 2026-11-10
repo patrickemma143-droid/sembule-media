@@ -347,14 +347,31 @@
     visual.addEventListener('pointercancel', () => { dragStart = null; });
   }
 
-  const filterButtons = [...document.querySelectorAll('[data-filter]')];
-  const portfolioItems = [...document.querySelectorAll('[data-category]')];
+  // Portfolio: two filter groups (service and event type) combined with AND.
+  const filterButtons = [...document.querySelectorAll('[data-filter-group]')];
+  const portfolioItems = [...document.querySelectorAll('.portfolio-item[data-service]')];
   if (filterButtons.length && portfolioItems.length) {
+    const active = { service: 'all', event: 'all' };
+    const empty = document.querySelector('[data-portfolio-empty]');
+    const apply = () => {
+      let shown = 0;
+      portfolioItems.forEach(item => {
+        const match = Object.entries(active).every(([group, value]) =>
+          value === 'all' || (item.dataset[group] || '').split(' ').includes(value));
+        item.hidden = !match;
+        if (match) shown += 1;
+      });
+      filterButtons.forEach(button => button.setAttribute('aria-pressed', String(active[button.dataset.filterGroup] === button.dataset.filter)));
+      if (empty) empty.hidden = shown > 0;
+    };
     filterButtons.forEach(button => button.addEventListener('click', () => {
-      const filter = button.dataset.filter;
-      filterButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-      portfolioItems.forEach(item => { item.hidden = filter !== 'all' && !item.dataset.category.split(' ').includes(filter); });
+      active[button.dataset.filterGroup] = button.dataset.filter;
+      apply();
     }));
+    document.querySelector('[data-filter-reset]')?.addEventListener('click', () => {
+      active.service = 'all'; active.event = 'all';
+      apply();
+    });
   }
 
   const form = document.querySelector('[data-enquiry-form]');

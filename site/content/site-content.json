@@ -93,8 +93,8 @@
         "Sembule Media was established in 2022 to provide live video production, streaming, sound and PA, photography, videography and documentary services.",
         "From conferences and hybrid events to weddings and field stories, the work begins by understanding the room, the audience and what should be remembered."
       ],
-      "image": "https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/DSC_6029-2-scaled.jpg?fit=1100%2C1200&ssl=1",
-      "imageAlt": "A live production taking place at an event",
+      "image": "./assets/work/about-crew-at-work.jpg",
+      "imageAlt": "Sembule Media crew running a multi-camera livestream from a boardroom control desk",
       "actionLabel": "Explore services",
       "actionUrl": "./services.html"
     },

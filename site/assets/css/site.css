@@ -178,7 +178,11 @@ h3 { font-size: clamp(24px, 3vw, 34px); }
 .service-callout h2 { margin: 0; font-size: clamp(30px, 4vw, 48px); }
 .service-callout p { margin-bottom: 18px; color: var(--muted); }
 
-.portfolio-toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 32px; }
+.portfolio-filters { display: grid; gap: 12px; margin: 0 0 36px; }
+.portfolio-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; }
+.filter-label { min-width: 88px; margin-right: 4px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.portfolio-empty { margin: 8px 0 0; padding: 18px 20px; border: 1px solid var(--line); border-radius: 10px; color: var(--muted); font-size: 14px; }
+.text-button { padding: 0; border: 0; color: var(--green); background: none; font: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .filter-button { min-height: 44px; padding: 9px 15px; border: 1px solid var(--line); border-radius: 99px; color: var(--ink); background: #fff; font-size: 12px; font-weight: 600; transition: border-color 160ms ease, color 160ms ease, background-color 160ms ease; }
 .filter-button:hover { border-color: var(--green); color: var(--green); }
 .filter-button[aria-pressed="true"] { border-color: var(--green); color: #fff; background: var(--green); }
@@ -187,7 +191,7 @@ h3 { font-size: clamp(24px, 3vw, 34px); }
 .portfolio-item[hidden] { display: none; }
 .portfolio-photo { position: relative; display: block; aspect-ratio: 1.12; overflow: hidden; border-radius: 12px; background: #dfe4df; }
 .portfolio-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 550ms var(--ease); }
-.portfolio-photo:hover img { transform: scale(1.035); }
+a.portfolio-photo:hover img { transform: scale(1.035); }
 .portfolio-item h2 { margin: 13px 0 4px; font-size: 18px; letter-spacing: -.025em; }
 .portfolio-item p { margin: 0; color: var(--muted); font-size: 12px; }
 .portfolio-video { display: grid; place-items: center; color: #fff; background: var(--green); text-decoration: none; }
@@ -219,6 +223,9 @@ h3 { font-size: clamp(24px, 3vw, 34px); }
 .contact-detail { margin-top: 28px; padding-top: 19px; border-top: 1px solid var(--line); }
 .contact-detail strong { display: block; margin-bottom: 5px; color: var(--green); font-size: 12px; }
 .contact-detail a { font-size: 14px; text-underline-offset: 4px; }
+.contact-map { margin-top: 28px; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #dfe4df; }
+.contact-map iframe { display: block; width: 100%; height: 240px; border: 0; }
+.contact-map a { display: block; padding: 12px 14px; color: var(--green); font-size: 13px; font-weight: 700; text-underline-offset: 4px; }
 .contact-form { padding: clamp(22px, 4vw, 46px); border-radius: 13px; background: var(--wash); }
 .contact-form h2 { margin-bottom: 8px; font-size: 30px; }
 .form-intro { margin-bottom: 27px; color: var(--muted); font-size: 14px; }
@@ -359,3 +366,10 @@ h3 { font-size: clamp(24px, 3vw, 34px); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Portfolio filters and contact on small screens */
+@media (max-width: 640px) {
+  .filter-label { flex-basis: 100%; margin-bottom: 2px; }
+  .contact-map iframe { height: 200px; }
+}
+.contact-detail .contact-whatsapp { margin-top: 4px; color: #fff; font-size: 14px; text-decoration: none; }
