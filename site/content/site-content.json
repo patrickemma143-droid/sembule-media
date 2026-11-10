@@ -5,36 +5,36 @@
       "slides": [
         {
           "eyebrow": "Weddings · portraits · film",
-          "title": "Moments you never forget.",
-          "description": "Photography and film that hold the quiet gestures, the laughter and the day exactly as it felt.",
+          "title": "You’ll be busy living it. We’ll keep it.",
+          "description": "On the day, a couple sees a fraction of their own wedding. Photography and film give you back the moments you were too busy to notice.",
           "image": "./assets/brand/hero-wedding-bw.jpg",
           "imageAlt": "Black and white photograph of a groom kissing his bride's hand among palm leaves"
         },
         {
           "eyebrow": "Conferences · stage · live events",
-          "title": "Every voice, heard in the room.",
-          "description": "Clear sound, sharp visuals and a calm crew for stages, conferences and celebrations.",
+          "title": "Nobody remembers good sound.",
+          "description": "Everyone remembers the dead microphone. Clear sound, readable screens and a calm crew, so the room remembers what was said.",
           "image": "./assets/brand/hero-live-stage.jpg",
           "imageAlt": "Speaker addressing the audience on stage at a live Sembule Media event"
         },
         {
           "eyebrow": "Concerts · live performance",
-          "title": "Every performance, front and centre.",
-          "description": "Multi-camera coverage, big-screen visuals and clean sound for concerts and stage productions.",
+          "title": "Not everyone could get a ticket.",
+          "description": "Multi-camera coverage and clean sound carry the performance to people watching from home, and keep it for the ones who were there.",
           "image": "./assets/brand/hero-live-performance.jpg",
           "imageAlt": "Choir in orange skirts performing on a lit stage in front of an LED screen"
         },
         {
-          "eyebrow": "LED screens · displays",
-          "title": "65-inch screens available.",
-          "description": "Crisp, bright screens for presentations, launches and conferences, set up and run by our crew.",
+          "eyebrow": "Screen hire · conferences · launches",
+          "title": "The back row came too.",
+          "description": "65-inch screens so every seat can read the slides and see the speaker. Set up and run by our crew.",
           "image": "./assets/brand/hero-led-screen.jpg",
           "imageAlt": "Presenter at a podium beside a large LED screen at a conference in Kampala"
         }
       ],
       "videoUrl": "https://www.youtube-nocookie.com/embed/rktDjkqMZaY?rel=0&playsinline=1&controls=1&autoplay=1",
       "primaryAction": {
-        "label": "Plan your production",
+        "label": "Check your date",
         "url": "./contact.html"
       },
       "secondaryAction": {
@@ -44,22 +44,22 @@
     },
     "servicesIntro": {
       "label": "What we produce",
-      "title": "Production that brings people together.",
-      "description": "Lead with the three growth services, then introduce the full service range.",
+      "title": "Not equipment. A day that goes to plan.",
+      "description": "Anyone can rent a camera or a speaker. What you’re hiring is a crew that has planned the room, done the sound check and stays calm when the programme changes.",
       "cards": [
         {
           "title": "Livestreaming",
-          "description": "Multi-camera event coverage and broadcast support.",
+          "description": "For the people who couldn’t be in the room: relatives abroad, partners on the road, an audience bigger than the venue.",
           "imageLabel": "Livestream image"
         },
         {
           "title": "Sound & PA",
-          "description": "Audio support for indoor and outdoor events.",
+          "description": "When sound works, nobody notices. That is exactly the point.",
           "imageLabel": "Sound / PA image"
         },
         {
           "title": "Documentaries",
-          "description": "Story-led filming and post-production.",
+          "description": "People support what they can see. We film the work so it can speak for itself.",
           "imageLabel": "Documentary image"
         }
       ],
@@ -67,31 +67,31 @@
     },
     "aboutIntro": {
       "label": "Sembule Media · Kampala, Uganda",
-      "title": "A thoughtful crew for moments that matter.",
-      "description": "Since 2022, Sembule Media has brought live video, streaming, sound, photography and film together—from conferences and weddings to documentary stories across Uganda.",
+      "title": "The crew you forget was there.",
+      "description": "Since 2022, Sembule Media has run cameras, streams, sound and screens for conferences, weddings and documentaries across Uganda. You look after your guests. We look after everything they see and hear.",
       "image": "./assets/brand/about-crew-at-work.jpg",
       "imageAlt": "Sembule Media crew running a multi-camera livestream from a boardroom control desk",
       "linkLabel": "Get to know Sembule"
     },
     "callToAction": {
-      "title": "Planning an event or production?",
-      "description": "Tell us the date, service, location and audience size.",
-      "actionLabel": "Start an enquiry",
+      "title": "Is your date still free?",
+      "description": "Send the date and the venue. We’ll tell you if we’re available and what the room will need. No full brief required.",
+      "actionLabel": "Check your date",
       "actionUrl": "./contact.html"
     }
   },
   "about": {
     "hero": {
       "label": "About Sembule Media",
-      "title": "Local production experience. A wider view of every story.",
+      "title": "We worry about the details, so you don’t have to.",
       "description": "Based in Bunamwaya, Kampala, Sembule Media works with events, organizations and communities across Uganda."
     },
     "story": {
       "label": "Since 2022",
-      "title": "Bring the production together, so people can stay with the moment.",
+      "title": "Good production is mostly invisible.",
       "paragraphs": [
-        "Sembule Media was established in 2022 to provide live video production, streaming, sound and PA, photography, videography and documentary services.",
-        "From conferences and hybrid events to weddings and field stories, the work begins by understanding the room, the audience and what should be remembered."
+        "Sembule Media started in 2022 to bring live video, streaming, sound and PA, photography, videography and documentary work under one roof. You deal with one crew, not five suppliers who have never met.",
+        "Every job starts with the same three questions: what is the room, who is the audience, and what should be remembered? The equipment follows from the answers, not the other way round."
       ],
       "image": "./assets/work/about-crew-at-work.jpg",
       "imageAlt": "Sembule Media crew running a multi-camera livestream from a boardroom control desk",
@@ -101,30 +101,30 @@
     "values": [
       {
         "title": "Plan for the room",
-        "description": "Venue, audience and running order shape the equipment and crew."
+        "description": "We look at the venue, the audience and the running order first. Then we choose the equipment and crew."
       },
       {
         "title": "Coordinate the details",
-        "description": "Align production needs with the event team before the day begins."
+        "description": "We talk to your event team before the day, so nothing gets decided for the first time on the morning."
       },
       {
-        "title": "Deliver with clarity",
-        "description": "Confirm formats, timing and scope before the final work is handed over."
+        "title": "Deliver what was agreed",
+        "description": "Formats, timing and scope are agreed up front, so the hand-over holds no surprises."
       }
     ],
     "coverage": {
       "label": "Where we work",
       "title": "Based in Kampala. Available for productions across Uganda.",
-      "description": "Tell us where your event or story is taking place and what you need produced. We’ll confirm availability and logistics with you."
+      "description": "A city hotel or a village hall: tell us where it is and what you need. We’ll confirm availability and logistics before you commit to anything."
     },
     "statement": {
       "titlePrefix": "Different productions. One thoughtful ",
       "titleEmphasis": "plan.",
-      "description": "Livestreaming, sound, event photography and documentary work are connected by the same essentials: clear preparation, capable coordination and an agreed delivery."
+      "description": "A livestream, a sound system and a documentary look like different jobs. They succeed or fail for the same reasons: preparation, coordination and delivering what was promised."
     },
     "callToAction": {
       "label": "Start a conversation",
-      "title": "Tell us what you’re planning.",
+      "title": "Tell us the date. We’ll do the worrying.",
       "actionLabel": "Plan a production",
       "actionUrl": "./contact.html"
     }
@@ -132,63 +132,63 @@
   "services": {
     "hero": {
       "label": "Sembule Media services",
-      "title": "Production support for the moments that matter.",
-      "description": "From the first sound check to the final edit, bring your event or story to a crew that can shape the whole production."
+      "title": "Choose the outcome. We’ll bring the equipment.",
+      "description": "Nobody books a sound system because they want a sound system. They want to be heard. Tell us what the day needs to achieve, and we’ll plan everything from the first sound check to the final edit around it."
     },
     "items": [
       {
         "title": "Livestreaming & broadcast",
-        "description": "Multi-camera event coverage, live switching, broadcast support and recording for in-person and hybrid audiences.",
+        "description": "Much of your audience may never set foot in the venue. Multi-camera coverage, live switching and recording carry the event to them, and leave you a full recording when it’s over.",
         "actionLabel": "See production work",
         "actionUrl": "./portfolio.html"
       },
       {
         "title": "Sound & PA",
-        "description": "Sound reinforcement and event crew for indoor and outdoor venues. We’ll scope the setup around your space and audience.",
+        "description": "Nobody remembers good sound. Everyone remembers feedback and a dead microphone. We scope the system around your venue and audience, indoors or out, so people talk afterwards about what was said.",
         "actionLabel": "Request a quote",
         "actionUrl": "./contact.html"
       },
       {
         "title": "Corporate events",
-        "description": "Production support for conferences, meetings, launches, workshops and gatherings that need clear sound and dependable coverage.",
+        "description": "A conference is judged by its worst five minutes. Clear sound, readable screens and dependable coverage for conferences, launches, meetings and workshops, so the room remembers your message rather than the technical pause.",
         "actionLabel": "Request a quote",
         "actionUrl": "./contact.html"
       },
       {
         "title": "Weddings & celebrations",
-        "description": "Photography and film for a day you want to experience fully and return to afterwards.",
+        "description": "On the day you’ll see a fraction of it. Photography and film give you back the moments you were too busy to notice, and something to share with everyone who couldn’t come.",
         "actionLabel": "See selected work",
         "actionUrl": "./portfolio.html"
       },
       {
         "title": "Photography & videography",
-        "description": "Event and production photography, video coverage and edited deliverables shaped around your brief.",
+        "description": "The event lasts a day. The pictures keep working for years: in the annual report, the next proposal, the website. Photography, video coverage and edited deliverables shaped around your brief.",
         "actionLabel": "Request a quote",
         "actionUrl": "./contact.html"
       },
       {
         "title": "Documentaries & field stories",
-        "description": "Story-led filming and post-production for organizations, communities and the people behind the work.",
+        "description": "People support what they can see. Story-led filming and post-production that shows the work, the community and the people behind it, in their own words.",
         "actionLabel": "See selected work",
         "actionUrl": "./portfolio.html"
       },
       {
         "title": "Podcast production",
-        "description": "Recording and production support for a conversation that needs to sound as considered as it feels.",
+        "description": "Listeners forgive a plain picture. They don’t forgive bad audio. Recording and production that make the conversation sound as considered as it is.",
         "actionLabel": "Request a quote",
         "actionUrl": "./contact.html"
       },
       {
         "title": "65-inch TV display hire",
-        "description": "Display hire for suitable events and venues. Availability, transport and setup are confirmed with each enquiry.",
+        "description": "Big enough for the back row to read your slides. Availability, transport and setup are confirmed with each enquiry.",
         "actionLabel": "Ask about availability",
         "actionUrl": "./contact.html"
       }
     ],
     "callout": {
-      "title": "Let’s shape the right setup for your event.",
-      "description": "Share the date, venue, audience and what you need covered. We’ll follow up to confirm the scope.",
-      "actionLabel": "Plan a production",
+      "title": "Not sure what you need? Most people aren’t.",
+      "description": "Tell us the date, the venue and roughly how many people. We’ll suggest the setup. Knowing the equipment is our job, not yours.",
+      "actionLabel": "Get a suggested setup",
       "actionUrl": "./contact.html"
     }
   }
