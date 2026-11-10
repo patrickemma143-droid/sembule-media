@@ -19,7 +19,7 @@
     const markers = [...hero.querySelectorAll('[data-hero-goto]')];
     const copy = hero.querySelector('[data-hero-copy]');
     const eyebrow = hero.querySelector('[data-hero-eyebrow]');
-    const title = hero.querySelector('[data-hero-title]');
+    const title = hero.querySelector('[data-hero-headline]');
     const description = hero.querySelector('[data-hero-description]');
     const index = hero.querySelector('[data-hero-index]');
     const pause = hero.querySelector('[data-hero-pause]');
@@ -98,6 +98,24 @@
       start = null;
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) show((current + (dx < 0 ? 1 : slides.length - 1)) % slides.length);
     });
+
+    // The slides own the hero copy: if anything else (the OS bridge) rewrites the headline,
+    // eyebrow or description, put back the text of the slide on screen. The h1 uses
+    // data-hero-headline rather than the bridge's data-hero-title hook, so the bridge writes once
+    // and does not watch the element; with both watching they would overwrite each other forever.
+    const fields = [[eyebrow, 'storyEyebrow'], [title, 'storyTitle'], [description, 'storyDescription']];
+    let restores = 0, restoreWindow = 0;
+    const restoreCopy = () => {
+      if (copy.classList.contains('is-changing')) return;
+      // Safety valve: if some other script keeps fighting back, give up rather than loop
+      const now = Date.now();
+      if (now - restoreWindow > 1000) { restoreWindow = now; restores = 0; }
+      if (++restores > 6) return;
+      const data = slides[current].dataset;
+      fields.forEach(([el, key]) => { if (el && data[key] && el.textContent !== data[key]) el.textContent = data[key]; });
+    };
+    new MutationObserver(restoreCopy).observe(copy, { childList: true, characterData: true, subtree: true });
+    restoreCopy();
 
     document.addEventListener('visibilitychange', () => syncVideos());
     reduced.addEventListener?.('change', () => syncVideos());
