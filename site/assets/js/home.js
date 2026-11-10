@@ -164,7 +164,9 @@
     const prev = flow.querySelector('[data-flow-prev]');
     const next = flow.querySelector('[data-flow-next]');
     const count = flow.querySelector('[data-flow-index]');
-    let active = 0, drag = null, moved = false, inView = false, videoTimer;
+    // Open in the middle of the deck (data-flow-start) so there are cards on both sides at first glance
+    let active = Math.min(cards.length - 1, Math.max(0, Number(flow.dataset.flowStart) || 0));
+    let drag = null, moved = false, inView = false, videoTimer;
     const saveData = navigator.connection?.saveData === true;
 
     const stopVideo = () => flow.querySelectorAll('.h-flow__video').forEach(frame => frame.remove());
