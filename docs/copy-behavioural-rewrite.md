@@ -21,7 +21,7 @@ The approach borrows from Rory Sutherland's work on behavioural economics in mar
 | Home, hero slide 3 | Every performance, front and centre. | Not everyone could get a ticket. | Reframe: the audience at home |
 | Home, hero slide 4 | 65-inch screens available. | The back row came too. | Outcome over spec |
 | Home, main button | Plan your production | Check your date | Tiny first step |
-| Home, services heading | Production that brings people together. | Not equipment. A day that goes to plan. | Outcome over kit |
+| Home, services heading | Production that brings people together. | What you’re really hiring is a day that goes to plan. | Outcome over kit |
 | Home, services intro | *(internal note was showing)* | Anyone can rent a camera or a speaker… | Effort and calm as the product |
 | Home, work intro | *(internal note was showing)* | Don't take our word for it… | Proof over claims |
 | Home, about | A thoughtful crew for moments that matter. | The crew you forget was there. | Good production is invisible |
@@ -54,7 +54,7 @@ The OS publishes its own copy over the website, so the live site keeps showing t
 - hero.eyebrow: `Weddings · portraits · film`
 - hero.headline: `You’ll be busy living it. We’ll keep it.`
 - hero.summary: `On the day, a couple sees a fraction of their own wedding. Photography and film give you back the moments you were too busy to notice.`
-- services.heading: `Not equipment. A day that goes to plan.`
+- services.heading: `What you’re really hiring is a day that goes to plan.`
 - services.intro: `Anyone can rent a camera or a speaker. What you’re hiring is a crew that has planned the room, done the sound check and stays calm when the programme changes.`
 - services.featured[0].summary: `For the people who couldn’t be in the room: relatives abroad, partners on the road, an audience bigger than the venue.`
 - services.featured[1].summary: `When sound works, nobody notices. That is exactly the point.`

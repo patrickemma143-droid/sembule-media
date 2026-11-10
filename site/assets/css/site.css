@@ -327,6 +327,11 @@ a.portfolio-photo:hover img { transform: scale(1.035); }
   .contact-aside { position: static; }
   .footer-main { grid-template-columns: 1fr 1fr; gap: 32px 24px; padding-block: 48px; }
   .footer-brand { grid-column: 1 / -1; }
+  /* Closed menu: off screen and out of the keyboard order */
+  .main-nav { visibility: hidden; transition: transform 250ms var(--ease), visibility 0s linear 250ms; }
+  .menu-open .main-nav { visibility: visible; transition: transform 250ms var(--ease), visibility 0s; }
+  /* Footer links: 44px tap targets on a phone */
+  .footer-col a { min-height: 44px; display: flex; align-items: center; margin: 0; }
 }
 
 @media (max-width: 520px) {

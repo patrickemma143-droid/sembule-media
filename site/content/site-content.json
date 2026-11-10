@@ -7,28 +7,28 @@
           "eyebrow": "Weddings · portraits · film",
           "title": "You’ll be busy living it. We’ll keep it.",
           "description": "On the day, a couple sees a fraction of their own wedding. Photography and film give you back the moments you were too busy to notice.",
-          "image": "./assets/brand/hero-wedding-bw.jpg",
+          "image": "./assets/work/hero-wedding-bw.jpg",
           "imageAlt": "Black and white photograph of a groom kissing his bride's hand among palm leaves"
         },
         {
           "eyebrow": "Conferences · stage · live events",
           "title": "Nobody remembers good sound.",
           "description": "Everyone remembers the dead microphone. Clear sound, readable screens and a calm crew, so the room remembers what was said.",
-          "image": "./assets/brand/hero-live-stage.jpg",
+          "image": "./assets/work/hero-live-stage.jpg",
           "imageAlt": "Speaker addressing the audience on stage at a live Sembule Media event"
         },
         {
           "eyebrow": "Concerts · live performance",
           "title": "Not everyone could get a ticket.",
           "description": "Multi-camera coverage and clean sound carry the performance to people watching from home, and keep it for the ones who were there.",
-          "image": "./assets/brand/hero-live-performance.jpg",
+          "image": "./assets/work/hero-live-performance.jpg",
           "imageAlt": "Choir in orange skirts performing on a lit stage in front of an LED screen"
         },
         {
           "eyebrow": "Screen hire · conferences · launches",
           "title": "The back row came too.",
           "description": "65-inch screens so every seat can read the slides and see the speaker. Set up and run by our crew.",
-          "image": "./assets/brand/hero-led-screen.jpg",
+          "image": "./assets/work/hero-led-screen.jpg",
           "imageAlt": "Presenter at a podium beside a large LED screen at a conference in Kampala"
         }
       ],
@@ -44,7 +44,7 @@
     },
     "servicesIntro": {
       "label": "What we produce",
-      "title": "Not equipment. A day that goes to plan.",
+      "title": "What you’re really hiring is a day that goes to plan.",
       "description": "Anyone can rent a camera or a speaker. What you’re hiring is a crew that has planned the room, done the sound check and stays calm when the programme changes.",
       "cards": [
         {
@@ -69,7 +69,7 @@
       "label": "Sembule Media · Kampala, Uganda",
       "title": "The crew you forget was there.",
       "description": "Since 2022, Sembule Media has run cameras, streams, sound and screens for conferences, weddings and documentaries across Uganda. You look after your guests. We look after everything they see and hear.",
-      "image": "./assets/brand/about-crew-at-work.jpg",
+      "image": "./assets/work/about-crew-at-work.jpg",
       "imageAlt": "Sembule Media crew running a multi-camera livestream from a boardroom control desk",
       "linkLabel": "Get to know Sembule"
     },
