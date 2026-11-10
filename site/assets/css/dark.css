@@ -1,0 +1,135 @@
+/* Sembule Media inner pages: the same premium dark feel as the homepage.
+   Loaded after site.css on services, portfolio, about, contact, privacy and terms (body.site-dark).
+   Brand colours only: black, #BF9000 gold, #04592A green, plus warm neutrals for text. */
+
+.site-dark {
+  --d-bg: #000;
+  --d-bg-2: #070807;
+  --d-card: rgba(255, 255, 255, .04);
+  --d-card-hover: rgba(255, 255, 255, .07);
+  --d-text: #f3f0e8;
+  --d-muted: rgba(243, 240, 232, .66);
+  --d-line: rgba(255, 255, 255, .11);
+  --d-gold: #bf9000;
+  --d-green: #04592a;
+  --d-ease: cubic-bezier(.22, 1, .36, 1);
+  /* site.css tokens, remapped for dark */
+  --ink: var(--d-text);
+  --muted: var(--d-muted);
+  --paper: var(--d-bg);
+  --wash: var(--d-bg-2);
+  --line: var(--d-line);
+  color-scheme: dark;
+  color: var(--d-text);
+  background: var(--d-bg);
+  font-family: "Axiforma", "Outfit", "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+html:has(.site-dark) { background: #000; }
+.site-dark ::selection { color: #000; background: var(--d-gold); }
+.site-dark :focus-visible { outline-color: var(--d-gold); }
+
+/* ---------- Header ---------- */
+.site-dark .site-header { color: var(--d-text); background: rgba(0, 0, 0, .78); border-bottom: 1px solid var(--d-line); -webkit-backdrop-filter: blur(16px) saturate(140%); backdrop-filter: blur(16px) saturate(140%); }
+.site-dark .main-nav a { color: rgba(243, 240, 232, .82); }
+.site-dark .main-nav a:not(.button):hover, .site-dark .main-nav a[aria-current="page"] { color: var(--d-text); }
+.site-dark .main-nav .button { min-height: 44px; padding: 0 20px; border: 1px solid rgba(255, 255, 255, .18); border-radius: 999px; color: var(--d-text); background: rgba(255, 255, 255, .06); }
+.site-dark .main-nav .button:hover { color: #000; background: var(--d-gold); border-color: var(--d-gold); }
+.site-dark .menu-toggle { color: var(--d-text); background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .18); border-radius: 999px; }
+.site-dark .menu-toggle:before { background: var(--d-text); box-shadow: 0 -6px 0 var(--d-text), 0 6px 0 var(--d-text); }
+
+/* ---------- Type ---------- */
+.site-dark main h1, .site-dark main h2, .site-dark main h3 { color: var(--d-text); font-weight: 600; letter-spacing: -.035em; text-wrap: balance; }
+.site-dark .eyebrow, .site-dark .eyebrow--gold { color: var(--d-gold); font-weight: 600; letter-spacing: .18em; }
+.site-dark .text-link, .site-dark .text-button { color: var(--d-gold); }
+.site-dark .text-link:hover { color: #d9a91a; }
+
+/* ---------- Buttons: one pill family (gold main action, glass second) ---------- */
+.site-dark .button { min-height: 54px; padding: 0 28px; border: 1px solid var(--d-gold); border-radius: 999px; color: #000; background: var(--d-gold); font-size: 15px; font-weight: 600; letter-spacing: -.005em; box-shadow: 0 12px 34px -12px rgba(191, 144, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .28); transition: transform 220ms var(--d-ease), box-shadow 220ms var(--d-ease), background-color 220ms var(--d-ease), border-color 220ms var(--d-ease), color 220ms var(--d-ease); }
+.site-dark .button:hover { transform: translateY(-2px); background: var(--d-gold); border-color: var(--d-gold); box-shadow: 0 18px 44px -12px rgba(191, 144, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .32); }
+.site-dark .button:active { transform: translateY(0) scale(.97); transition-duration: 90ms; }
+.site-dark .button--green, .site-dark .button--outline { color: var(--d-text); border-color: rgba(255, 255, 255, .16); background: rgba(255, 255, 255, .06); box-shadow: none; -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.site-dark .button--green:hover, .site-dark .button--outline:hover { color: #000; border-color: var(--d-gold); background: var(--d-gold); }
+
+/* ---------- Page heroes: black stage with a soft gold glow ---------- */
+.site-dark .page-hero, .site-dark .page-hero--green { position: relative; overflow: hidden; color: var(--d-text); background: radial-gradient(70% 90% at 85% 0%, rgba(191, 144, 0, .18) 0%, rgba(191, 144, 0, .05) 40%, transparent 70%), radial-gradient(60% 80% at 0% 100%, rgba(4, 89, 42, .28) 0%, transparent 65%), #000; border-bottom: 1px solid rgba(255, 255, 255, .05); isolation: isolate; }
+.site-dark .page-hero h1 { max-width: 16ch; font-size: clamp(44px, 6.4vw, 92px); line-height: 1; }
+.site-dark .page-hero p:not(.eyebrow), .site-dark .page-hero--green p:not(.eyebrow) { color: var(--d-muted); line-height: 1.65; }
+.site-dark main > section:not(.page-hero):not(.quote-section):not(.coverage-band) { background: var(--d-bg-2); }
+.site-dark main > section + section { border-top: 1px solid rgba(255, 255, 255, .05); }
+/* Sections that are also the .container are page-width boxes: no panel behind them */
+.site-dark main > section.container { background: transparent; border-top: 0; }
+
+/* ---------- Services ---------- */
+.site-dark .service-row { transition: background-color 260ms var(--d-ease); }
+.site-dark .service-row:hover { background: linear-gradient(90deg, rgba(191, 144, 0, .06), transparent 70%); }
+.site-dark .service-row-index { color: var(--d-gold); letter-spacing: .12em; }
+.site-dark .service-row-note, .site-dark .service-row-note a { color: var(--d-gold); }
+.site-dark .service-row-note a { display: inline-flex; min-height: 44px; align-items: center; }
+.site-dark .service-callout { border: 1px solid var(--d-line); border-radius: 28px; background: radial-gradient(80% 120% at 100% 0%, rgba(191, 144, 0, .14), transparent 60%), var(--d-card); }
+
+/* ---------- Portfolio ---------- */
+.site-dark .filter-label { color: var(--d-muted); }
+.site-dark .filter-button { color: var(--d-muted); border-color: var(--d-line); border-radius: 999px; background: rgba(255, 255, 255, .04); transition: color 200ms var(--d-ease), border-color 200ms var(--d-ease), background-color 200ms var(--d-ease), transform 200ms var(--d-ease); }
+.site-dark .filter-button:hover { color: var(--d-text); border-color: rgba(255, 255, 255, .3); }
+.site-dark .filter-button:active { transform: scale(.97); }
+.site-dark .filter-button[aria-pressed="true"] { color: #000; border-color: var(--d-gold); background: var(--d-gold); }
+.site-dark .portfolio-photo { border-radius: 20px; background: #111; box-shadow: 0 0 0 1px rgba(255, 255, 255, .06); }
+.site-dark .portfolio-photo img { transition: transform 600ms var(--d-ease); }
+.site-dark .portfolio-item:hover .portfolio-photo img { transform: scale(1.03); }
+.site-dark .portfolio-item h2 { color: var(--d-text); font-size: 20px; }
+.site-dark .portfolio-video { background: #111; }
+.site-dark .portfolio-empty { border-color: var(--d-line); }
+
+/* ---------- About ---------- */
+.site-dark .about-image, .site-dark .voices-image { border-radius: 24px; background: #111; }
+.site-dark .about-value h3 { color: var(--d-text); }
+.site-dark .coverage-band { color: var(--d-text); background: radial-gradient(60% 120% at 0% 100%, rgba(4, 89, 42, .4), transparent 65%), #000; }
+.site-dark .coverage-band .eyebrow { color: var(--d-gold); }
+.site-dark .coverage-band p { color: var(--d-muted); }
+
+/* ---------- Contact ---------- */
+.site-dark .contact-detail strong { color: var(--d-gold); letter-spacing: .08em; text-transform: uppercase; font-size: 11px; }
+.site-dark .contact-detail a:not(.button) { color: var(--d-text); }
+.site-dark .contact-detail .contact-whatsapp { margin-top: 6px; color: var(--d-text); }
+.site-dark .contact-map { border-color: var(--d-line); border-radius: 20px; background: #111; }
+.site-dark .contact-map iframe { filter: grayscale(.35) invert(.9) hue-rotate(180deg) contrast(.9); }
+.site-dark .contact-map a { display: flex; min-height: 44px; align-items: center; color: var(--d-gold); }
+.site-dark .contact-form { border: 1px solid var(--d-line); border-radius: 28px; background: var(--d-card); }
+.site-dark .form-field label { color: var(--d-text); }
+.site-dark .form-field input, .site-dark .form-field select, .site-dark .form-field textarea { color: var(--d-text); border-color: rgba(255, 255, 255, .18); border-radius: 14px; background: rgba(0, 0, 0, .45); transition: border-color 200ms var(--d-ease), box-shadow 200ms var(--d-ease); }
+.site-dark .form-field input::placeholder, .site-dark .form-field textarea::placeholder { color: rgba(243, 240, 232, .4); }
+.site-dark .form-field input:focus, .site-dark .form-field select:focus, .site-dark .form-field textarea:focus { outline: 0; border-color: var(--d-gold); box-shadow: 0 0 0 4px rgba(191, 144, 0, .2); }
+.site-dark .form-field select option { color: #000; }
+.site-dark .form-help { color: var(--d-muted); }
+.site-dark .form-status { color: var(--d-gold); }
+
+/* ---------- Legal ---------- */
+.site-dark .legal-content p, .site-dark .legal-content li { color: var(--d-muted); }
+.site-dark .legal-content a { color: var(--d-gold); }
+.site-dark .draft-note { color: var(--d-text); border: 1px solid rgba(191, 144, 0, .35); background: rgba(191, 144, 0, .1); }
+
+/* ---------- Closing band ---------- */
+.site-dark .quote-section { background: radial-gradient(70% 120% at 50% 120%, rgba(191, 144, 0, .2), transparent 60%), #000; border-top: 1px solid rgba(255, 255, 255, .05); }
+.site-dark .quote-section:after { border-color: rgba(191, 144, 0, .2); }
+.site-dark .quote-inner p:not(.eyebrow) { color: var(--d-muted); }
+
+/* ---------- Footer ---------- */
+.site-dark .site-footer { background: #000; border-top: 1px solid rgba(255, 255, 255, .06); }
+.site-dark .footer-col h2 { color: var(--d-gold); }
+
+/* ---------- Phone ---------- */
+@media (max-width: 760px) {
+  /* A backdrop-filter would make the header the containing block for the fixed menu panel,
+     squeezing the open menu into the header and pushing the closed one into the page width. */
+  .site-dark .site-header { background: rgba(0, 0, 0, .94); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .site-dark .main-nav { background: #000; }
+  .site-dark .main-nav a { border-bottom-color: var(--d-line); }
+  .site-dark .main-nav .button { color: #000; background: var(--d-gold); border-color: var(--d-gold); }
+  .site-dark .button { min-height: 50px; padding: 0 22px; font-size: 14px; }
+  .site-dark .service-callout, .site-dark .contact-form { border-radius: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-dark .portfolio-item:hover .portfolio-photo img, .site-dark .button:hover { transform: none; }
+}

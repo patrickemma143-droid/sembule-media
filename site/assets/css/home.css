@@ -227,6 +227,8 @@
 
 @media (max-width: 760px) {
   .home-dark { --h-head: 70px; }
+  /* No backdrop-filter on phones: it would trap the fixed menu panel inside the header */
+  .home-dark .site-header.is-scrolled, .home-dark.menu-open .site-header { background: rgba(0, 0, 0, .94); -webkit-backdrop-filter: none; backdrop-filter: none; }
   .home-dark .main-nav { background: #000; }
   .home-dark .main-nav a { border-bottom-color: var(--h-line); }
   .home-dark .main-nav .button { color: #000; background: var(--h-gold); border-color: var(--h-gold); }
