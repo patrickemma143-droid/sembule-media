@@ -62,6 +62,15 @@
   }
   window.SEMBULE_HERO_VIDEO_URL = publicUrl(siteContent?.home?.hero?.videoUrl);
 
+  // Pages with a full-bleed film hero (body.has-film-hero): the header floats over the film and
+  // turns to glass once the page scrolls, as on the homepage.
+  if (document.body.classList.contains('has-film-hero')) {
+    const bar = document.querySelector('.site-header');
+    const syncBar = () => bar?.classList.toggle('is-scrolled', window.scrollY > 24);
+    syncBar();
+    window.addEventListener('scroll', syncBar, { passive: true });
+  }
+
   const toggle = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-main-nav]');
   if (toggle && nav) {
