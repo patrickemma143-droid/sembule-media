@@ -1,3 +1,5 @@
 .taste-skill/
 site/.taste-skill/
 inspire/
+# Raw video masters (100+ MB); the site uses compressed cuts in site/assets/video
+/assets/

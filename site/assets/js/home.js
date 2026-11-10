@@ -24,6 +24,19 @@
     const index = hero.querySelector('[data-hero-index]');
     const pause = hero.querySelector('[data-hero-pause]');
     let current = 0, paused = reduced.matches, holding = false, timer, swap;
+    const heroSaveData = navigator.connection?.saveData === true;
+
+    // Slide videos play only while their slide is showing; reduced motion and Save-Data keep the poster
+    const syncVideos = () => slides.forEach((slide, i) => {
+      const video = slide.querySelector('video');
+      if (!video) return;
+      if (i === current && !reduced.matches && !heroSaveData && !document.hidden) {
+        if (video.preload === 'none') video.preload = 'auto';
+        video.play().then(() => slide.classList.add('has-video')).catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
 
     const setPause = () => {
       pause.setAttribute('aria-pressed', String(paused));
@@ -43,6 +56,7 @@
         slide.setAttribute('aria-hidden', String(i !== current));
       });
       markers.forEach((marker, i) => marker.setAttribute('aria-current', String(i === current)));
+      syncVideos();
       if (index) index.textContent = String(current + 1).padStart(2, '0');
       const next = slides[current].querySelector('img');
       if (next && next.loading === 'lazy') next.loading = 'eager';
@@ -81,7 +95,10 @@
       if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) show((current + (dx < 0 ? 1 : slides.length - 1)) % slides.length);
     });
 
+    document.addEventListener('visibilitychange', syncVideos);
+    reduced.addEventListener?.('change', syncVideos);
     setPause();
+    syncVideos();
     schedule();
   }
 
@@ -89,6 +106,21 @@
   const reel = document.querySelector('[data-reel]');
   if (reel) {
     reel.querySelector('[data-reel-play]').addEventListener('click', () => {
+      // A hosted MP4 (data-src) plays in a native player; otherwise fall back to the YouTube id
+      if (reel.dataset.src) {
+        const video = document.createElement('video');
+        video.src = reel.dataset.src;
+        video.controls = true;
+        video.playsInline = true;
+        video.autoplay = true;
+        video.setAttribute('aria-label', 'Sembule Media showreel');
+        const poster = reel.querySelector('img');
+        if (poster) video.poster = poster.currentSrc || poster.src;
+        reel.replaceChildren(video);
+        video.play().catch(() => {});
+        video.focus();
+        return;
+      }
       const id = reel.dataset.video;
       const frame = document.createElement('iframe');
       frame.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?rel=0&playsinline=1&autoplay=1`;
@@ -100,7 +132,9 @@
     });
   }
 
-  /* Work coverflow: arrows, keys, swipe and drag; no autoplay */
+  /* Work coverflow: arrows, keys, swipe and drag.
+     The front card plays its YouTube clip (data-video) muted and looped while the section is on
+     screen; the photograph stays underneath and shows again for side cards, reduced motion and Save-Data. */
   const flow = document.querySelector('[data-flow]');
   if (flow) {
     const stage = flow.querySelector('[data-flow-stage]');
@@ -108,7 +142,51 @@
     const prev = flow.querySelector('[data-flow-prev]');
     const next = flow.querySelector('[data-flow-next]');
     const count = flow.querySelector('[data-flow-index]');
-    let active = 0, drag = null, moved = false;
+    let active = 0, drag = null, moved = false, inView = false, videoTimer;
+    const saveData = navigator.connection?.saveData === true;
+
+    const stopVideo = () => flow.querySelectorAll('.h-flow__video').forEach(frame => frame.remove());
+    const playActive = () => {
+      clearTimeout(videoTimer);
+      const card = cards[active];
+      const current = card.querySelector('.h-flow__video');
+      flow.querySelectorAll('.h-flow__video').forEach(frame => { if (frame !== current) frame.remove(); });
+      const id = card.dataset.video;
+      const src = card.dataset.videoSrc;
+      if (!(id || src) || !inView || reduced.matches || saveData || document.hidden) { stopVideo(); return; }
+      if (current) return;
+      // Wait for the card to settle at the front before loading the player
+      videoTimer = setTimeout(() => {
+        if (cards[active] !== card || card.querySelector('.h-flow__video')) return;
+        if (src) {
+          // Hosted portrait clip: muted, looped, inline; fades in once it is actually playing
+          const video = document.createElement('video');
+          video.className = 'h-flow__video h-flow__video--file';
+          video.src = src;
+          video.muted = true;
+          video.loop = true;
+          video.playsInline = true;
+          video.autoplay = true;
+          video.setAttribute('aria-hidden', 'true');
+          video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
+          card.querySelector('img').after(video);
+          video.play().catch(() => video.remove());
+          return;
+        }
+        const v = encodeURIComponent(id);
+        const start = Number(card.dataset.videoStart) || 0;
+        const frame = document.createElement('iframe');
+        frame.className = 'h-flow__video';
+        frame.src = `https://www.youtube-nocookie.com/embed/${v}?autoplay=1&mute=1&loop=1&playlist=${v}&controls=0&rel=0&playsinline=1&modestbranding=1&disablekb=1&iv_load_policy=3&start=${start}`;
+        frame.title = `${card.querySelector('h3')?.textContent || 'Sembule Media'} video`;
+        frame.allow = 'autoplay; encrypted-media; picture-in-picture';
+        frame.tabIndex = -1;
+        frame.setAttribute('aria-hidden', 'true');
+        // YouTube shows its own poster for a moment; fade in once it has had time to start playing
+        frame.addEventListener('load', () => setTimeout(() => frame.classList.add('is-playing'), 1200), { once: true });
+        card.querySelector('img').after(frame);
+      }, 650);
+    };
 
     const layout = () => {
       const width = cards[0].offsetWidth; // layout width, unaffected by the scale transform
@@ -128,6 +206,7 @@
       count.textContent = String(active + 1).padStart(2, '0');
       prev.disabled = active === 0;
       next.disabled = active === cards.length - 1;
+      playActive();
     };
     const go = target => { active = Math.max(0, Math.min(cards.length - 1, target)); layout(); };
 
@@ -149,6 +228,11 @@
     });
     stage.addEventListener('pointercancel', () => { drag = null; });
     window.addEventListener('resize', layout);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; playActive(); }, { threshold: .35 }).observe(stage);
+    }
+    document.addEventListener('visibilitychange', playActive);
+    reduced.addEventListener?.('change', playActive);
     layout();
   }
 })();

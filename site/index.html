@@ -27,9 +27,9 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Sembule Media | Livestream, sound, film and photography in Uganda</title>
   <link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
-  <link rel="stylesheet" href="./assets/css/home.css?v=hero-fullbleed-20261110">
+  <link rel="stylesheet" href="./assets/css/home.css?v=hosted-video-20261110">
   <script defer src="./assets/js/site.js?v=site-content-20261008"></script>
-  <script defer src="./assets/js/home.js?v=premium-dark-20261110"></script>
+  <script defer src="./assets/js/home.js?v=hosted-video-20261110"></script>
   <script defer src="./assets/js/analytics.js"></script>
   <meta name="sembule-site-content" content="./content/site-content.json">
 </head>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="h-hero__stage h-enter" style="--d:1">
-          <figure class="h-slide is-active" data-hero-slide data-story-eyebrow="Conferences · stage · live events" data-story-title="Nobody remembers good sound." data-story-description="Everyone remembers the dead microphone. Clear sound, readable screens and a calm crew, so the room remembers what was said."><img fetchpriority="high" src="./assets/work/hero-live-stage.jpg" srcset="./assets/work/hero-live-stage-640.jpg 640w, ./assets/work/hero-live-stage.jpg 1200w" sizes="100vw" width="1200" height="800" style="object-position:55% 30%" alt="Speaker addressing the audience on stage at a live Sembule Media event" data-cms-src="home.hero.slides.0.image" data-cms-alt="home.hero.slides.0.imageAlt"></figure>
+          <figure class="h-slide is-active" data-hero-slide data-story-eyebrow="Conferences · stage · live events" data-story-title="Nobody remembers good sound." data-story-description="Everyone remembers the dead microphone. Clear sound, readable screens and a calm crew, so the room remembers what was said."><img fetchpriority="high" src="./assets/work/hero-live-stage.jpg" srcset="./assets/work/hero-live-stage-640.jpg 640w, ./assets/work/hero-live-stage.jpg 1200w" sizes="100vw" width="1200" height="800" style="object-position:55% 30%" alt="Speaker addressing the audience on stage at a live Sembule Media event" data-cms-src="home.hero.slides.0.image" data-cms-alt="home.hero.slides.0.imageAlt"><video src="./assets/video/hero-nic-party.mp4" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video></figure>
           <figure class="h-slide" data-hero-slide data-story-eyebrow="Concerts · live performance" data-story-title="Not everyone could get a ticket." data-story-description="Multi-camera coverage and clean sound carry the performance to people watching from home, and keep it for the ones who were there."><img loading="lazy" src="./assets/work/hero-live-performance.jpg" srcset="./assets/work/hero-live-performance-640.jpg 640w, ./assets/work/hero-live-performance.jpg 1200w" sizes="100vw" width="1200" height="800" style="object-position:50% 55%" alt="Choir in orange skirts performing on a lit stage in front of an LED screen" data-cms-src="home.hero.slides.1.image" data-cms-alt="home.hero.slides.1.imageAlt"></figure>
           <figure class="h-slide" data-hero-slide data-story-eyebrow="Screen hire · conferences · launches" data-story-title="The back row came too." data-story-description="65-inch screens so every seat can read the slides and see the speaker. Set up and run by our crew."><img loading="lazy" src="./assets/work/hero-stage-screen.jpg" sizes="100vw" width="736" height="736" style="object-position:50% 38%" alt="Event hall set for a corporate function, with a large screen above the stage, truss lighting and rows of chairs" data-cms-src="home.hero.slides.2.image" data-cms-alt="home.hero.slides.2.imageAlt"></figure>
           <figure class="h-slide" data-hero-slide data-story-eyebrow="Weddings · portraits · film" data-story-title="You’ll be busy living it. We’ll keep it." data-story-description="On the day, a couple sees a fraction of their own wedding. Photography and film give you back the moments you were too busy to notice."><img loading="lazy" src="./assets/work/hero-wedding-bw.jpg" srcset="./assets/work/hero-wedding-bw-640.jpg 640w, ./assets/work/hero-wedding-bw.jpg 1200w" sizes="100vw" width="1200" height="705" style="object-position:50% 45%" alt="Black and white photograph of a groom kissing his bride's hand among palm leaves" data-cms-src="home.hero.slides.3.image" data-cms-alt="home.hero.slides.3.imageAlt"></figure>
@@ -124,9 +124,9 @@
           <p class="h-eyebrow">Showreel</p>
           <h2 id="reel-title">See a Sembule production from the inside.</h2>
         </div>
-        <!-- Client slot: replace the video id with the final showreel on YouTube (brief: videos on YouTube, never self-hosted). -->
-        <div class="h-reel__frame" data-reel data-video="rktDjkqMZaY">
-          <img loading="lazy" src="./assets/work/hero-live-performance.jpg" srcset="./assets/work/hero-live-performance-640.jpg 640w, ./assets/work/hero-live-performance.jpg 1200w" sizes="(max-width: 820px) 100vw, 960px" width="1200" height="800" alt="Choir performing on a lit stage, filmed by Sembule Media" style="object-position:50% 55%">
+        <!-- Showreel: hosted MP4 (Jubilee Life & Health launch, Serena Kampala), loaded only when the visitor presses play. -->
+        <div class="h-reel__frame" data-reel data-src="./assets/video/showreel-jubilee-serena.mp4">
+          <img loading="lazy" src="./assets/work/showreel-poster.jpg" width="1200" height="675" alt="Speaker at the Jubilee Life and Health launch at Serena Kampala, filmed by Sembule Media">
           <button class="h-reel__play" type="button" data-reel-play><span class="h-btn__play" aria-hidden="true"></span>Play the showreel</button>
         </div>
       </div>
@@ -144,7 +144,7 @@
         </div>
         <div class="h-flow" data-flow role="region" aria-roledescription="carousel" aria-label="Selected work">
           <div class="h-flow__stage" data-flow-stage tabindex="0" aria-label="Use the arrow keys to browse projects">
-            <article class="h-flow__card" data-flow-card><img loading="lazy" src="./assets/work/hero-live-stage.jpg" srcset="./assets/work/hero-live-stage-640.jpg 640w, ./assets/work/hero-live-stage.jpg 1200w" sizes="(max-width: 820px) 70vw, 360px" width="1200" height="800" alt="Speaker addressing the audience on stage at a live event"><div class="h-flow__meta"><span class="h-tag">Livestream</span><h3>Live event production</h3><p>Livestream · Event coverage</p></div></article>
+            <article class="h-flow__card" data-flow-card data-video-src="./assets/video/work-jubilee-portrait.mp4"><img loading="lazy" src="./assets/work/work-jubilee-portrait.jpg" width="540" height="720" alt="Speaker addressing guests at the Jubilee Life and Health launch in Kampala"><div class="h-flow__meta"><span class="h-tag">Livestream</span><h3>Live event production</h3><p>Livestream · Event coverage</p></div></article>
             <article class="h-flow__card" data-flow-card><img loading="lazy" src="./assets/work/service-livestream.jpg" srcset="./assets/work/service-livestream-640.jpg 640w, ./assets/work/service-livestream.jpg 900w" sizes="(max-width: 820px) 70vw, 360px" width="900" height="1200" alt="Multi-camera livestream setup with the monitor showing the live shot"><div class="h-flow__meta"><span class="h-tag">Broadcast</span><h3>On-site broadcast</h3><p>Livestream · Multi-camera</p></div></article>
             <article class="h-flow__card" data-flow-card><img loading="lazy" src="./assets/work/work-conference-qa.jpg" srcset="./assets/work/work-conference-qa-640.jpg 640w, ./assets/work/work-conference-qa.jpg 900w" sizes="(max-width: 820px) 70vw, 360px" width="900" height="1125" alt="Delegate asking a question with a microphone during a conference session"><div class="h-flow__meta"><span class="h-tag">Conference</span><h3>Conference coverage</h3><p>Corporate events · Photography</p></div></article>
             <article class="h-flow__card" data-flow-card><img loading="lazy" src="./assets/work/service-documentary.jpg" srcset="./assets/work/service-documentary-640.jpg 640w, ./assets/work/service-documentary.jpg 1200w" sizes="(max-width: 820px) 70vw, 360px" width="1200" height="625" alt="Woman carrying a basin on her head through a village in dappled sunlight"><div class="h-flow__meta"><span class="h-tag">Documentary</span><h3>Stories from the field</h3><p>Documentary · Photography</p></div></article>
