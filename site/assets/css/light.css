@@ -147,6 +147,12 @@ html[data-theme="light"] { background: var(--l-bg); }
 [data-theme="light"] .site-dark .showday.is-live .sd-step.is-on { border-left-color: var(--l-gold); }
 [data-theme="light"] .site-dark .showday.is-live .sd-frame { box-shadow: 0 0 0 1px rgba(19, 23, 19, .08), 0 40px 90px -40px rgba(19, 23, 19, .45); }
 
+/* What we bring (rider) */
+[data-theme="light"] .site-dark .rider__sheet { background: #fff; border-color: var(--l-line); box-shadow: 0 30px 60px -44px rgba(19, 23, 19, .4); }
+[data-theme="light"] .site-dark .rider__group th { color: var(--l-green); }
+[data-theme="light"] .site-dark .rider__table tbody tr:not(.rider__group):hover { background: #fbf6e6; }
+[data-theme="light"] .site-dark .rider__asks { background: var(--l-sage); }
+
 /* Team */
 [data-theme="light"] .site-dark .team-card { box-shadow: 0 24px 50px -40px rgba(19, 23, 19, .4); }
 [data-theme="light"] .site-dark .team-card:hover { border-color: rgba(191, 144, 0, .6); }
