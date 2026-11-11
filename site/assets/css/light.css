@@ -140,6 +140,13 @@ html[data-theme="light"] { background: var(--l-bg); }
 [data-theme="light"] .site-dark .page-hero__visual img { filter: drop-shadow(0 40px 50px rgba(19, 23, 19, .35)); }
 [data-theme="light"] .site-dark main > section + section { border-top-color: rgba(19, 23, 19, .06); }
 
+/* Show day */
+[data-theme="light"] .site-dark .sd-step__label span,
+[data-theme="light"] .site-dark .showday.is-live .sd-step.is-on .sd-step__label span { color: var(--l-gold); background: var(--l-green); }
+[data-theme="light"] .site-dark .showday.is-live .sd-step__label span { color: var(--l-muted); background: var(--l-line); }
+[data-theme="light"] .site-dark .showday.is-live .sd-step.is-on { border-left-color: var(--l-gold); }
+[data-theme="light"] .site-dark .showday.is-live .sd-frame { box-shadow: 0 0 0 1px rgba(19, 23, 19, .08), 0 40px 90px -40px rgba(19, 23, 19, .45); }
+
 /* Team */
 [data-theme="light"] .site-dark .team-card { box-shadow: 0 24px 50px -40px rgba(19, 23, 19, .4); }
 [data-theme="light"] .site-dark .team-card:hover { border-color: rgba(191, 144, 0, .6); }
