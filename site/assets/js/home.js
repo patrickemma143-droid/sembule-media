@@ -47,7 +47,8 @@
 
     // "Auto" is the mixer's auto-transition: lit while the stories advance by themselves
     const setPause = () => {
-      pause.setAttribute('aria-pressed', String(!paused));
+      // An "Auto" lamp button is pressed while running; a plain Pause button is pressed while paused
+      pause.setAttribute('aria-pressed', String(pauseLabel ? !paused : paused));
       if (pauseLabel) pauseLabel.textContent = 'Auto'; else pause.textContent = paused ? 'Play' : 'Pause';
       pause.setAttribute('aria-label', paused ? 'Turn auto on: let the stories advance by themselves' : 'Turn auto off: stop the stories advancing');
     };
