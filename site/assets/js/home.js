@@ -391,7 +391,95 @@
       if (event.key === 'ArrowRight') { event.preventDefault(); go(active + 1); }
       if (event.key === 'ArrowLeft') { event.preventDefault(); go(active - 1); }
     });
-    cards.forEach((card, i) => card.addEventListener('click', () => { if (!moved && i !== active) go(i); }));
+    // Expanded view: clicking the front card (or Enter on the slider) opens it full screen.
+    // A native <dialog> outside <main>, so focus is held inside it, Esc closes it, and the OS bridge's
+    // image order in <main> is untouched.
+    const box = document.createElement('dialog');
+    box.className = 'h-lightbox';
+    box.setAttribute('aria-label', 'Selected work');
+    box.innerHTML = `
+      <div class="h-lightbox__stage" data-lb-stage></div>
+      <div class="h-lightbox__caption"><span class="h-tag" data-lb-tag></span><p class="h-lightbox__title" data-lb-title></p><p class="h-lightbox__meta" data-lb-meta></p></div>
+      <p class="h-lightbox__count" aria-live="polite"><strong data-lb-index>01</strong> / <span data-lb-total>10</span></p>
+      <button class="h-lightbox__close" type="button" data-lb-close aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+      <button class="h-lightbox__nav h-lightbox__nav--prev" type="button" data-lb-prev aria-label="Previous project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="h-lightbox__nav h-lightbox__nav--next" type="button" data-lb-next aria-label="Next project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+    document.body.append(box);
+    const lbStage = box.querySelector('[data-lb-stage]');
+    const lbTag = box.querySelector('[data-lb-tag]');
+    const lbTitle = box.querySelector('[data-lb-title]');
+    const lbMeta = box.querySelector('[data-lb-meta]');
+    const lbIndex = box.querySelector('[data-lb-index]');
+    box.querySelector('[data-lb-total]').textContent = String(cards.length).padStart(2, '0');
+    let lbAt = 0;
+    // The largest picture the card has (its srcset's widest entry, else its src)
+    const bestSrc = img => {
+      const set = (img.getAttribute('srcset') || '').split(',').map(part => part.trim().split(/\s+/)).filter(p => p[0]);
+      set.sort((a, b) => parseInt(b[1] || '0', 10) - parseInt(a[1] || '0', 10));
+      return set[0]?.[0] || img.getAttribute('src');
+    };
+    const fill = i => {
+      lbAt = (i + cards.length) % cards.length;
+      const card = cards[lbAt];
+      const img = card.querySelector('img');
+      let media;
+      if (card.dataset.videoSrc && !saveData) {
+        media = document.createElement('video');
+        media.src = card.dataset.videoSrc;
+        media.controls = true; media.playsInline = true; media.loop = true; media.autoplay = !reduced.matches;
+        if (img) media.poster = img.getAttribute('src');
+        media.setAttribute('aria-label', card.querySelector('h3')?.textContent || 'Project video');
+      } else {
+        media = document.createElement('img');
+        media.src = bestSrc(img);
+        media.alt = img.alt;
+        media.decoding = 'async';
+      }
+      lbStage.replaceChildren(media);
+      lbTag.textContent = card.querySelector('.h-tag')?.textContent || '';
+      lbTitle.textContent = card.querySelector('h3')?.textContent || '';
+      lbMeta.textContent = card.querySelector('.h-flow__meta p')?.textContent || '';
+      lbIndex.textContent = String(lbAt + 1).padStart(2, '0');
+      box.classList.remove('is-swapping'); void box.offsetWidth; box.classList.add('is-swapping');
+    };
+    const openBox = i => {
+      stopVideo(); // the card's own clip pauses while the big view is open
+      fill(i);
+      box.showModal();
+      document.documentElement.classList.add('has-lightbox');
+    };
+    const step = dir => { fill(lbAt + dir); go(lbAt); };
+    box.querySelector('[data-lb-close]').addEventListener('click', () => box.close());
+    box.querySelector('[data-lb-prev]').addEventListener('click', () => step(-1));
+    box.querySelector('[data-lb-next]').addEventListener('click', () => step(1));
+    box.addEventListener('keydown', event => {
+      if (event.target.closest('video')) return;
+      if (event.key === 'ArrowRight') { event.preventDefault(); step(1); }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1); }
+    });
+    // A click on the dark backdrop (outside the picture and the controls) closes it
+    box.addEventListener('click', event => { if (event.target === box || event.target === lbStage) box.close(); });
+    box.addEventListener('close', () => {
+      lbStage.replaceChildren(); // stops any video
+      document.documentElement.classList.remove('has-lightbox');
+      playActive();
+      stage.focus({ preventScroll: true });
+    });
+    let lbDrag = null;
+    lbStage.addEventListener('pointerdown', event => { lbDrag = { x: event.clientX, y: event.clientY }; });
+    lbStage.addEventListener('pointerup', event => {
+      if (!lbDrag) return;
+      const dx = event.clientX - lbDrag.x, dy = event.clientY - lbDrag.y;
+      lbDrag = null;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) step(dx < 0 ? 1 : -1);
+    });
+    stage.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openBox(active); } });
+
+    cards.forEach((card, i) => card.addEventListener('click', () => {
+      if (moved) return;
+      if (i !== active) go(i);   // a side card comes to the front first
+      else openBox(i);           // the front card opens big
+    }));
     stage.addEventListener('pointerdown', event => { drag = { x: event.clientX, y: event.clientY }; moved = false; });
     stage.addEventListener('pointermove', event => { if (drag && Math.abs(event.clientX - drag.x) > 8) moved = true; });
     stage.addEventListener('pointerup', event => {

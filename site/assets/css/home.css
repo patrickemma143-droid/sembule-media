@@ -437,3 +437,43 @@
   .h-hero__copy .h-eyebrow, .h-hero .h-hero__title, .h-hero .h-hero__lede { transition: none; }
   .h-hero .h-dots button.is-running:before { animation: none; transform: scaleX(1); }
 }
+
+/* ---------- Work: expanded view (native dialog) ---------- */
+.h-flow__card.is-active { cursor: zoom-in; }
+.h-flow__card.is-active:before { position: absolute; z-index: 2; top: 16px; right: 16px; padding: 7px 12px; content: "View"; border: 1px solid rgba(255, 255, 255, .3); border-radius: 999px; color: #f3f0e8; background: rgba(0, 0, 0, .4); font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; opacity: 0; transform: translateY(-4px); transition: opacity 250ms var(--h-ease), transform 250ms var(--h-ease); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.h-flow__card.is-active:hover:before { opacity: 1; transform: none; }
+@media (hover: none) { .h-flow__card.is-active:before { opacity: 1; transform: none; } }
+html.has-lightbox { overflow: hidden; }
+.h-lightbox { --h-text: #f3f0e8; --h-muted: rgba(243, 240, 232, .7); --h-line: rgba(255, 255, 255, .12); width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0; border: 0; color: #f3f0e8; background: #050505; font-family: var(--font-body, inherit); }
+.h-lightbox::backdrop { background: rgba(0, 0, 0, .7); }
+.h-lightbox[open] { display: grid; grid-template-rows: minmax(0, 1fr) auto; animation: h-lb-in 320ms var(--h-ease, ease) both; }
+@keyframes h-lb-in { from { opacity: 0; } to { opacity: 1; } }
+.h-lightbox__stage { display: grid; place-items: center; min-height: 0; padding: clamp(64px, 8vh, 88px) clamp(16px, 7vw, 120px) 12px; }
+.h-lightbox__stage img, .h-lightbox__stage video { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 16px; object-fit: contain; background: #000; box-shadow: 0 40px 120px -40px rgba(191, 144, 0, .45); }
+.h-lightbox.is-swapping .h-lightbox__stage > * { animation: h-lb-swap 480ms cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes h-lb-swap { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
+.h-lightbox__caption { padding: 14px clamp(16px, 7vw, 120px) clamp(20px, 4vh, 36px); }
+.h-lightbox__caption .h-tag { margin-bottom: 10px; }
+.h-lightbox__title { margin: 0 0 4px; font-family: var(--font-display, inherit); font-size: clamp(22px, 2.2vw, 32px); font-weight: 600; letter-spacing: -.02em; }
+.h-lightbox__meta { margin: 0; color: rgba(243, 240, 232, .66); font-size: 14px; }
+.h-lightbox__count { position: absolute; top: 22px; left: clamp(16px, 3vw, 32px); margin: 0; color: rgba(243, 240, 232, .66); font-size: 14px; font-variant-numeric: tabular-nums; }
+.h-lightbox__count strong { color: #f3f0e8; font-size: 22px; font-weight: 500; }
+.h-lightbox__close, .h-lightbox__nav { position: absolute; display: grid; place-items: center; width: 52px; height: 52px; padding: 0; border: 1px solid rgba(255, 255, 255, .2); border-radius: 50%; color: #f3f0e8; background: rgba(255, 255, 255, .06); cursor: pointer; transition: transform 200ms ease, background-color 200ms ease, border-color 200ms ease; }
+.h-lightbox__close svg, .h-lightbox__nav svg { width: 22px; height: 22px; }
+.h-lightbox__close:hover, .h-lightbox__nav:hover { border-color: #bf9000; background: rgba(191, 144, 0, .18); }
+.h-lightbox__close:active, .h-lightbox__nav:active { transform: scale(.94); }
+.h-lightbox__close { top: 16px; right: clamp(16px, 3vw, 32px); }
+.h-lightbox__nav { top: 50%; margin-top: -26px; }
+.h-lightbox__nav--prev { left: clamp(8px, 2vw, 32px); }
+.h-lightbox__nav--next { right: clamp(8px, 2vw, 32px); }
+.h-lightbox :focus-visible { outline: 2px solid #bf9000; outline-offset: 3px; }
+@media (max-width: 760px) {
+  .h-lightbox__stage { padding: 72px 12px 8px; }
+  .h-lightbox__nav { top: auto; bottom: 20px; margin-top: 0; width: 48px; height: 48px; }
+  .h-lightbox__nav--prev { left: auto; right: 76px; }
+  .h-lightbox__nav--next { right: 16px; }
+  .h-lightbox__caption { padding-right: 140px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .h-lightbox[open], .h-lightbox.is-swapping .h-lightbox__stage > * { animation: none; }
+}
