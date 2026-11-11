@@ -40,10 +40,25 @@
       }
     });
 
+    // Vision-mixer parts: the camera name in the program readout and the running timecode
+    const cam = hero.querySelector('[data-hero-cam]');
+    const timecode = hero.querySelector('[data-hero-timecode]');
+    const pauseLabel = pause.querySelector('[data-hero-pause-label]');
+
+    // "Auto" is the mixer's auto-transition: lit while the stories advance by themselves
     const setPause = () => {
-      pause.setAttribute('aria-pressed', String(paused));
-      pause.textContent = paused ? 'Play' : 'Pause';
-      pause.setAttribute('aria-label', paused ? 'Play the hero stories' : 'Pause the hero stories');
+      pause.setAttribute('aria-pressed', String(!paused));
+      if (pauseLabel) pauseLabel.textContent = 'Auto'; else pause.textContent = paused ? 'Play' : 'Pause';
+      pause.setAttribute('aria-label', paused ? 'Turn auto on: let the stories advance by themselves' : 'Turn auto off: stop the stories advancing');
+    };
+    // Gold tally on the tile that is on air (program), green on the one that comes next (preview)
+    const setTally = () => {
+      const next = (current + 1) % slides.length;
+      markers.forEach((marker, i) => {
+        marker.setAttribute('aria-current', String(i === current));
+        marker.classList.toggle('is-pvw', i === next && !paused);
+      });
+      if (cam) cam.textContent = `CAM ${current + 1}`;
     };
     const schedule = () => {
       clearTimeout(timer);
@@ -52,14 +67,19 @@
       const hasVideo = slides[current].querySelector('video') && !reduced.matches && !heroSaveData;
       timer = setTimeout(() => show((current + 1) % slides.length), hasVideo ? 12000 : 7000);
     };
-    const show = target => {
+    let cutTimer;
+    const show = (target, { cut = false } = {}) => {
       if (target === current) return;
       current = target;
+      // A pressed camera tile is a hard CUT; auto mode keeps the slow MIX
+      clearTimeout(cutTimer);
+      hero.classList.toggle('is-cut', cut);
+      if (cut) cutTimer = setTimeout(() => hero.classList.remove('is-cut'), 400);
       slides.forEach((slide, i) => {
         slide.classList.toggle('is-active', i === current);
         slide.setAttribute('aria-hidden', String(i !== current));
       });
-      markers.forEach((marker, i) => marker.setAttribute('aria-current', String(i === current)));
+      setTally();
       syncVideos(true);
       if (index) index.textContent = String(current + 1).padStart(2, '0');
       const next = slides[current].querySelector('img');
@@ -77,8 +97,43 @@
     };
 
     slides.forEach((slide, i) => slide.setAttribute('aria-hidden', String(i !== 0)));
-    markers.forEach(marker => marker.addEventListener('click', () => show(Number(marker.dataset.heroGoto))));
-    pause.addEventListener('click', () => { paused = !paused; setPause(); schedule(); });
+    markers.forEach(marker => marker.addEventListener('click', () => show(Number(marker.dataset.heroGoto), { cut: true })));
+    pause.addEventListener('click', () => { paused = !paused; setPause(); setTally(); schedule(); });
+
+    // Camera tiles show the slide's own picture, so a photo changed by the OS or site.js shows here too
+    const syncThumbs = () => markers.forEach(marker => {
+      const img = slides[Number(marker.dataset.heroGoto)]?.querySelector('img');
+      const thumb = marker.querySelector('.h-mv__thumb');
+      const src = img && (img.currentSrc || img.src);
+      if (thumb && src) thumb.style.setProperty('--thumb', `url("${src.replace(/"/g, '%22')}")`);
+    });
+    window.addEventListener('load', syncThumbs, { once: true });
+
+    // Program timecode (hours:minutes:seconds:frames at 25 fps): how long this page has been on air.
+    // Runs only while the hero is on screen and the tab is visible; reduced motion ticks once a second.
+    if (timecode) {
+      const startedAt = performance.now();
+      const two = n => String(n).padStart(2, '0');
+      const draw = () => {
+        const ms = performance.now() - startedAt;
+        const frames = reduced.matches ? 0 : Math.floor((ms % 1000) / 40);
+        const s = Math.floor(ms / 1000);
+        timecode.textContent = `${two(Math.floor(s / 3600))}:${two(Math.floor(s / 60) % 60)}:${two(s % 60)}:${two(frames)}`;
+      };
+      let raf = 0, tick = 0, heroVisible = true;
+      const loop = () => { draw(); raf = requestAnimationFrame(loop); };
+      const run = () => {
+        cancelAnimationFrame(raf); clearInterval(tick);
+        if (!heroVisible || document.hidden) return;
+        if (reduced.matches) { draw(); tick = setInterval(draw, 1000); } else loop();
+      };
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => { heroVisible = entry.isIntersecting; run(); }).observe(hero);
+      }
+      document.addEventListener('visibilitychange', run);
+      reduced.addEventListener?.('change', run);
+      run();
+    }
     hero.addEventListener('pointerenter', () => { holding = true; schedule(); });
     hero.addEventListener('pointerleave', () => { holding = false; schedule(); });
     hero.addEventListener('focusin', () => { holding = true; schedule(); });
@@ -120,6 +175,7 @@
     document.addEventListener('visibilitychange', () => syncVideos());
     reduced.addEventListener?.('change', () => syncVideos());
     setPause();
+    setTally();
     syncVideos(true);
     schedule();
   }

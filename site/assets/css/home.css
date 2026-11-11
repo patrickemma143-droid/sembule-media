@@ -115,6 +115,50 @@
 .h-dots button[aria-current="true"]:after { background: var(--h-gold); }
 .h-hero__place { margin: 0 0 0 auto; color: var(--h-muted); font-size: 13px; letter-spacing: .04em; }
 
+/* ---------- Vision mixer: program readout, camera tiles, tally lights ---------- */
+/* A click is a CUT (fast); auto mode MIXes (the slow crossfade above) */
+.h-hero.is-cut .h-slide { transition-duration: 140ms; }
+.h-hero.is-cut .h-slide img { transition-duration: 0ms; }
+
+/* Program readout over the picture, like the top of a multiviewer */
+.h-hud { position: absolute; z-index: 3; top: calc(var(--h-head) + 18px); right: var(--page-gutter); display: flex; align-items: center; gap: 10px; color: rgba(243, 240, 232, .82); font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; pointer-events: none; }
+.h-hud__pgm { padding: 5px 9px; border-radius: 6px; color: #000; background: var(--h-gold); letter-spacing: .12em; }
+.h-hud__cam { padding-right: 6px; }
+.h-hud__air { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border: 1px solid rgba(255, 255, 255, .18); border-radius: 999px; background: rgba(0, 0, 0, .35); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.h-hud__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--h-gold); box-shadow: 0 0 0 3px rgba(191, 144, 0, .25), 0 0 10px rgba(191, 144, 0, .9); }
+.h-hud__tc { min-width: 11ch; color: var(--h-text); font-size: 13px; font-variant-numeric: tabular-nums; letter-spacing: .06em; }
+
+/* Bottom row: four camera tiles, then the counter and the Auto button */
+.h-hero__bar { align-items: flex-end; justify-content: space-between; }
+/* Tiles get an explicit width and a 16:9 height: a grid row would not take its height from the tiles */
+.h-mv { --tile-w: clamp(112px, 9.5vw, 150px); display: flex; flex-shrink: 0; gap: 10px; }
+/* each tile: --tile-w wide, 9/16 of that tall */
+.h-mv__tile { position: relative; flex: 0 0 auto; width: var(--tile-w); height: calc(var(--tile-w) * 9 / 16); padding: 0; overflow: hidden; border: 1px solid rgba(255, 255, 255, .16); border-radius: 10px; background: #111; cursor: pointer; transition: transform 200ms var(--h-ease), border-color 200ms var(--h-ease), box-shadow 200ms var(--h-ease); }
+.h-mv__tile:hover { transform: translateY(-2px); border-color: rgba(255, 255, 255, .4); }
+.h-mv__tile:active { transform: scale(.97); transition-duration: 90ms; }
+.h-mv__thumb { position: absolute; inset: 0; background: var(--thumb) center / cover no-repeat; filter: grayscale(1) brightness(.62); transition: filter 300ms var(--h-ease); }
+.h-mv__tile:hover .h-mv__thumb { filter: grayscale(.4) brightness(.85); }
+.h-mv__tile:after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, .75)); pointer-events: none; }
+.h-mv__label { position: absolute; z-index: 1; right: 8px; bottom: 6px; left: 8px; overflow: hidden; color: rgba(243, 240, 232, .78); font-size: 10px; font-weight: 500; letter-spacing: .08em; line-height: 1.2; text-align: left; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+.h-mv__label b { margin-right: 6px; color: var(--h-text); font-weight: 700; }
+.h-mv__tally { position: absolute; z-index: 1; top: 6px; left: 6px; display: none; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 700; letter-spacing: .12em; line-height: 1.4; }
+/* Program (on air): gold tally, picture in colour */
+.h-mv__tile[aria-current="true"] { border: 2px solid var(--h-gold); box-shadow: 0 0 0 1px rgba(191, 144, 0, .35), 0 10px 30px -8px rgba(191, 144, 0, .55); }
+.h-mv__tile[aria-current="true"] .h-mv__thumb { filter: none; }
+.h-mv__tile[aria-current="true"] .h-mv__tally { display: block; color: #000; background: var(--h-gold); }
+.h-mv__tile[aria-current="true"] .h-mv__tally:before { content: "PGM"; }
+/* Preview (next up): green tally */
+.h-mv__tile.is-pvw { border: 2px solid #0b8a45; box-shadow: 0 0 0 1px rgba(4, 89, 42, .5), 0 10px 26px -10px rgba(11, 138, 69, .6); }
+.h-mv__tile.is-pvw .h-mv__thumb { filter: grayscale(.5) brightness(.8); }
+.h-mv__tile.is-pvw .h-mv__tally { display: block; color: #fff; background: var(--h-green); }
+.h-mv__tile.is-pvw .h-mv__tally:before { content: "PVW"; }
+
+.h-mv__side { display: flex; flex-shrink: 0; align-items: center; gap: 18px; }
+.h-auto { display: inline-flex; align-items: center; gap: 9px; letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
+.h-auto__lamp { width: 9px; height: 9px; border-radius: 50%; background: rgba(243, 240, 232, .25); transition: background-color 200ms var(--h-ease), box-shadow 200ms var(--h-ease); }
+.h-auto[aria-pressed="true"] { color: var(--h-text); border-color: rgba(191, 144, 0, .5); }
+.h-auto[aria-pressed="true"] .h-auto__lamp { background: var(--h-gold); box-shadow: 0 0 0 3px rgba(191, 144, 0, .22), 0 0 10px rgba(191, 144, 0, .85); }
+
 /* Entrance: once, on load */
 .h-enter { animation: h-in 900ms var(--h-ease) both; animation-delay: calc(var(--d, 0) * 90ms + 80ms); }
 @keyframes h-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
@@ -265,6 +309,11 @@
   .h-hero { padding-top: calc(var(--h-head) + 20px); }
   .h-hero__stage:after { background: linear-gradient(180deg, rgba(0, 0, 0, .6) 0%, rgba(0, 0, 0, .3) 22%, rgba(0, 0, 0, .86) 46%, rgba(0, 0, 0, .94) 64%, #000 100%); }
   .h-hero__glow { bottom: -20%; left: auto; right: -30%; width: 120vw; }
+  .h-hud { top: calc(var(--h-head) + 12px); left: var(--page-gutter); right: auto; gap: 8px; font-size: 10px; }
+  .h-hud__tc { font-size: 12px; }
+  .h-hero__bar { flex-direction: column; align-items: stretch; gap: 14px; }
+  .h-mv { --tile-w: calc((100vw - var(--page-gutter) * 2 - 24px) / 4); gap: 8px; }
+  .h-mv__side { justify-content: space-between; }
   .h-cards { grid-template-columns: 1fr; }
   .testimonial-frame { grid-template-columns: 1fr; gap: 12px; }
   .testimonial-visual { height: clamp(280px, 80vw, 360px); }
@@ -290,6 +339,9 @@
 @media (max-width: 560px) {
   .h-actions .h-btn { width: 100%; }
   .h-hero__title { font-size: clamp(38px, 11vw, 52px); }
+  .h-mv__label { font-size: 9px; }
+  .h-mv__name { display: none; }
+  .h-hud__cam { display: none; }
   .h-flow__bar { flex-wrap: wrap; justify-content: space-between; }
   .h-flow__arrows { margin-inline: 0; }
   .h-flow__bar .h-link { width: 100%; }

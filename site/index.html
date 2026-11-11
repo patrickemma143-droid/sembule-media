@@ -23,9 +23,9 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Sembule Media | Livestream, sound, film and photography in Uganda</title>
   <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
-  <link rel="stylesheet" href="./assets/css/home.css?v=stack-testimonials-1"><link rel="stylesheet" href="./assets/css/light.css?v=stack-testimonials-1">
+  <link rel="stylesheet" href="./assets/css/home.css?v=mixer-hero-5"><link rel="stylesheet" href="./assets/css/light.css?v=stack-testimonials-1">
   <script defer src="./assets/js/site.js?v=stack-testimonials-1"></script>
-  <script defer src="./assets/js/home.js?v=stack-testimonials-1"></script>
+  <script defer src="./assets/js/home.js?v=mixer-hero-1"></script>
   <script defer src="./assets/js/analytics.js"></script>
   <meta name="sembule-site-content" content="./content/site-content.json">
 </head>
@@ -69,16 +69,24 @@
           <figure class="h-slide" data-hero-slide data-story-eyebrow="Weddings · portraits · film" data-story-title="You’ll be busy living it. We’ll keep it." data-story-description="On the day, a couple sees a fraction of their own wedding. Photography and film give you back the moments you were too busy to notice."><img loading="lazy" src="./assets/work/hero-wedding-bw.jpg" srcset="./assets/work/hero-wedding-bw-640.jpg 640w, ./assets/work/hero-wedding-bw.jpg 1200w" sizes="100vw" width="1200" height="705" style="object-position:50% 45%" alt="Black and white photograph of a groom kissing his bride's hand among palm leaves" data-cms-src="home.hero.slides.3.image" data-cms-alt="home.hero.slides.3.imageAlt"></figure>
         </div>
       </div>
+      <!-- Vision-mixer controls: the four camera tiles are the story markers (data-hero-goto, kept for site.js and the OS).
+           Gold tally = on air (program), green tally = next up (preview). Thumbnails are CSS backgrounds, not <img>,
+           because the OS bridge rewrites image alt text by the order of <img> elements in main. -->
+      <div class="h-hud h-enter" style="--d:2" aria-hidden="true">
+        <span class="h-hud__pgm">PGM</span><span class="h-hud__cam" data-hero-cam>CAM 1</span>
+        <span class="h-hud__air"><span class="h-hud__dot"></span>On air</span><span class="h-hud__tc" data-hero-timecode>00:00:00:00</span>
+      </div>
       <div class="h-wrap h-hero__bar h-enter" style="--d:4">
-        <p class="h-count" aria-hidden="true"><strong data-hero-index>01</strong><span>/ 04</span></p>
-        <nav class="h-dots" aria-label="Production stories">
-          <button type="button" data-hero-goto="0" aria-current="true" aria-label="Show story 1: Not everyone could get a ticket."></button>
-          <button type="button" data-hero-goto="1" aria-current="false" aria-label="Show story 2: Nobody remembers good sound."></button>
-          <button type="button" data-hero-goto="2" aria-current="false" aria-label="Show story 3: The back row came too."></button>
-          <button type="button" data-hero-goto="3" aria-current="false" aria-label="Show story 4: You’ll be busy living it. We’ll keep it."></button>
-        </nav>
-        <button class="h-pause" type="button" data-hero-pause aria-pressed="false">Pause</button>
-        <p class="h-hero__place">Bunamwaya, Kampala · Across Uganda</p>
+        <div class="h-mv" role="group" aria-label="Camera tiles: choose what goes on air">
+          <button class="h-mv__tile" type="button" data-hero-goto="0" aria-current="true" aria-label="Show story 1: Not everyone could get a ticket."><span class="h-mv__thumb" style="--thumb:url('./assets/work/hero-live-performance-640.jpg')" aria-hidden="true"></span><span class="h-mv__label" aria-hidden="true"><b>CAM 1</b><span class="h-mv__name">Concerts</span></span><span class="h-mv__tally" aria-hidden="true"></span></button>
+          <button class="h-mv__tile" type="button" data-hero-goto="1" aria-current="false" aria-label="Show story 2: Nobody remembers good sound."><span class="h-mv__thumb" style="--thumb:url('./assets/work/hero-live-stage-640.jpg')" aria-hidden="true"></span><span class="h-mv__label" aria-hidden="true"><b>CAM 2</b><span class="h-mv__name">Sound</span></span><span class="h-mv__tally" aria-hidden="true"></span></button>
+          <button class="h-mv__tile" type="button" data-hero-goto="2" aria-current="false" aria-label="Show story 3: The back row came too."><span class="h-mv__thumb" style="--thumb:url('./assets/work/hero-stage-screen.jpg')" aria-hidden="true"></span><span class="h-mv__label" aria-hidden="true"><b>CAM 3</b><span class="h-mv__name">Screens</span></span><span class="h-mv__tally" aria-hidden="true"></span></button>
+          <button class="h-mv__tile" type="button" data-hero-goto="3" aria-current="false" aria-label="Show story 4: You’ll be busy living it. We’ll keep it."><span class="h-mv__thumb" style="--thumb:url('./assets/work/hero-wedding-bw-640.jpg')" aria-hidden="true"></span><span class="h-mv__label" aria-hidden="true"><b>CAM 4</b><span class="h-mv__name">Weddings</span></span><span class="h-mv__tally" aria-hidden="true"></span></button>
+        </div>
+        <div class="h-mv__side">
+          <p class="h-count" aria-hidden="true"><strong data-hero-index>01</strong><span>/ 04</span></p>
+          <button class="h-pause h-auto" type="button" data-hero-pause aria-pressed="false"><span class="h-auto__lamp" aria-hidden="true"></span><span data-hero-pause-label>Auto</span></button>
+        </div>
       </div>
     </section>
     <!-- 2. Services -->
