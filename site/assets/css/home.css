@@ -89,6 +89,10 @@
 .h-hero__glow { position: absolute; z-index: 0; bottom: -38%; left: -14%; width: min(80vw, 1100px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(191, 144, 0, .2) 0%, rgba(191, 144, 0, .06) 38%, transparent 66%); pointer-events: none; }
 /* Full-bleed hero: the photograph fills the whole section, the copy sits over it */
 .h-hero { justify-content: flex-end; }
+/* Taller than the screen, so the photo has room and the copy sits lower */
+/* ...but the copy and the buttons stay on the first screen: the extra height is picture underneath them */
+.h-hero { min-height: max(118svh, 860px); padding-bottom: calc(max(118svh, 860px) - 100svh + clamp(28px, 4vh, 44px)); }
+@media (max-width: 820px) { .h-hero { min-height: 108svh; padding-bottom: calc(8svh + 28px); } }
 .h-hero__grid { position: static; display: grid; grid-template-columns: minmax(0, 1fr); }
 .h-hero__copy { position: relative; z-index: 2; max-width: 680px; }
 .h-hero__title { max-width: 13ch; margin: 0 0 22px; font-size: clamp(44px, 5.5vw, 88px); line-height: 1; transition: opacity 260ms var(--h-ease), transform 260ms var(--h-ease); }
