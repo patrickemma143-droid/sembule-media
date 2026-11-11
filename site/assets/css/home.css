@@ -173,6 +173,10 @@
 .h-card__body { padding: 20px 14px 12px; }
 .h-card h3 { margin: 0 0 8px; font-size: clamp(22px, 1.8vw, 27px); line-height: 1.1; }
 .h-card p { margin: 0; color: var(--h-muted); font-size: 15px; line-height: 1.6; }
+.h-cards--four { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.h-cards--four .h-card__media { aspect-ratio: 4 / 3.4; }
+.h-cards--four .h-card h3 { font-size: clamp(20px, 1.6vw, 24px); }
+@media (max-width: 1180px) and (min-width: 821px) { .h-cards--four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .h-also { margin: 30px 0 0; color: var(--h-muted); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; }
 
 /* ---------- 3. Showreel ---------- */
@@ -314,7 +318,7 @@
   .h-hero__bar { flex-direction: column; align-items: stretch; gap: 14px; }
   .h-mv { --tile-w: calc((100vw - var(--page-gutter) * 2 - 24px) / 4); gap: 8px; }
   .h-mv__side { justify-content: space-between; }
-  .h-cards { grid-template-columns: 1fr; }
+  .h-cards, .h-cards--four { grid-template-columns: 1fr; }
   .testimonial-frame { grid-template-columns: 1fr; gap: 12px; }
   .testimonial-visual { height: clamp(280px, 80vw, 360px); }
   .testimonial-stack { width: min(290px, 74%); }

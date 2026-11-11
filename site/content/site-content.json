@@ -4,32 +4,32 @@
     "hero": {
       "slides": [
         {
-          "eyebrow": "Concerts · live performance",
+          "eyebrow": "Livestream · concerts · live events",
           "title": "Not everyone could get a ticket.",
           "description": "Multi-camera coverage and clean sound carry the performance to people watching from home, and keep it for the ones who were there.",
           "image": "./assets/work/hero-live-performance.jpg",
           "imageAlt": "Choir in orange skirts performing on a lit stage in front of an LED screen"
         },
         {
-          "eyebrow": "Conferences · stage · live events",
+          "eyebrow": "Sound & PA · conferences · live events",
           "title": "Nobody remembers good sound.",
           "description": "Everyone remembers the dead microphone. Clear sound, readable screens and a calm crew, so the room remembers what was said.",
           "image": "./assets/work/hero-live-stage.jpg",
           "imageAlt": "Speaker addressing the audience on stage at a live Sembule Media event"
         },
         {
-          "eyebrow": "Screen hire · conferences · launches",
+          "eyebrow": "Corporate events · conferences · launches",
           "title": "The back row came too.",
           "description": "65-inch screens so every seat can read the slides and see the speaker. Set up and run by our crew.",
           "image": "./assets/work/hero-stage-screen.jpg",
           "imageAlt": "Event hall set for a corporate function, with a large screen above the stage, truss lighting and rows of chairs"
         },
         {
-          "eyebrow": "Weddings · portraits · film",
-          "title": "You’ll be busy living it. We’ll keep it.",
-          "description": "On the day, a couple sees a fraction of their own wedding. Photography and film give you back the moments you were too busy to notice.",
-          "image": "./assets/work/hero-wedding-bw.jpg",
-          "imageAlt": "Black and white photograph of a groom kissing his bride's hand among palm leaves"
+          "eyebrow": "Documentaries · NGO work",
+          "title": "People support what they can see.",
+          "description": "Programme films and field stories that show donors, partners and the public the work, the community and the people behind it, in their own words.",
+          "image": "./assets/work/service-documentary.jpg",
+          "imageAlt": "Documentary still of a woman carrying a basin on her head through a village in dappled sunlight"
         }
       ],
       "videoUrl": "https://www.youtube-nocookie.com/embed/rktDjkqMZaY?rel=0&playsinline=1&controls=1&autoplay=1",
@@ -53,17 +53,22 @@
           "imageLabel": "Livestream image"
         },
         {
+          "title": "Corporate events",
+          "description": "A conference is judged by its worst five minutes. Clear sound, readable screens and a calm crew.",
+          "imageLabel": "Corporate event image"
+        },
+        {
           "title": "Sound & PA",
           "description": "When sound works, nobody notices. That is exactly the point.",
           "imageLabel": "Sound / PA image"
         },
         {
-          "title": "Documentaries",
+          "title": "Documentaries & NGO work",
           "description": "People support what they can see. We film the work so it can speak for itself.",
           "imageLabel": "Documentary image"
         }
       ],
-      "serviceList": "Also: photography · videography · podcast · event coverage · 65” TV display hire"
+      "serviceList": "Also: photography · videography · 65-inch TV hire"
     },
     "aboutIntro": {
       "label": "Sembule Media · Kampala, Uganda",
@@ -143,26 +148,14 @@
         "actionUrl": "./portfolio.html"
       },
       {
-        "title": "Sound & PA",
-        "description": "Nobody remembers good sound. Everyone remembers feedback and a dead microphone. We scope the system around your venue and audience, indoors or out, so people talk afterwards about what was said.",
-        "actionLabel": "Request a quote",
-        "actionUrl": "./contact.html"
-      },
-      {
         "title": "Corporate events",
         "description": "A conference is judged by its worst five minutes. Clear sound, readable screens and dependable coverage for conferences, launches, meetings and workshops, so the room remembers your message rather than the technical pause.",
         "actionLabel": "Request a quote",
         "actionUrl": "./contact.html"
       },
       {
-        "title": "Weddings & celebrations",
-        "description": "On the day you’ll see a fraction of it. Photography and film give you back the moments you were too busy to notice, and something to share with everyone who couldn’t come.",
-        "actionLabel": "See selected work",
-        "actionUrl": "./portfolio.html"
-      },
-      {
-        "title": "Photography & videography",
-        "description": "The event lasts a day. The pictures keep working for years: in the annual report, the next proposal, the website. Photography, video coverage and edited deliverables shaped around your brief.",
+        "title": "Sound & PA",
+        "description": "Nobody remembers good sound. Everyone remembers feedback and a dead microphone. We scope the system around your venue and audience, indoors or out, so people talk afterwards about what was said.",
         "actionLabel": "Request a quote",
         "actionUrl": "./contact.html"
       },
@@ -173,10 +166,22 @@
         "actionUrl": "./portfolio.html"
       },
       {
-        "title": "Podcast production",
-        "description": "Listeners forgive a plain picture. They don’t forgive bad audio. Recording and production that make the conversation sound as considered as it is.",
+        "title": "NGO work",
+        "description": "Donors, partners and communities believe what they can see. Programme films and field stories, coverage of launches, dialogues and workshops, and livestreams for the people who couldn’t travel.",
         "actionLabel": "Request a quote",
         "actionUrl": "./contact.html"
+      },
+      {
+        "title": "Photography",
+        "description": "The event lasts a day. The pictures keep working for years: in the annual report, the next proposal, the website. Conferences, launches, portraits and weddings.",
+        "actionLabel": "Request a quote",
+        "actionUrl": "./contact.html"
+      },
+      {
+        "title": "Videography",
+        "description": "Highlight films, interviews, brand films and podcasts, filmed and edited by the crew that ran the day, so nothing is lost between the shoot and the edit.",
+        "actionLabel": "See selected work",
+        "actionUrl": "./portfolio.html"
       },
       {
         "title": "65-inch TV display hire",

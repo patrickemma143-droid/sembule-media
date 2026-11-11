@@ -62,6 +62,20 @@
   }
   window.SEMBULE_HERO_VIDEO_URL = publicUrl(siteContent?.home?.hero?.videoUrl);
 
+  // The website owns these texts ([data-site-owns]): the service list and the homepage service cards
+  // follow the new priority order, while the Sembule OS still publishes its older eight-item list by
+  // position. If the OS bridge writes over one of them, put the site's own text back. The bridge writes
+  // these once and does not watch them, so this cannot loop; a counter stops it if something else fights.
+  const owned = [...document.querySelectorAll('[data-site-owns]')].map(node => ({ node, text: node.textContent }));
+  if (owned.length && 'MutationObserver' in window) {
+    let restores = 0;
+    const keep = () => owned.forEach(item => {
+      if (item.node.textContent !== item.text && restores < 200) { restores += 1; item.node.textContent = item.text; }
+    });
+    const watcher = new MutationObserver(keep);
+    owned.forEach(({ node }) => watcher.observe(node, { childList: true, characterData: true, subtree: true }));
+  }
+
   // Pages with a full-bleed film hero (body.has-film-hero): the header floats over the film and
   // turns to glass once the page scrolls, as on the homepage.
   if (document.body.classList.contains('has-film-hero')) {
