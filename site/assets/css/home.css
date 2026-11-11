@@ -90,9 +90,10 @@
 /* Full-bleed hero: the photograph fills the whole section, the copy sits over it */
 .h-hero { justify-content: flex-end; }
 /* Taller than the screen, so the photo has room and the copy sits lower */
-/* The words and buttons sit at the very foot of the hero, leaving the top of the screen to the photograph */
-.h-hero { min-height: max(118svh, 860px); padding-bottom: clamp(40px, 6vh, 72px); }
-@media (max-width: 820px) { .h-hero { min-height: 108svh; padding-bottom: 32px; } }
+/* The hero runs just past the screen; the words and buttons sit low but finish inside the first screen,
+   so they are seen at first glance and the photograph keeps the top of the screen */
+.h-hero { min-height: calc(100svh + 40px); padding-bottom: clamp(64px, 9vh, 88px); }
+@media (max-width: 820px) { .h-hero { min-height: calc(100svh + 24px); padding-bottom: 48px; } }
 
 /* Type anchored to the bottom-left corner (taste skill, photo hero): the words stack from the foot on
    six of the twelve columns, on the calm dark corner of the picture; the rest of the photo stays bright */
@@ -100,7 +101,10 @@
 .h-hero .h-hero__lede { max-width: 40ch; }
 .h-hero .h-eyebrow { margin-bottom: 14px; }
 .h-hero .h-hero__bar { margin-top: clamp(24px, 3.6vh, 40px); }
-@media (min-width: 1024px) { .h-hero__copy { max-width: min(50%, 760px); } }
+@media (min-width: 1024px) { .h-hero .h-hero__copy { max-width: min(50%, 760px); } }
+/* Wide screens: a longer line keeps the headline on two lines, so the block stays low and uncrowded */
+@media (min-width: 1280px) { .h-hero .h-hero__copy { max-width: min(60%, 920px); } .h-hero .h-hero__title { max-width: 17ch; } }
+@media (min-width: 1600px) { .h-hero .h-hero__copy { max-width: min(86%, 1140px); } .h-hero .h-hero__title { max-width: 22ch; } }
 /* the shade sits in the corner the words sit in (about where the first screen ends), not across the whole left side */
 .h-hero__stage:after { background:
   radial-gradient(110% 80% at 0% 100%, rgba(0, 0, 0, .9) 0%, rgba(0, 0, 0, .62) 34%, rgba(0, 0, 0, .18) 62%, transparent 78%),
