@@ -412,3 +412,28 @@
 .h-reel .h-head--center h2 { max-width: 24ch; font-size: clamp(32px, 3.4vw, 56px); }
 .h-reel .h-reel__frame { border-radius: clamp(18px, 2vw, 32px); }
 @media (max-width: 820px) { .h-reel .h-reel__frame { width: 100%; } }
+
+/* ---------- Hero motion: the stories run by themselves (no number, no Pause) ---------- */
+/* Crossfade between photographs, and a slow push-in on the photograph that is up */
+.h-hero .h-slide { transition: opacity 1200ms var(--h-ease); }
+.h-hero .h-slide img { transform: scale(1); transition: transform 0s linear 1300ms; }
+.h-hero .h-slide.is-active img { transform: scale(1.08); transition: transform calc(var(--slide-ms, 7000ms) + 1500ms) cubic-bezier(.25, .1, .25, 1); }
+/* The words leave together, then come back one after another: eyebrow, headline, lede */
+.h-hero__copy .h-eyebrow, .h-hero .h-hero__title, .h-hero .h-hero__lede { transition: opacity 650ms var(--h-ease), transform 800ms var(--h-ease); }
+.h-hero .h-hero__title { transition-delay: 90ms; }
+.h-hero .h-hero__lede { transition-delay: 180ms; }
+.h-hero__copy.is-changing .h-eyebrow, .h-hero__copy.is-changing .h-hero__title, .h-hero__copy.is-changing .h-hero__lede { opacity: 0; transform: translateY(16px); transition-duration: 260ms; transition-delay: 0s; }
+.h-hero__copy.is-changing [data-hero-eyebrow] { opacity: 1; }
+/* Progress lines: the current story's line fills gold over the time it stays up */
+.h-hero .h-dots button:after { background: rgba(255, 255, 255, .24); }
+.h-hero .h-dots button[aria-current="true"]:after { background: rgba(255, 255, 255, .24); }
+.h-hero .h-dots button:before { position: absolute; z-index: 1; top: 50%; left: 6px; right: 6px; height: 2px; content: ""; border-radius: 2px; background: var(--h-gold); transform: scaleX(0); transform-origin: left; }
+.h-hero .h-dots button[aria-current="true"]:before { transform: scaleX(1); }
+.h-hero .h-dots button.is-running:before { transform: scaleX(0); animation: h-progress var(--slide-ms, 7000ms) linear forwards; }
+.h-hero.is-holding .h-dots button.is-running:before { animation-play-state: paused; }
+@keyframes h-progress { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .h-hero .h-slide.is-active img { transform: none; transition: none; }
+  .h-hero__copy .h-eyebrow, .h-hero .h-hero__title, .h-hero .h-hero__lede { transition: none; }
+  .h-hero .h-dots button.is-running:before { animation: none; transform: scaleX(1); }
+}

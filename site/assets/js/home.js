@@ -43,10 +43,11 @@
     // Vision-mixer parts: the camera name in the program readout and the running timecode
     const cam = hero.querySelector('[data-hero-cam]');
     const timecode = hero.querySelector('[data-hero-timecode]');
-    const pauseLabel = pause.querySelector('[data-hero-pause-label]');
+    const pauseLabel = pause?.querySelector('[data-hero-pause-label]');
 
     // "Auto" is the mixer's auto-transition: lit while the stories advance by themselves
     const setPause = () => {
+      if (!pause) return; // no Pause button: the stories simply run (they still hold on hover and focus)
       // An "Auto" lamp button is pressed while running; a plain Pause button is pressed while paused
       pause.setAttribute('aria-pressed', String(pauseLabel ? !paused : paused));
       if (pauseLabel) pauseLabel.textContent = 'Auto'; else pause.textContent = paused ? 'Play' : 'Pause';
@@ -61,12 +62,28 @@
       });
       if (cam) cam.textContent = `CAM ${current + 1}`;
     };
+    // Progress line: the current story's line fills gold over the time it stays up
+    const runBar = ms => {
+      hero.style.setProperty('--slide-ms', `${ms}ms`);
+      markers.forEach(marker => marker.classList.remove('is-running'));
+      const marker = markers[current];
+      if (!marker) return;
+      void marker.offsetWidth; // restart the fill from empty
+      marker.classList.add('is-running');
+    };
     const schedule = () => {
       clearTimeout(timer);
-      if (paused || holding || document.hidden) return;
+      // While the pointer or keyboard focus is in the hero the story holds and its line stops filling
+      hero.classList.toggle('is-holding', holding);
+      if (paused || holding || document.hidden) {
+        if (paused || document.hidden) markers.forEach(marker => marker.classList.remove('is-running'));
+        return;
+      }
       // A slide with a video stays up longer so the clip gets a proper run before the next photo
       const hasVideo = slides[current].querySelector('video') && !reduced.matches && !heroSaveData;
-      timer = setTimeout(() => show((current + 1) % slides.length), hasVideo ? 12000 : 7000);
+      const ms = hasVideo ? 12000 : 7000;
+      runBar(ms);
+      timer = setTimeout(() => show((current + 1) % slides.length), ms);
     };
     let cutTimer;
     const show = (target, { cut = false } = {}) => {
@@ -93,13 +110,13 @@
         title.textContent = data.storyTitle || '';
         description.textContent = data.storyDescription || '';
         copy.classList.remove('is-changing');
-      }, reduced.matches ? 0 : 260);
+      }, reduced.matches ? 0 : 320);
       schedule();
     };
 
     slides.forEach((slide, i) => slide.setAttribute('aria-hidden', String(i !== 0)));
     markers.forEach(marker => marker.addEventListener('click', () => show(Number(marker.dataset.heroGoto), { cut: true })));
-    pause.addEventListener('click', () => { paused = !paused; setPause(); setTally(); schedule(); });
+    pause?.addEventListener('click', () => { paused = !paused; setPause(); setTally(); schedule(); });
 
     // Camera tiles show the slide's own picture, so a photo changed by the OS or site.js shows here too
     const syncThumbs = () => markers.forEach(marker => {
