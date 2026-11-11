@@ -181,9 +181,86 @@
     schedule();
   }
 
-  /* Showreel: load YouTube only when asked (keeps the page light on mobile data) */
+  /* Showreel: plays by itself, muted, while it is on screen (browsers only autoplay muted video).
+     Pause and Sound buttons sit on the frame; a pause by the visitor is respected, the reel does not
+     restart itself. It stops when scrolled away. Reduced motion and Save-Data keep the click-to-play
+     poster, so nothing downloads or moves until asked. */
   const reel = document.querySelector('[data-reel]');
-  if (reel) {
+  const reelSaveData = navigator.connection?.saveData === true;
+  if (reel && reel.dataset.src && !reduced.matches && !reelSaveData && 'IntersectionObserver' in window) {
+    const poster = reel.querySelector('img');
+    const video = document.createElement('video');
+    video.className = 'h-reel__video';
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = 'none';
+    video.setAttribute('aria-label', 'Sembule Media showreel');
+    if (poster) video.poster = poster.currentSrc || poster.src;
+
+    const controls = document.createElement('div');
+    controls.className = 'h-reel__controls';
+    controls.innerHTML = '<button class="h-reel__ctl" type="button" data-reel-toggle aria-pressed="false"><span class="h-reel__icon h-reel__icon--pause" aria-hidden="true"></span><span data-reel-toggle-label>Pause</span></button><button class="h-reel__ctl" type="button" data-reel-sound aria-pressed="false"><span class="h-reel__icon h-reel__icon--sound" aria-hidden="true"></span><span data-reel-sound-label>Sound on</span></button>';
+    const toggle = controls.querySelector('[data-reel-toggle]');
+    const toggleLabel = controls.querySelector('[data-reel-toggle-label]');
+    const sound = controls.querySelector('[data-reel-sound]');
+    const soundLabel = controls.querySelector('[data-reel-sound-label]');
+    let started = false, userPaused = false, visible = false;
+
+    const start = () => {
+      if (started) return;
+      started = true;
+      video.src = reel.dataset.src;
+      video.preload = 'auto';
+      reel.replaceChildren(video, controls);
+      reel.classList.add('is-playing');
+    };
+    const setToggle = () => {
+      const paused = video.paused;
+      toggle.setAttribute('aria-pressed', String(paused));
+      toggleLabel.textContent = paused ? 'Play' : 'Pause';
+      toggle.querySelector('.h-reel__icon').className = `h-reel__icon h-reel__icon--${paused ? 'play' : 'pause'}`;
+      toggle.setAttribute('aria-label', paused ? 'Play the showreel' : 'Pause the showreel');
+    };
+    const setSound = () => {
+      sound.setAttribute('aria-pressed', String(!video.muted));
+      soundLabel.textContent = video.muted ? 'Sound on' : 'Mute';
+      sound.querySelector('.h-reel__icon').className = `h-reel__icon h-reel__icon--${video.muted ? 'sound' : 'mute'}`;
+      sound.setAttribute('aria-label', video.muted ? 'Turn the showreel sound on' : 'Mute the showreel');
+    };
+    toggle.addEventListener('click', () => {
+      if (video.paused) { userPaused = false; video.play().catch(() => {}); }
+      else { userPaused = true; video.pause(); }
+    });
+    sound.addEventListener('click', () => {
+      video.muted = !video.muted;
+      if (!video.muted && video.paused) { userPaused = false; video.play().catch(() => {}); }
+      setSound();
+    });
+    video.addEventListener('play', setToggle);
+    video.addEventListener('pause', setToggle);
+    video.addEventListener('volumechange', setSound);
+    // Clicking the picture itself pauses or plays, like any video player
+    video.addEventListener('click', () => toggle.click());
+
+    const sync = () => {
+      if (visible && !document.hidden) {
+        start();
+        if (!userPaused) video.play().catch(() => {});
+      } else if (started) {
+        video.pause();
+      }
+    };
+    new IntersectionObserver(([entry]) => { visible = entry.intersectionRatio >= 0.5; sync(); }, { threshold: [0, 0.5, 1] }).observe(reel);
+    document.addEventListener('visibilitychange', sync);
+    // Pressing the poster's play button before the reel has started: start it, with sound
+    reel.querySelector('[data-reel-play]')?.addEventListener('click', () => {
+      start(); userPaused = false; video.muted = false; video.play().catch(() => {}); setSound();
+    });
+    reel.dataset.autoplay = 'on';
+    setToggle(); setSound();
+  }
+  if (reel && reel.dataset.autoplay !== 'on' && reel.querySelector('[data-reel-play]')) {
     reel.querySelector('[data-reel-play]').addEventListener('click', () => {
       // A hosted MP4 (data-src) plays in a native player; otherwise fall back to the YouTube id
       if (reel.dataset.src) {
