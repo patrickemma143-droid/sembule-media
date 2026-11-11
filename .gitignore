@@ -3,3 +3,5 @@ site/.taste-skill/
 inspire/
 # Raw video masters (100+ MB); the site uses compressed cuts in site/assets/video
 /assets/
+# Client documents with registration, tax and contact details: never commit
+*.pdf
