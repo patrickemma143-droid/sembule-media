@@ -303,59 +303,6 @@
     setPaused(); update();
   }
 
-  const testimonial = document.querySelector('[data-testimonial-carousel]');
-  if (testimonial) {
-    const slides = [
-      { name: 'Client name to confirm', role: 'Corporate event · client role and organization to confirm', quote: 'Approved corporate event testimonial copy will appear here.', image: 'https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/DSC_6029-2-scaled.jpg?fit=1200%2C800&ssl=1' },
-      { name: 'Client name to confirm', role: 'Wedding / celebration · client name to confirm', quote: 'Approved wedding client testimonial copy will appear here.', image: 'https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/msg680180638-10205.jpg?resize=580%2C435&ssl=1' },
-      { name: 'Client name to confirm', role: 'Documentary · client role and organization to confirm', quote: 'Approved documentary testimonial copy will appear here.', image: 'https://i0.wp.com/sembulemedia.com/wp-content/uploads/2022/04/msg680180638-10213-Copy.jpg?resize=580%2C435&ssl=1' }
-    ];
-    const photos = {
-      front: testimonial.querySelector('.testimonial-photo--front img'),
-      middle: testimonial.querySelector('.testimonial-photo--middle img'),
-      back: testimonial.querySelector('.testimonial-photo--back img'),
-      incoming: testimonial.querySelector('.testimonial-photo--incoming img')
-    };
-    const name = testimonial.querySelector('[data-testimonial-name]'), role = testimonial.querySelector('[data-testimonial-role]');
-    const quote = testimonial.querySelector('[data-testimonial-quote]'), copy = testimonial.querySelector('[data-testimonial-copy]');
-    const previous = testimonial.querySelector('[data-testimonial-prev]'), following = testimonial.querySelector('[data-testimonial-next]');
-    let index = 0, busy = false, dragStart = null, moveTimer;
-    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-    const drawStack = () => Object.entries(photos).forEach(([position, img], offset) => { img.src = slides[(index + offset) % slides.length].image; });
-    const drawCopy = () => { name.textContent = slides[index].name; role.textContent = slides[index].role; quote.textContent = slides[index].quote; };
-    const move = direction => {
-      if (busy) return;
-      busy = true; previous.disabled = following.disabled = true;
-      testimonial.classList.add(direction > 0 ? 'is-next' : 'is-previous'); copy.classList.add('is-changing');
-      clearTimeout(moveTimer);
-      moveTimer = setTimeout(() => {
-        index = (index + direction + slides.length) % slides.length;
-        drawStack(); drawCopy(); testimonial.classList.remove('is-next', 'is-previous'); copy.classList.remove('is-changing');
-        previous.disabled = following.disabled = false; busy = false;
-      }, reducedMotion.matches ? 140 : 280);
-    };
-    drawStack(); drawCopy();
-    previous.addEventListener('click', () => move(-1)); following.addEventListener('click', () => move(1));
-    testimonial.addEventListener('keydown', event => {
-      if (event.target.closest('button')) return;
-      if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }
-      else if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
-    });
-    const visual = testimonial.querySelector('[data-testimonial-visual]');
-    visual.addEventListener('pointerdown', event => {
-      if (event.pointerType === 'mouse' && event.button !== 0) return;
-      dragStart = { x: event.clientX, y: event.clientY };
-      visual.setPointerCapture?.(event.pointerId);
-    });
-    visual.addEventListener('pointerup', event => {
-      if (!dragStart) return;
-      const dx = event.clientX - dragStart.x, dy = event.clientY - dragStart.y;
-      dragStart = null;
-      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.25) move(dx < 0 ? 1 : -1);
-    });
-    visual.addEventListener('pointercancel', () => { dragStart = null; });
-  }
-
   // Portfolio: two filter groups (service and event type) combined with AND.
   const filterButtons = [...document.querySelectorAll('[data-filter-group]')];
   const portfolioItems = [...document.querySelectorAll('.portfolio-item[data-service]')];

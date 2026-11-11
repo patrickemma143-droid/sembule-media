@@ -23,9 +23,9 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Sembule Media | Livestream, sound, film and photography in Uganda</title>
   <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
-  <link rel="stylesheet" href="./assets/css/home.css?v=team-fonts-1"><link rel="stylesheet" href="./assets/css/light.css?v=team-fonts-1">
-  <script defer src="./assets/js/site.js?v=site-content-20261008"></script>
-  <script defer src="./assets/js/home.js?v=team-fonts-1"></script>
+  <link rel="stylesheet" href="./assets/css/home.css?v=stack-testimonials-1"><link rel="stylesheet" href="./assets/css/light.css?v=stack-testimonials-1">
+  <script defer src="./assets/js/site.js?v=stack-testimonials-1"></script>
+  <script defer src="./assets/js/home.js?v=stack-testimonials-1"></script>
   <script defer src="./assets/js/analytics.js"></script>
   <meta name="sembule-site-content" content="./content/site-content.json">
 </head>
@@ -215,9 +215,9 @@
         </ul></div></div>
       </div>
     </section>
-    <!-- 7. Testimonials: published from the Sembule OS (published_content.home.testimonials, read by home.js).
-         The three cards below are draft slots; the OS replaces them as soon as approved quotes are published there.
-         Each item: { quote, name, role, organisation, event }. -->
+    <!-- 7. Testimonials: stacked photo carousel, fed from the Sembule OS (published_content.home.testimonials, read by home.js).
+         The three draft slides live in home.js; the OS replaces them as soon as approved quotes are published there.
+         Each item: { quote, name, role, organisation, event, image }. -->
     <section class="h-section h-testimonials" id="testimonials" aria-labelledby="testimonials-title" data-testimonials>
       <div class="h-wrap">
         <div class="h-head">
@@ -227,10 +227,24 @@
           </div>
           <p class="h-head__lede">Corporate teams, couples, churches and NGOs on what it was like to hand Sembule Media the day.</p>
         </div>
-        <div class="h-quotes" data-testimonial-list>
-          <figure class="h-quote is-draft" data-testimonial><span class="h-quote__mark" aria-hidden="true">“</span><blockquote data-testimonial-quote>Approved client words will appear here once they are published from the Sembule OS.</blockquote><figcaption><span class="h-quote__avatar" aria-hidden="true" data-testimonial-initials>CE</span><span><strong data-testimonial-name>Client name to confirm</strong><span data-testimonial-role>Corporate event</span></span></figcaption></figure>
-          <figure class="h-quote is-draft" data-testimonial><span class="h-quote__mark" aria-hidden="true">“</span><blockquote data-testimonial-quote>Approved client words will appear here once they are published from the Sembule OS.</blockquote><figcaption><span class="h-quote__avatar" aria-hidden="true" data-testimonial-initials>WE</span><span><strong data-testimonial-name>Client name to confirm</strong><span data-testimonial-role>Wedding and celebration</span></span></figcaption></figure>
-          <figure class="h-quote is-draft" data-testimonial><span class="h-quote__mark" aria-hidden="true">“</span><blockquote data-testimonial-quote>Approved client words will appear here once they are published from the Sembule OS.</blockquote><figcaption><span class="h-quote__avatar" aria-hidden="true" data-testimonial-initials>LS</span><span><strong data-testimonial-name>Client name to confirm</strong><span data-testimonial-role>Livestream and sound</span></span></figcaption></figure>
+        <div class="testimonial-showcase" data-testimonial-carousel tabindex="0" aria-roledescription="carousel" aria-label="Client testimonials">
+          <div class="testimonial-frame">
+            <div class="testimonial-visual" data-testimonial-visual aria-hidden="true">
+              <div class="testimonial-stack">
+                <figure class="testimonial-photo testimonial-photo--back"><img alt="" src="./assets/work/about-crew-at-work-640.jpg" width="640" height="480" loading="lazy" decoding="async"></figure>
+                <figure class="testimonial-photo testimonial-photo--middle"><img alt="" src="./assets/work/work-wedding-640.jpg" width="640" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="testimonial-photo testimonial-photo--front"><img alt="" src="./assets/work/work-conference-qa-640.jpg" width="640" height="800" loading="lazy" decoding="async"></figure>
+                <figure class="testimonial-photo testimonial-photo--incoming"><img alt="" src="./assets/work/work-conference-qa-640.jpg" width="640" height="800" loading="lazy" decoding="async"></figure>
+              </div>
+            </div>
+            <div class="testimonial-copy" data-testimonial-copy aria-live="polite">
+              <p class="testimonial-count"><strong data-testimonial-index>01</strong><span>/ <span data-testimonial-total>03</span></span></p>
+              <blockquote class="testimonial-quote" data-testimonial-quote>Approved client words will appear here once they are published from the Sembule OS.</blockquote>
+              <p class="testimonial-name" data-testimonial-name>Client name to confirm</p>
+              <p class="testimonial-role" data-testimonial-role>Corporate event</p>
+              <div class="testimonial-navigation" role="group" aria-label="Testimonial navigation"><button class="testimonial-arrow" type="button" data-testimonial-prev aria-label="Show previous testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button><button class="testimonial-arrow testimonial-arrow--next" type="button" data-testimonial-next aria-label="Show next testimonial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

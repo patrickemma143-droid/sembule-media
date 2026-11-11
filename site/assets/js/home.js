@@ -259,38 +259,107 @@
     reduced.addEventListener?.('change', playActive);
     layout();
   }
-  /* Testimonials: read straight from the Sembule OS (published_content.home.testimonials).
-     Same public, read-only view and publishable key the OS website bridge uses; never a service key.
-     Until the OS publishes approved quotes, the draft cards in the HTML stay in place. */
-  const quotes = document.querySelector('[data-testimonials]');
-  if (quotes) {
+  /* Testimonials: stacked photo cards (the earlier homepage design) fed from the Sembule OS.
+     Quotes come from published_content.home.testimonials, read through the same public, read-only view
+     and publishable key the OS website bridge uses (never a service key). Until the OS publishes approved
+     quotes, three clearly marked draft slides show. OS text is only ever set as text, never as HTML. */
+  const showcase = document.querySelector('[data-testimonial-carousel]');
+  if (showcase) {
     const OS_VIEW = 'https://stpawtberphnvhcxjmkj.supabase.co/rest/v1/sembule_website_public?id=eq.main&select=published_content';
     const OS_KEY = 'sb_publishable_RvlRBmtSxrtAXDsUKn91QQ_XwWZOpt_';
+    const draft = 'Approved client words will appear here once they are published from the Sembule OS.';
+    // Local photos that fill the stack when a quote has no image of its own
+    const photos = ['./assets/work/work-conference-qa-640.jpg', './assets/work/work-wedding-640.jpg', './assets/work/about-crew-at-work-640.jpg', './assets/work/hero-live-stage-640.jpg', './assets/work/service-documentary-640.jpg', './assets/work/work-official-event-640.jpg'];
+    let slides = [
+      { name: 'Client name to confirm', role: 'Corporate event', quote: draft, image: photos[0] },
+      { name: 'Client name to confirm', role: 'Wedding and celebration', quote: draft, image: photos[1] },
+      { name: 'Client name to confirm', role: 'Livestream and sound', quote: draft, image: photos[2] }
+    ];
+    showcase.classList.add('is-draft');
+
+    const layers = ['front', 'middle', 'back', 'incoming'].map(position => showcase.querySelector(`.testimonial-photo--${position} img`));
+    const name = showcase.querySelector('[data-testimonial-name]');
+    const role = showcase.querySelector('[data-testimonial-role]');
+    const quote = showcase.querySelector('[data-testimonial-quote]');
+    const count = showcase.querySelector('[data-testimonial-index]');
+    const total = showcase.querySelector('[data-testimonial-total]');
+    const copy = showcase.querySelector('[data-testimonial-copy]');
+    const previous = showcase.querySelector('[data-testimonial-prev]');
+    const following = showcase.querySelector('[data-testimonial-next]');
+    let index = 0, busy = false, dragStart = null, moveTimer, realCount = slides.length;
+
+    const pad = n => String(n).padStart(2, '0');
+    const drawStack = () => layers.forEach((img, offset) => { img.src = slides[(index + offset) % slides.length].image; });
+    const drawCopy = () => {
+      const slide = slides[index];
+      name.textContent = slide.name;
+      role.textContent = slide.role;
+      quote.textContent = slide.quote;
+      count.textContent = pad((index % realCount) + 1);
+      total.textContent = pad(realCount);
+    };
+    const move = direction => {
+      if (busy || realCount < 2) return;
+      busy = true; previous.disabled = following.disabled = true;
+      showcase.classList.add(direction > 0 ? 'is-next' : 'is-previous');
+      copy.classList.add('is-changing');
+      clearTimeout(moveTimer);
+      moveTimer = setTimeout(() => {
+        index = (index + direction + slides.length) % slides.length;
+        drawStack(); drawCopy();
+        showcase.classList.remove('is-next', 'is-previous');
+        copy.classList.remove('is-changing');
+        previous.disabled = following.disabled = false; busy = false;
+      }, reduced.matches ? 140 : 280);
+    };
+
+    drawStack(); drawCopy();
+    previous.addEventListener('click', () => move(-1));
+    following.addEventListener('click', () => move(1));
+    showcase.addEventListener('keydown', event => {
+      if (event.target.closest('button')) return;
+      if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); }
+      else if (event.key === 'ArrowRight') { event.preventDefault(); move(1); }
+    });
+    const visual = showcase.querySelector('[data-testimonial-visual]');
+    visual.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      dragStart = { x: event.clientX, y: event.clientY };
+      visual.setPointerCapture?.(event.pointerId);
+    });
+    visual.addEventListener('pointerup', event => {
+      if (!dragStart) return;
+      const dx = event.clientX - dragStart.x, dy = event.clientY - dragStart.y;
+      dragStart = null;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.25) move(dx < 0 ? 1 : -1);
+    });
+    visual.addEventListener('pointercancel', () => { dragStart = null; });
+
+    // Swap the drafts for the OS's approved quotes once they are published there
     const clean = value => (typeof value === 'string' ? value.trim() : '');
-    const initials = name => name.split(/\s+/).filter(Boolean).slice(0, 2).map(part => part[0].toUpperCase()).join('');
+    const safeImage = value => (/^(https:\/\/|\.\/assets\/)/.test(clean(value)) ? clean(value) : '');
     fetch(OS_VIEW, { headers: { apikey: OS_KEY, Authorization: 'Bearer ' + OS_KEY, Accept: 'application/json' }, cache: 'no-store', credentials: 'omit' })
       .then(response => (response.ok ? response.json() : []))
       .then(rows => {
         const content = rows?.[0]?.published_content || {};
-        const list = (content.home?.testimonials || content.testimonials || [])
-          .filter(item => clean(item?.quote) && clean(item?.name))
-          .slice(0, 6);
-        if (!list.length) return;
-        const holder = quotes.querySelector('[data-testimonial-list]');
-        const template = holder.querySelector('[data-testimonial]');
-        const cards = list.map(item => {
-          const card = template.cloneNode(true);
-          card.classList.remove('is-draft');
-          // textContent only: OS text is never parsed as HTML
-          card.querySelector('[data-testimonial-quote]').textContent = clean(item.quote);
-          card.querySelector('[data-testimonial-name]').textContent = clean(item.name);
-          card.querySelector('[data-testimonial-role]').textContent =
-            [clean(item.role), clean(item.organisation || item.organization), clean(item.event)].filter(Boolean).join(' · ');
-          card.querySelector('[data-testimonial-initials]').textContent = initials(clean(item.name));
-          return card;
-        });
-        holder.replaceChildren(...cards);
-        quotes.classList.add('is-live');
+        const list = content.home?.testimonials || content.testimonials;
+        if (!Array.isArray(list)) return;
+        const approved = list.filter(item => clean(item?.quote) && clean(item?.name)).slice(0, 8).map((item, i) => ({
+          quote: clean(item.quote),
+          name: clean(item.name),
+          role: [clean(item.role), clean(item.organisation || item.organization), clean(item.event)].filter(Boolean).join(' · '),
+          image: safeImage(item.image) || photos[i % photos.length]
+        }));
+        if (!approved.length) return;
+        // The stack shows three photos at once; repeat a short list so it always has enough layers
+        slides = approved.length >= 3 ? approved : [...approved, ...approved, ...approved].slice(0, approved.length * Math.ceil(3 / approved.length));
+        realCount = approved.length;
+        index = 0;
+        showcase.classList.remove('is-draft');
+        showcase.classList.add('is-live');
+        // One quote: nothing to step through
+        showcase.querySelector('.testimonial-navigation').hidden = realCount < 2;
+        drawStack(); drawCopy();
       })
       .catch(() => {});
   }
