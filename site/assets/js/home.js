@@ -259,4 +259,39 @@
     reduced.addEventListener?.('change', playActive);
     layout();
   }
+  /* Testimonials: read straight from the Sembule OS (published_content.home.testimonials).
+     Same public, read-only view and publishable key the OS website bridge uses; never a service key.
+     Until the OS publishes approved quotes, the draft cards in the HTML stay in place. */
+  const quotes = document.querySelector('[data-testimonials]');
+  if (quotes) {
+    const OS_VIEW = 'https://stpawtberphnvhcxjmkj.supabase.co/rest/v1/sembule_website_public?id=eq.main&select=published_content';
+    const OS_KEY = 'sb_publishable_RvlRBmtSxrtAXDsUKn91QQ_XwWZOpt_';
+    const clean = value => (typeof value === 'string' ? value.trim() : '');
+    const initials = name => name.split(/\s+/).filter(Boolean).slice(0, 2).map(part => part[0].toUpperCase()).join('');
+    fetch(OS_VIEW, { headers: { apikey: OS_KEY, Authorization: 'Bearer ' + OS_KEY, Accept: 'application/json' }, cache: 'no-store', credentials: 'omit' })
+      .then(response => (response.ok ? response.json() : []))
+      .then(rows => {
+        const content = rows?.[0]?.published_content || {};
+        const list = (content.home?.testimonials || content.testimonials || [])
+          .filter(item => clean(item?.quote) && clean(item?.name))
+          .slice(0, 6);
+        if (!list.length) return;
+        const holder = quotes.querySelector('[data-testimonial-list]');
+        const template = holder.querySelector('[data-testimonial]');
+        const cards = list.map(item => {
+          const card = template.cloneNode(true);
+          card.classList.remove('is-draft');
+          // textContent only: OS text is never parsed as HTML
+          card.querySelector('[data-testimonial-quote]').textContent = clean(item.quote);
+          card.querySelector('[data-testimonial-name]').textContent = clean(item.name);
+          card.querySelector('[data-testimonial-role]').textContent =
+            [clean(item.role), clean(item.organisation || item.organization), clean(item.event)].filter(Boolean).join(' · ');
+          card.querySelector('[data-testimonial-initials]').textContent = initials(clean(item.name));
+          return card;
+        });
+        holder.replaceChildren(...cards);
+        quotes.classList.add('is-live');
+      })
+      .catch(() => {});
+  }
 })();

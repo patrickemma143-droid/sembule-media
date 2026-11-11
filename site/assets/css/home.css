@@ -17,7 +17,7 @@
   color-scheme: dark;
   color: var(--h-text);
   background: var(--h-bg);
-  font-family: "Axiforma", "Outfit", "Segoe UI", Arial, sans-serif;
+  font-family: var(--font-body, "Axiforma", "Segoe UI", Arial, sans-serif);
   -webkit-font-smoothing: antialiased;
 }
 .home-dark ::selection { color: #000; background: var(--h-gold); }
@@ -184,6 +184,19 @@
 .h-clients.is-paused .client-logo-track { animation-play-state: paused; }
 @keyframes h-marquee { to { transform: translateX(-50%); } }
 
+/* ---------- 6b. Testimonials (filled from the Sembule OS) ---------- */
+.h-quotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.h-quote { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 28px; margin: 0; padding: 30px 28px 26px; border: 1px solid var(--h-line); border-radius: 26px; background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .015)); transition: transform 260ms var(--h-ease), border-color 260ms var(--h-ease); }
+.h-quote:hover { transform: translateY(-2px); border-color: rgba(191, 144, 0, .45); }
+.h-quote__mark { display: block; height: 44px; color: var(--h-gold); font-size: 84px; font-weight: 700; line-height: .9; }
+.h-quote blockquote { margin: 0; color: var(--h-text); font-size: clamp(17px, 1.35vw, 20px); line-height: 1.55; }
+.h-quote figcaption { display: flex; align-items: center; gap: 14px; padding-top: 18px; border-top: 1px solid var(--h-line); }
+.h-quote figcaption strong { display: block; color: var(--h-text); font-size: 15px; font-weight: 600; }
+.h-quote figcaption span span { display: block; color: var(--h-muted); font-size: 13px; }
+.h-quote__avatar { width: 44px; height: 44px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; color: #000; background: var(--h-gold); font-size: 14px; font-weight: 700; letter-spacing: .02em; }
+.h-quote.is-draft blockquote { color: var(--h-muted); font-style: italic; }
+.h-quote.is-draft { border-style: dashed; }
+
 /* ---------- 7. Closing call to action ---------- */
 .h-cta { min-height: 100svh; display: flex; align-items: center; text-align: center; }
 .h-cta__ghost { top: 50%; left: 50%; font-size: clamp(170px, 32vw, 520px); transform: translate(-50%, -50%); }
@@ -218,6 +231,7 @@
   .h-hero__stage:after { background: linear-gradient(180deg, rgba(0, 0, 0, .6) 0%, rgba(0, 0, 0, .3) 22%, rgba(0, 0, 0, .86) 46%, rgba(0, 0, 0, .94) 64%, #000 100%); }
   .h-hero__glow { bottom: -20%; left: auto; right: -30%; width: 120vw; }
   .h-cards { grid-template-columns: 1fr; }
+  .h-quotes { grid-template-columns: 1fr; }
   .h-card__media { aspect-ratio: 16 / 10; }
   .h-about__grid { grid-template-columns: 1fr; }
   .h-about__ghost { bottom: auto; top: 4%; }

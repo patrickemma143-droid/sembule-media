@@ -1,0 +1,28 @@
+/* Sembule Media brand fonts (discovery response: "Surgena, Axiforma").
+   Axiforma: the same files the Sembule OS uses, self-hosted here as WOFF2.
+   Surgena: headings ask for it first. When the licensed web files arrive, add them to
+   assets/fonts/ and uncomment the @font-face rules below; until then headings fall back to Axiforma. */
+
+@font-face { font-family: "Axiforma"; src: url("../fonts/Axiforma-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("../fonts/Axiforma-SemiBold.woff2") format("woff2"); font-weight: 500 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Axiforma"; src: url("../fonts/Axiforma-Bold.woff2") format("woff2"); font-weight: 700 800; font-style: normal; font-display: swap; }
+
+/*
+@font-face { font-family: "Surgena"; src: url("../fonts/Surgena-SemiBold.woff2") format("woff2"); font-weight: 500 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Surgena"; src: url("../fonts/Surgena-Bold.woff2") format("woff2"); font-weight: 700 800; font-style: normal; font-display: swap; }
+*/
+
+:root {
+  --font-body: "Axiforma", "Segoe UI", Arial, sans-serif;
+  --font-display: "Surgena", "Axiforma", "Segoe UI", Arial, sans-serif;
+}
+
+/* Body and UI in Axiforma on every page (overrides the Outfit stand-in in home.css and dark.css) */
+html, body, .home-dark, .site-dark, button, input, select, textarea { font-family: var(--font-body); }
+
+/* Headings and big display type in Surgena (Axiforma until the Surgena files are added) */
+h1, h2, h3,
+.h-hero__title, .h-count strong, .page-hero__count strong,
+.h-hero__ghost, .h-about__ghost, .h-cta__ghost, .page-hero__ghost { font-family: var(--font-display); }
+/* Small uppercase labels that happen to be headings stay in Axiforma */
+.footer-col h2, .filter-label { font-family: var(--font-body); }

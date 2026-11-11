@@ -11,10 +11,6 @@
   <link rel="icon" href="./assets/brand/mark.png" type="image/png">
   <link rel="apple-touch-icon" href="./assets/brand/icon-192.png">
   <link rel="preload" as="image" href="./assets/work/hero-live-performance.jpg" imagesrcset="./assets/work/hero-live-performance-640.jpg 640w, ./assets/work/hero-live-performance.jpg 1200w" imagesizes="100vw" fetchpriority="high">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Outfit stands in for Axiforma until the licensed font files are supplied (see README). -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Sembule Media">
   <meta property="og:title" content="Sembule Media | Livestream, sound, film and photography in Uganda">
@@ -26,10 +22,10 @@
   <meta property="og:image:alt" content="Speaker on stage at a live event produced by Sembule Media">
   <meta name="twitter:card" content="summary_large_image">
   <title>Sembule Media | Livestream, sound, film and photography in Uganda</title>
-  <link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
-  <link rel="stylesheet" href="./assets/css/home.css?v=pages-like-home-1"><link rel="stylesheet" href="./assets/css/light.css?v=light-20261110">
+  <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
+  <link rel="stylesheet" href="./assets/css/home.css?v=team-fonts-1"><link rel="stylesheet" href="./assets/css/light.css?v=team-fonts-1">
   <script defer src="./assets/js/site.js?v=site-content-20261008"></script>
-  <script defer src="./assets/js/home.js?v=pages-like-home-1"></script>
+  <script defer src="./assets/js/home.js?v=team-fonts-1"></script>
   <script defer src="./assets/js/analytics.js"></script>
   <meta name="sembule-site-content" content="./content/site-content.json">
 </head>
@@ -40,11 +36,10 @@
       <a class="brand" href="./index.html" aria-label="Sembule Media home"><img src="./assets/brand/logo-colour-dark.png" alt="Sembule Media — The Giants of Multimedia" width="600" height="175"></a>
       <button class="menu-toggle" type="button" data-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="main-nav"><span aria-hidden="true"></span></button>
       <nav class="main-nav" id="main-nav" data-main-nav aria-label="Main navigation">
-        <a href="./index.html" aria-current="page">Home</a><a href="./services.html">Services</a><a href="./portfolio.html">Portfolio</a><a href="./about.html">About</a><a class="button" href="./contact.html">Plan your event</a>
+        <a href="./index.html" aria-current="page">Home</a><a href="./services.html">Services</a><a href="./portfolio.html">Portfolio</a><a href="./about.html">Team</a><a class="button" href="./contact.html">Plan your event</a>
       </nav>
     </div>
   </header>
-
   <!--
     OS bridge hooks (website-bridge.js): the hero copy follows the slides, not the OS: the h1 deliberately
     uses data-hero-headline (not data-hero-title), and home.js restores each slide's own text if the bridge
@@ -53,12 +48,10 @@
     those sections, and the call to action as the LAST h2 in <main>.
   -->
   <main id="main" class="home">
-
     <!-- 1. Hero -->
     <section class="h-hero" data-hero-stage aria-label="Sembule Media production stories">
       <div class="h-hero__ghost" aria-hidden="true">Live</div>
       <div class="h-hero__glow" aria-hidden="true"></div>
-
       <div class="h-wrap h-hero__grid">
         <div class="h-hero__copy" data-hero-copy aria-live="polite">
           <p class="h-eyebrow h-enter" style="--d:0"><span class="h-live" aria-hidden="true"></span><span data-hero-eyebrow data-cms-text="home.hero.slides.0.eyebrow">Concerts · live performance</span></p>
@@ -69,7 +62,6 @@
             <a class="h-btn h-btn--glass" href="#showreel"><span class="h-btn__play" aria-hidden="true"></span>Play the showreel</a>
           </div>
         </div>
-
         <div class="h-hero__stage h-enter" style="--d:1">
           <figure class="h-slide is-active" data-hero-slide data-story-eyebrow="Concerts · live performance" data-story-title="Not everyone could get a ticket." data-story-description="Multi-camera coverage and clean sound carry the performance to people watching from home, and keep it for the ones who were there."><img fetchpriority="high" src="./assets/work/hero-live-performance.jpg" srcset="./assets/work/hero-live-performance-640.jpg 640w, ./assets/work/hero-live-performance.jpg 1200w" sizes="100vw" width="1200" height="800" style="object-position:50% 55%" alt="Choir in orange skirts performing on a lit stage in front of an LED screen" data-cms-src="home.hero.slides.0.image" data-cms-alt="home.hero.slides.0.imageAlt"><video src="./assets/video/hero-nic-party.mp4" muted loop playsinline autoplay preload="auto" aria-hidden="true" tabindex="-1"></video></figure>
           <figure class="h-slide" data-hero-slide data-story-eyebrow="Conferences · stage · live events" data-story-title="Nobody remembers good sound." data-story-description="Everyone remembers the dead microphone. Clear sound, readable screens and a calm crew, so the room remembers what was said."><img loading="lazy" src="./assets/work/hero-live-stage.jpg" srcset="./assets/work/hero-live-stage-640.jpg 640w, ./assets/work/hero-live-stage.jpg 1200w" sizes="100vw" width="1200" height="800" style="object-position:55% 30%" alt="Speaker addressing the audience on stage at a live Sembule Media event" data-cms-src="home.hero.slides.1.image" data-cms-alt="home.hero.slides.1.imageAlt"></figure>
@@ -77,7 +69,6 @@
           <figure class="h-slide" data-hero-slide data-story-eyebrow="Weddings · portraits · film" data-story-title="You’ll be busy living it. We’ll keep it." data-story-description="On the day, a couple sees a fraction of their own wedding. Photography and film give you back the moments you were too busy to notice."><img loading="lazy" src="./assets/work/hero-wedding-bw.jpg" srcset="./assets/work/hero-wedding-bw-640.jpg 640w, ./assets/work/hero-wedding-bw.jpg 1200w" sizes="100vw" width="1200" height="705" style="object-position:50% 45%" alt="Black and white photograph of a groom kissing his bride's hand among palm leaves" data-cms-src="home.hero.slides.3.image" data-cms-alt="home.hero.slides.3.imageAlt"></figure>
         </div>
       </div>
-
       <div class="h-wrap h-hero__bar h-enter" style="--d:4">
         <p class="h-count" aria-hidden="true"><strong data-hero-index>01</strong><span>/ 04</span></p>
         <nav class="h-dots" aria-label="Production stories">
@@ -90,7 +81,6 @@
         <p class="h-hero__place">Bunamwaya, Kampala · Across Uganda</p>
       </div>
     </section>
-
     <!-- 2. Services -->
     <section class="h-section h-services" aria-labelledby="services-title">
       <div class="h-wrap">
@@ -118,7 +108,6 @@
         <p class="h-also" data-cms-text="home.servicesIntro.serviceList">Also: photography · videography · podcasts · event coverage · 65” screen hire</p>
       </div>
     </section>
-
     <!-- 3. Showreel -->
     <section class="h-section h-reel" id="showreel" aria-labelledby="reel-title">
       <div class="h-wrap">
@@ -133,7 +122,6 @@
         </div>
       </div>
     </section>
-
     <!-- 4. Work: coverflow. Titles follow the OS editor's project order. -->
     <section class="h-section h-work" aria-labelledby="work-title">
       <div class="h-wrap">
@@ -168,7 +156,6 @@
         </div>
       </div>
     </section>
-
     <!-- 5. About -->
     <section class="h-section h-about" aria-labelledby="about-intro-title">
       <div class="h-about__ghost" aria-hidden="true">2022</div>
@@ -187,7 +174,6 @@
         </div>
       </div>
     </section>
-
     <!-- 6. Clients -->
     <section class="h-section h-clients" data-partner-band aria-labelledby="trusted-title">
       <div class="h-wrap">
@@ -228,9 +214,26 @@
           <li><img src="./assets/clients/vijana.webp" alt="Vijana Corps" width="400" height="400" loading="lazy" decoding="async"></li>
         </ul></div></div>
       </div>
-      <!-- Testimonials: add the three approved client quotes here (brief). Hidden until they are supplied. -->
     </section>
-
+    <!-- 7. Testimonials: published from the Sembule OS (published_content.home.testimonials, read by home.js).
+         The three cards below are draft slots; the OS replaces them as soon as approved quotes are published there.
+         Each item: { quote, name, role, organisation, event }. -->
+    <section class="h-section h-testimonials" id="testimonials" aria-labelledby="testimonials-title" data-testimonials>
+      <div class="h-wrap">
+        <div class="h-head">
+          <div>
+            <p class="h-eyebrow"><span class="h-live" aria-hidden="true"></span>In their words</p>
+            <h2 id="testimonials-title">What clients say after the event.</h2>
+          </div>
+          <p class="h-head__lede">Corporate teams, couples, churches and NGOs on what it was like to hand Sembule Media the day.</p>
+        </div>
+        <div class="h-quotes" data-testimonial-list>
+          <figure class="h-quote is-draft" data-testimonial><span class="h-quote__mark" aria-hidden="true">“</span><blockquote data-testimonial-quote>Approved client words will appear here once they are published from the Sembule OS.</blockquote><figcaption><span class="h-quote__avatar" aria-hidden="true" data-testimonial-initials>CE</span><span><strong data-testimonial-name>Client name to confirm</strong><span data-testimonial-role>Corporate event</span></span></figcaption></figure>
+          <figure class="h-quote is-draft" data-testimonial><span class="h-quote__mark" aria-hidden="true">“</span><blockquote data-testimonial-quote>Approved client words will appear here once they are published from the Sembule OS.</blockquote><figcaption><span class="h-quote__avatar" aria-hidden="true" data-testimonial-initials>WE</span><span><strong data-testimonial-name>Client name to confirm</strong><span data-testimonial-role>Wedding and celebration</span></span></figcaption></figure>
+          <figure class="h-quote is-draft" data-testimonial><span class="h-quote__mark" aria-hidden="true">“</span><blockquote data-testimonial-quote>Approved client words will appear here once they are published from the Sembule OS.</blockquote><figcaption><span class="h-quote__avatar" aria-hidden="true" data-testimonial-initials>LS</span><span><strong data-testimonial-name>Client name to confirm</strong><span data-testimonial-role>Livestream and sound</span></span></figcaption></figure>
+        </div>
+      </div>
+    </section>
     <!-- 7. Closing call to action: keep this the last h2 in <main> (OS bridge). -->
     <section class="h-section h-cta" aria-labelledby="cta-title">
       <div class="h-cta__ghost" aria-hidden="true">Book</div>
@@ -246,13 +249,12 @@
       </div>
     </section>
   </main>
-
   <footer class="site-footer"><div class="container footer-main"><div class="footer-brand"><a href="./index.html" aria-label="Sembule Media home"><img src="./assets/brand/logo-white-480.png" alt="Sembule Media" width="480" height="140" loading="lazy"></a><p>Live production, sound, photography and film for events and stories across Uganda.</p><div class="footer-socials" role="group" aria-label="Sembule Media social media">
 <a href="https://www.youtube.com/channel/UCeszdRUx6osXVRtPzhkYt0Q" target="_blank" rel="noopener noreferrer" aria-label="Sembule Media on YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.6 12 3.6 12 3.6s-7.6 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.8.5 9.4.5 9.4.5s7.6 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg><span>YouTube</span></a>
 <a href="https://www.instagram.com/sembulemedia/" target="_blank" rel="noopener noreferrer" aria-label="Sembule Media on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
 <a href="https://www.tiktok.com/@sembulemedia" target="_blank" rel="noopener noreferrer" aria-label="Sembule Media on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.6 7.1a5.7 5.7 0 0 1-3.5-1.2v8.3a6.2 6.2 0 1 1-5.4-6.1v3.2a3.1 3.1 0 1 0 2.2 3V2.5h3.2c.2 2 1.5 3.6 3.5 4.1v3.3Z"/></svg><span>TikTok</span></a>
 <a href="https://www.facebook.com/share/17ZZ9wmYTv/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Sembule Media on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.4 21v-8.2h2.8l.4-3.2h-3.2v-2c0-.9.3-1.5 1.6-1.5h1.7V3.2c-.3 0-1.4-.2-2.6-.2-2.6 0-4.4 1.6-4.4 4.5v2.1H6.8v3.2h2.9V21h3.7Z"/></svg><span>Facebook</span></a>
-</div></div><div class="footer-col"><h2>Explore</h2><a href="./services.html">Services</a><a href="./portfolio.html">Portfolio</a><a href="./about.html">About Sembule</a><a href="./contact.html">Plan a production</a></div><div class="footer-col"><h2>Connect</h2><a href="https://wa.me/256774345634" target="_blank" rel="noopener">WhatsApp the team</a><a href="mailto:sembule@sembulemedia.com">Email Sembule</a><a href="https://nextos.nextafrica.ai/sembule/index.html">Team workspace</a><a href="./privacy.html">Privacy</a><a href="./terms.html">Terms</a></div></div><div class="container footer-bottom"><p>© <span data-year>2026</span> Sembule Media. All rights reserved.</p><p>Bunamwaya, Kampala · Productions across Uganda</p></div></footer>
+</div></div><div class="footer-col"><h2>Explore</h2><a href="./services.html">Services</a><a href="./portfolio.html">Portfolio</a><a href="./about.html">Our team</a><a href="./contact.html">Plan a production</a></div><div class="footer-col"><h2>Connect</h2><a href="https://wa.me/256774345634" target="_blank" rel="noopener">WhatsApp the team</a><a href="mailto:sembule@sembulemedia.com">Email Sembule</a><a href="https://nextos.nextafrica.ai/sembule/index.html">Team workspace</a><a href="./privacy.html">Privacy</a><a href="./terms.html">Terms</a></div></div><div class="container footer-bottom"><p>© <span data-year>2026</span> Sembule Media. All rights reserved.</p><p>Bunamwaya, Kampala · Productions across Uganda</p></div></footer>
 <script src="https://nextos.nextafrica.ai/sembule/website-bridge.js?v=0.8.9" defer></script>
 </body>
 </html>
