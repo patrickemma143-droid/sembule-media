@@ -55,7 +55,7 @@ html:has(.site-dark) { background: #000; }
 .site-dark .page-hero, .site-dark .page-hero--green { position: relative; overflow: hidden; color: var(--d-text); background: radial-gradient(70% 90% at 85% 0%, rgba(191, 144, 0, .18) 0%, rgba(191, 144, 0, .05) 40%, transparent 70%), radial-gradient(60% 80% at 0% 100%, rgba(4, 89, 42, .28) 0%, transparent 65%), #000; border-bottom: 1px solid rgba(255, 255, 255, .05); isolation: isolate; }
 .site-dark .page-hero h1 { max-width: 16ch; font-size: clamp(44px, 6.4vw, 92px); line-height: 1; }
 .site-dark .page-hero p:not(.eyebrow), .site-dark .page-hero--green p:not(.eyebrow) { color: var(--d-muted); line-height: 1.65; }
-.site-dark main > section:not(.page-hero):not(.quote-section):not(.coverage-band) { background: var(--d-bg-2); }
+.site-dark main > section:not(.page-hero):not(.quote-section):not(.coverage-band):not(.container) { background: var(--d-bg-2); }
 .site-dark main > section + section { border-top: 1px solid rgba(255, 255, 255, .05); }
 /* Sections that are also the .container are page-width boxes: no panel behind them */
 .site-dark main > section.container { background: transparent; border-top: 0; }

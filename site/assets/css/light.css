@@ -1,0 +1,165 @@
+/* Sembule Media: light theme ("Linen & Sage") over the same pages and content.
+   Active when <html data-theme="light">. Remove that attribute on a page to get the dark theme back;
+   home.css and dark.css stay as they are underneath.
+   Areas where text sits on photographs or film keep their dark treatment so the text stays readable:
+   the homepage hero, work cards, showreel, the portfolio film hero and cards, the closing bands, the footer. */
+
+[data-theme="light"] {
+  --l-bg: #f1ebdd;        /* linen page */
+  --l-bg-2: #ebe4d1;      /* warm band */
+  --l-sage: #e9eee1;      /* light green wash */
+  --l-card: #f9f6ee;      /* ivory cards and controls */
+  --l-ink: #131713;
+  --l-muted: #5a6157;
+  --l-line: #d7d0bb;
+  --l-green: #04592a;
+  --l-gold: #bf9000;
+  --l-gold-text: #8a6800; /* gold that passes contrast on linen */
+}
+html[data-theme="light"] { background: var(--l-bg); }
+
+/* Dark islands: everything that sits on a photograph or film keeps the dark tokens */
+[data-theme="light"] .h-hero,
+[data-theme="light"] .h-flow__card,
+[data-theme="light"] .h-reel__frame,
+[data-theme="light"] .page-hero--film,
+[data-theme="light"] .portfolio-item,
+[data-theme="light"] .quote-section,
+[data-theme="light"] .coverage-band {
+  --h-text: #f3f0e8; --h-muted: rgba(243, 240, 232, .7); --h-line: rgba(255, 255, 255, .12);
+  --d-text: #f3f0e8; --d-muted: rgba(243, 240, 232, .7); --d-line: rgba(255, 255, 255, .12);
+  --ink: #f3f0e8; --muted: rgba(243, 240, 232, .7);
+  color: #f3f0e8;
+}
+
+/* ================= Homepage (body.home-dark) ================= */
+[data-theme="light"] .home-dark {
+  --h-bg: var(--l-bg); --h-bg-2: var(--l-bg-2); --h-text: var(--l-ink); --h-muted: var(--l-muted);
+  --h-faint: rgba(19, 23, 19, .05); --h-line: rgba(19, 23, 19, .12);
+  color-scheme: light;
+}
+[data-theme="light"] .home-dark ::selection { color: #fff; background: var(--l-green); }
+[data-theme="light"] .h-clients { background: var(--l-sage); }
+
+/* Header: solid ivory with the full-colour logo, as on the original light site */
+[data-theme="light"] .site-header,
+[data-theme="light"] .home-dark .site-header,
+[data-theme="light"] .home-dark .site-header.is-scrolled,
+[data-theme="light"] .site-dark .site-header,
+[data-theme="light"] .site-dark.has-film-hero .site-header,
+[data-theme="light"] .site-dark.has-film-hero .site-header.is-scrolled {
+  color: var(--l-ink); background: rgba(249, 246, 238, .94); border-bottom: 1px solid #e0d9c4; -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+[data-theme="light"] .brand img { content: url("../brand/logo-main-600.png"); }
+[data-theme="light"] .main-nav a,
+[data-theme="light"] .home-dark .main-nav a,
+[data-theme="light"] .site-dark .main-nav a { color: #323932; }
+[data-theme="light"] .home-dark .main-nav a:not(.button):hover,
+[data-theme="light"] .home-dark .main-nav a[aria-current="page"],
+[data-theme="light"] .site-dark .main-nav a:not(.button):hover,
+[data-theme="light"] .site-dark .main-nav a[aria-current="page"] { color: var(--l-ink); }
+[data-theme="light"] .home-dark .main-nav .button,
+[data-theme="light"] .site-dark .main-nav .button { color: #000; background: var(--l-gold); border-color: var(--l-gold); }
+[data-theme="light"] .home-dark .main-nav .button:hover,
+[data-theme="light"] .site-dark .main-nav .button:hover { background: #d5a719; border-color: #d5a719; }
+[data-theme="light"] .home-dark .menu-toggle,
+[data-theme="light"] .site-dark .menu-toggle { color: var(--l-green); background: var(--l-card); border-color: var(--l-line); }
+[data-theme="light"] .home-dark .menu-toggle:before,
+[data-theme="light"] .site-dark .menu-toggle:before { background: var(--l-green); box-shadow: 0 -6px 0 var(--l-green), 0 6px 0 var(--l-green); }
+
+/* Type and small parts */
+[data-theme="light"] .home-dark .h-eyebrow { color: var(--l-green); }
+[data-theme="light"] .home-dark .h-hero .h-eyebrow { color: var(--h-gold); }
+[data-theme="light"] .h-link { color: var(--l-green); }
+[data-theme="light"] .h-num { color: var(--l-gold-text); }
+[data-theme="light"] .h-about__ghost,
+[data-theme="light"] .h-cta__ghost,
+[data-theme="light"] .page-hero__ghost { -webkit-text-stroke: 1px rgba(19, 23, 19, .08); }
+[data-theme="light"] .h-section + .h-section { border-top-color: rgba(19, 23, 19, .06); }
+
+/* Buttons outside the dark islands: glass becomes ivory */
+[data-theme="light"] .h-btn--glass { color: var(--l-ink); background: var(--l-card); border-color: rgba(19, 23, 19, .16); }
+[data-theme="light"] .h-btn--glass:hover { background: #fff; border-color: rgba(19, 23, 19, .3); }
+[data-theme="light"] .h-hero .h-btn--glass { color: #f3f0e8; background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .16); }
+[data-theme="light"] .h-hero .h-btn--glass:hover { background: rgba(255, 255, 255, .11); border-color: rgba(255, 255, 255, .28); }
+[data-theme="light"] .h-pill, [data-theme="light"] .h-pause { background: var(--l-card); }
+[data-theme="light"] .h-hero .h-pause { background: rgba(255, 255, 255, .04); }
+[data-theme="light"] .h-round { color: var(--l-ink); background: var(--l-card); border-color: rgba(19, 23, 19, .16); }
+[data-theme="light"] .h-round:hover { border-color: var(--l-gold); background: #fff7e0; }
+
+/* Cards */
+[data-theme="light"] .h-card { background: var(--l-card); border-color: #d3cdb6; box-shadow: 0 24px 50px -36px rgba(19, 23, 19, .35); }
+[data-theme="light"] .h-card:hover { border-color: rgba(191, 144, 0, .6); }
+[data-theme="light"] .h-flow__card { box-shadow: 0 0 0 1px rgba(19, 23, 19, .06), 0 30px 60px -30px rgba(19, 23, 19, .55); }
+[data-theme="light"] .h-reel__frame { box-shadow: 0 0 0 1px rgba(19, 23, 19, .08), 0 60px 140px -60px rgba(191, 144, 0, .45); }
+[data-theme="light"] .h-about__media { box-shadow: 0 0 0 1px rgba(19, 23, 19, .08), 0 50px 120px -60px rgba(19, 23, 19, .4); }
+[data-theme="light"] .client-logo-set li { background: #fff; box-shadow: 0 0 0 1px rgba(19, 23, 19, .06); }
+
+/* ================= Inner pages (body.site-dark) ================= */
+[data-theme="light"] .site-dark {
+  --d-bg: var(--l-bg); --d-bg-2: var(--l-bg-2); --d-card: var(--l-card); --d-card-hover: #fff;
+  --d-text: var(--l-ink); --d-muted: var(--l-muted); --d-line: var(--l-line);
+  --ink: var(--l-ink); --muted: var(--l-muted); --paper: var(--l-bg); --wash: var(--l-bg-2); --line: var(--l-line);
+  color-scheme: light;
+}
+[data-theme="light"] .site-dark ::selection { color: #fff; background: var(--l-green); }
+[data-theme="light"] .site-dark .eyebrow { color: var(--l-green); }
+[data-theme="light"] .site-dark .quote-section .eyebrow,
+[data-theme="light"] .site-dark .coverage-band .eyebrow,
+[data-theme="light"] .site-dark .page-hero--film .eyebrow { color: var(--l-gold); }
+[data-theme="light"] .site-dark .text-link,
+[data-theme="light"] .site-dark .text-button,
+[data-theme="light"] .site-dark .service-row-note,
+[data-theme="light"] .site-dark .service-row-note a,
+[data-theme="light"] .site-dark .contact-map a,
+[data-theme="light"] .site-dark .legal-content a { color: var(--l-green); }
+[data-theme="light"] .site-dark .service-row-index,
+[data-theme="light"] .site-dark .contact-detail strong,
+[data-theme="light"] .site-dark .form-status { color: var(--l-gold-text); }
+
+/* Buttons: the second button becomes ivory outside the dark islands */
+[data-theme="light"] .site-dark .button--green,
+[data-theme="light"] .site-dark .button--outline { color: var(--l-ink); border-color: rgba(19, 23, 19, .18); background: var(--l-card); }
+[data-theme="light"] .site-dark .button--green:hover,
+[data-theme="light"] .site-dark .button--outline:hover { color: #000; border-color: var(--l-gold); background: var(--l-gold); }
+[data-theme="light"] .site-dark .page-hero--film .button--outline { color: #f3f0e8; border-color: rgba(255, 255, 255, .16); background: rgba(255, 255, 255, .06); }
+
+/* Page heroes on linen with soft gold and sage light */
+[data-theme="light"] .site-dark .page-hero,
+[data-theme="light"] .site-dark .page-hero--green { color: var(--l-ink); background: radial-gradient(70% 90% at 85% 0%, rgba(191, 144, 0, .16) 0%, rgba(191, 144, 0, .04) 40%, transparent 70%), radial-gradient(60% 80% at 0% 100%, rgba(4, 89, 42, .12) 0%, transparent 65%), var(--l-bg); border-bottom-color: rgba(19, 23, 19, .06); }
+[data-theme="light"] .site-dark .page-hero--film { color: #f3f0e8; background: #000; }
+[data-theme="light"] .site-dark .page-hero__visual img { filter: drop-shadow(0 40px 50px rgba(19, 23, 19, .35)); }
+[data-theme="light"] .site-dark main > section + section { border-top-color: rgba(19, 23, 19, .06); }
+
+/* Services, portfolio, contact */
+[data-theme="light"] .site-dark .service-row { box-shadow: 0 24px 50px -40px rgba(19, 23, 19, .4); }
+[data-theme="light"] .site-dark .service-row:hover { border-color: rgba(191, 144, 0, .55); }
+[data-theme="light"] .site-dark .service-callout { background: radial-gradient(80% 120% at 100% 0%, rgba(191, 144, 0, .12), transparent 60%), var(--l-sage); }
+[data-theme="light"] .site-dark .filter-button { color: #323932; background: var(--l-card); }
+[data-theme="light"] .site-dark .filter-button:hover { color: var(--l-green); border-color: var(--l-green); }
+[data-theme="light"] .site-dark .filter-button[aria-pressed="true"] { color: #fff; border-color: var(--l-green); background: var(--l-green); }
+[data-theme="light"] .site-dark .portfolio-item { box-shadow: 0 0 0 1px rgba(19, 23, 19, .06), 0 30px 60px -30px rgba(19, 23, 19, .5); }
+[data-theme="light"] .site-dark .contact-map { background: var(--l-card); }
+[data-theme="light"] .site-dark .contact-map iframe { filter: none; }
+[data-theme="light"] .site-dark .contact-form { background: var(--l-card); box-shadow: 0 30px 60px -44px rgba(19, 23, 19, .4); }
+[data-theme="light"] .site-dark .form-field input,
+[data-theme="light"] .site-dark .form-field select,
+[data-theme="light"] .site-dark .form-field textarea { color: var(--l-ink); border-color: #b4ae98; background: #fff; }
+[data-theme="light"] .site-dark .form-field input::placeholder,
+[data-theme="light"] .site-dark .form-field textarea::placeholder { color: #8a8f86; }
+[data-theme="light"] .site-dark .draft-note { color: #2b321c; background: #efe3bc; }
+[data-theme="light"] .site-dark .contact-detail .contact-whatsapp { color: var(--l-ink); }
+
+/* ================= Phones ================= */
+@media (max-width: 760px) {
+  [data-theme="light"] .home-dark .main-nav,
+  [data-theme="light"] .site-dark .main-nav { background: var(--l-card); }
+  [data-theme="light"] .home-dark .main-nav a,
+  [data-theme="light"] .site-dark .main-nav a { border-bottom-color: var(--l-line); }
+  [data-theme="light"] .site-header,
+  [data-theme="light"] .home-dark .site-header.is-scrolled,
+  [data-theme="light"] .home-dark.menu-open .site-header,
+  [data-theme="light"] .site-dark .site-header,
+  [data-theme="light"] .site-dark.has-film-hero .site-header:not(.is-scrolled),
+  [data-theme="light"] .site-dark.has-film-hero.menu-open .site-header { background: var(--l-card); }
+}
