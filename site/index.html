@@ -184,18 +184,6 @@
         </div>
       </div>
     </section>
-    <!-- 1c. What we stream: a moving row of real event types (old site's list, plus hybrid). GSAP loop that
-         speeds up and turns with the scroll; Pause button; reduced motion and no-script: a still, wrapped list. -->
-    <section class="h-events" aria-labelledby="events-title" data-event-row>
-      <h2 class="visually-hidden" id="events-title">Events we stream and cover</h2>
-      <div class="h-events__viewport">
-        <div class="h-events__track" data-event-track><ul class="h-events__list"><li class="h-events__word">AGMs</li><li class="h-events__word is-outline">Zoom meetings</li><li class="h-events__word">YouTube live</li><li class="h-events__word is-outline">Facebook live</li><li class="h-events__word">TV broadcast</li><li class="h-events__word is-outline">Hybrid conferences</li><li class="h-events__word">Seminars</li><li class="h-events__word is-outline">Workshops</li><li class="h-events__word">Product launches</li><li class="h-events__word is-outline">Album launches</li><li class="h-events__word">Concerts</li><li class="h-events__word is-outline">Awards nights</li><li class="h-events__word">Weddings</li></ul><ul class="h-events__list" aria-hidden="true"><li class="h-events__word">AGMs</li><li class="h-events__word is-outline">Zoom meetings</li><li class="h-events__word">YouTube live</li><li class="h-events__word is-outline">Facebook live</li><li class="h-events__word">TV broadcast</li><li class="h-events__word is-outline">Hybrid conferences</li><li class="h-events__word">Seminars</li><li class="h-events__word is-outline">Workshops</li><li class="h-events__word">Product launches</li><li class="h-events__word is-outline">Album launches</li><li class="h-events__word">Concerts</li><li class="h-events__word is-outline">Awards nights</li><li class="h-events__word">Weddings</li></ul></div>
-      </div>
-      <div class="h-wrap h-events__foot">
-        <p class="h-events__note">From AGMs on Zoom to concerts on YouTube: if it happens in a room, we can put it online.</p>
-        <button class="h-pill h-events__pause" type="button" data-event-pause aria-pressed="false">Pause</button>
-      </div>
-    </section>
     <!-- 2. Services -->
     <section class="h-section h-services" aria-labelledby="services-title">
       <div class="h-wrap">
@@ -379,6 +367,17 @@
           <a class="h-btn h-btn--gold" href="./contact.html" data-cms-text="home.callToAction.actionLabel" data-cms-href="home.callToAction.actionUrl">Check your date</a>
           <a class="h-btn h-btn--glass" href="https://wa.me/256774345634" target="_blank" rel="noopener">Message us on WhatsApp</a>
         </div>
+      </div>
+    </section>
+      <!-- 8. What we stream (last in <main>, just before the footer; no h2, so the CTA stays the last h2 for the OS): a moving row of real event types (old site's list, plus hybrid). GSAP loop that
+         speeds up and turns with the scroll; Pause button; reduced motion and no-script: a still, wrapped list. -->
+    <section class="h-events h-events--closing" aria-label="Events we stream and cover" data-event-row>
+      <div class="h-events__viewport">
+        <div class="h-events__track" data-event-track><ul class="h-events__list"><li class="h-events__word">AGMs</li><li class="h-events__word is-outline">Zoom meetings</li><li class="h-events__word">YouTube live</li><li class="h-events__word is-outline">Facebook live</li><li class="h-events__word">TV broadcast</li><li class="h-events__word is-outline">Hybrid conferences</li><li class="h-events__word">Seminars</li><li class="h-events__word is-outline">Workshops</li><li class="h-events__word">Product launches</li><li class="h-events__word is-outline">Album launches</li><li class="h-events__word">Concerts</li><li class="h-events__word is-outline">Awards nights</li><li class="h-events__word">Weddings</li></ul><ul class="h-events__list" aria-hidden="true"><li class="h-events__word">AGMs</li><li class="h-events__word is-outline">Zoom meetings</li><li class="h-events__word">YouTube live</li><li class="h-events__word is-outline">Facebook live</li><li class="h-events__word">TV broadcast</li><li class="h-events__word is-outline">Hybrid conferences</li><li class="h-events__word">Seminars</li><li class="h-events__word is-outline">Workshops</li><li class="h-events__word">Product launches</li><li class="h-events__word is-outline">Album launches</li><li class="h-events__word">Concerts</li><li class="h-events__word is-outline">Awards nights</li><li class="h-events__word">Weddings</li></ul></div>
+      </div>
+      <div class="h-wrap h-events__foot">
+        <p class="h-events__note">From AGMs on Zoom to concerts on YouTube: if it happens in a room, we can put it online.</p>
+        <button class="h-pill h-events__pause" type="button" data-event-pause aria-pressed="false">Pause</button>
       </div>
     </section>
   </main>
