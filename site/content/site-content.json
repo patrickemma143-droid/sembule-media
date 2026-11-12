@@ -5,8 +5,22 @@
       "slides": [
         {
           "eyebrow": "Livestreams · Zoom · hybrid events",
+          "title": "Half your audience isn’t in the room.",
+          "description": "We stream conferences and meetings live to YouTube, Facebook and Zoom, with remote speakers on the big screen and a full recording afterwards.",
+          "image": "./assets/work/hero-cam-conference.jpg",
+          "imageAlt": "Canon video camera on a tripod filming a conference room, its screen showing the live shot"
+        },
+        {
+          "eyebrow": "Multi-camera livestream",
+          "title": "Every angle, cut live.",
+          "description": "Three to six cameras, a vision mixer and a crew on headsets, so your stream looks like television, not a phone on a tripod.",
+          "image": "./assets/work/hero-cam-multicam.jpg",
+          "imageAlt": "Camera operator in headphones beside a cinema camera with a field monitor showing the speaker on stage"
+        },
+        {
+          "eyebrow": "Concerts · crusades · live events",
           "title": "Not everyone could get a ticket.",
-          "description": "Your event, live on YouTube, Facebook and Zoom from three to six cameras, with clean sound and a full recording afterwards. The people who couldn’t be in the room still are.",
+          "description": "Multi-camera coverage and clean sound carry the performance to people watching from home, and keep it for the ones who were there.",
           "image": "./assets/work/hero-live-performance.jpg",
           "imageAlt": "Choir in orange skirts singing on a lit stage at a crusade"
         },
