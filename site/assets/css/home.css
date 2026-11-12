@@ -567,3 +567,29 @@ html.intro-on .h-enter { animation-play-state: paused; } /* the hero's own entra
 .h-intro__dot { width: .32em; height: .32em; border-radius: 50%; background: #04592a; box-shadow: 0 0 0 .08em rgba(4, 89, 42, .35); }
 .h-intro__bar { position: absolute; right: 8vw; bottom: 8vh; left: 8vw; height: 2px; overflow: hidden; border-radius: 2px; background: rgba(255, 255, 255, .12); }
 .h-intro__bar span { position: absolute; inset: 0; background: var(--h-gold, #bf9000); transform: scaleX(0); transform-origin: left; }
+
+/* Partner strip: a slim band after the clients, gear makers' logos in one slow row */
+.h-partners { padding-block: clamp(40px, 6vw, 64px); background: var(--h-bg); border-block: 1px solid var(--h-line); }
+.h-partners__inner { display: grid; grid-template-columns: minmax(180px, 240px) 1fr; align-items: center; gap: clamp(24px, 4vw, 56px); }
+.h-partners__label { display: grid; gap: 8px; margin: 0; }
+.h-partners__label .h-eyebrow { margin: 0; }
+.h-partners__line { color: var(--h-muted); font-size: 15px; line-height: 1.45; }
+.h-partners__viewport { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.h-partners__track { display: flex; width: max-content; animation: h-marquee 42s linear infinite; }
+.h-partners:hover .h-partners__track, .h-partners:focus-within .h-partners__track { animation-play-state: paused; }
+.h-partners__list { display: flex; align-items: center; gap: clamp(40px, 5vw, 72px); margin: 0; padding: 0 clamp(40px, 5vw, 72px) 0 0; list-style: none; }
+.h-partners__list li { display: grid; place-items: center; height: 72px; flex: none; }
+.h-partners__list img { display: block; width: auto; height: var(--logo-h, 36px); opacity: .62; transition: opacity .3s ease, transform .3s ease; }
+.h-partners__list li:hover img { opacity: 1; transform: translateY(-2px); }
+@media (max-width: 760px) {
+  .h-partners__inner { grid-template-columns: 1fr; gap: 18px; }
+  .h-partners__list li { height: 60px; }
+  .h-partners__list img { height: calc(var(--logo-h, 36px) * .8); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .h-partners__track { animation: none; width: auto; }
+  .h-partners__viewport { -webkit-mask-image: none; mask-image: none; }
+  .h-partners__list { flex-wrap: wrap; padding: 0; gap: 20px 40px; }
+  .h-partners__list[aria-hidden="true"] { display: none; }
+  .h-partners__list img { transition: none; }
+}
