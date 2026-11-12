@@ -12,6 +12,36 @@
     window.addEventListener('scroll', sync, { passive: true });
   }
 
+  /* "Going live" intro (step 5): 3, 2, 1, LIVE, then the black screen wipes up to the hero.
+     Switched on by the inline script in <head> (once per visit, full motion only). Resolves
+     window.sembuleIntro when done, so the hero's own entrance plays after it. */
+  const introEl = document.querySelector('[data-intro]');
+  const html = document.documentElement;
+  window.sembuleIntro = new Promise(resolve => {
+    if (!introEl || !html.classList.contains('intro-on') || !window.gsap) { html.classList.remove('intro-on'); resolve(); return; }
+    const count = introEl.querySelector('[data-intro-count]');
+    const live = introEl.querySelector('[data-intro-live]');
+    const bar = introEl.querySelector('[data-intro-bar]');
+    const done = () => {
+      html.classList.remove('intro-on');
+      try { sessionStorage.setItem('sm-intro', '1'); } catch (e) { /* private mode: it simply shows again */ }
+      resolve();
+    };
+    const tl = gsap.timeline({ onComplete: done });
+    tl.to(bar, { scaleX: 1, duration: 1.9, ease: 'none' }, 0);
+    ['3', '2', '1'].forEach((n, i) => {
+      tl.call(() => { count.textContent = n; }, null, i * 0.5)
+        .fromTo(count, { yPercent: 40, opacity: 0, scale: 0.9 }, { yPercent: 0, opacity: 1, scale: 1, duration: 0.3, ease: 'expo.out' }, i * 0.5)
+        .to(count, { yPercent: -30, opacity: 0, duration: 0.18, ease: 'power2.in' }, i * 0.5 + 0.32);
+    });
+    tl.to(live, { opacity: 1, scale: 1, yPercent: -50, duration: 0.45, ease: 'back.out(2.2)' }, 1.5)
+      .to(introEl, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.9, ease: 'expo.inOut' }, 2.15);
+    // A click or key skips it
+    const skip = () => { tl.progress(1); };
+    introEl.addEventListener('click', skip, { once: true });
+    window.addEventListener('keydown', skip, { once: true });
+  });
+
   /* Hero stories: crossfade, numbered markers, pause control */
   const hero = document.querySelector('[data-hero-stage]');
   if (hero) {
@@ -218,7 +248,7 @@
     setPause();
     setTally();
     // First headline and LIVE badge: once the brand font has loaded, so the lines split where they will stay
-    (document.fonts?.ready || Promise.resolve()).then(() => { revealTitle(); decodeLive(); });
+    Promise.all([document.fonts?.ready || Promise.resolve(), window.sembuleIntro]).then(() => { revealTitle(); decodeLive(); });
     syncVideos(true);
     schedule();
   }

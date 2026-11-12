@@ -553,3 +553,17 @@ html.has-lightbox { overflow: hidden; }
 .h-events__pause { flex: 0 0 auto; }
 .h-events:not(.is-moving) .h-events__pause { display: none; }
 @media (max-width: 560px) { .h-events__foot { flex-direction: column; align-items: flex-start; } }
+
+/* ---------- "Going live" intro: 3, 2, 1, LIVE, then the screen wipes up (once per visit) ---------- */
+.h-intro { display: none; }
+html.intro-on { overflow: hidden; }
+html.intro-on .h-intro { position: fixed; z-index: 200; inset: 0; display: grid; place-items: center; color: #f3f0e8; background: radial-gradient(60% 60% at 50% 55%, rgba(191, 144, 0, .14), transparent 70%), #000; }
+html.intro-on .h-enter { animation-play-state: paused; } /* the hero's own entrance waits for the intro */
+.h-intro__inner { position: relative; display: grid; justify-items: center; }
+.h-intro__mark { width: 56px; height: 56px; margin-bottom: 18px; object-fit: contain; }
+.h-intro__label { margin: 0; color: var(--h-gold, #bf9000); font-size: 13px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.h-intro__count { margin: 0; font-family: var(--font-display, inherit); font-size: clamp(140px, 30vh, 280px); font-weight: 700; line-height: 1; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
+.h-intro__live { position: absolute; top: 50%; left: 50%; display: inline-flex; align-items: center; gap: .3em; margin: 0; padding: .12em .4em .12em .3em; border-radius: 999px; color: #000; background: var(--h-gold, #bf9000); font-family: var(--font-display, inherit); font-size: clamp(56px, 12vh, 120px); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: 0; transform: translate(-50%, -10%) scale(.7); }
+.h-intro__dot { width: .32em; height: .32em; border-radius: 50%; background: #04592a; box-shadow: 0 0 0 .08em rgba(4, 89, 42, .35); }
+.h-intro__bar { position: absolute; right: 8vw; bottom: 8vh; left: 8vw; height: 2px; overflow: hidden; border-radius: 2px; background: rgba(255, 255, 255, .12); }
+.h-intro__bar span { position: absolute; inset: 0; background: var(--h-gold, #bf9000); transform: scaleX(0); transform-origin: left; }

@@ -79,6 +79,83 @@
     return () => { gsap.set(items, { clearProps: 'all' }); gsap.set(frames, { clearProps: 'clipPath' }); };
   });
 
+  // ---------- Finishing touches (step 5): desktop with a mouse and full motion only ----------
+  const desk = '(min-width: 1024px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
+
+  // Smooth scrolling (Lenis), driven by GSAP's clock so ScrollTrigger pins and scrubs stay in step.
+  // It stops while a full-screen viewer is open, and in-page links glide to their target.
+  mm.add(desk, () => {
+    if (!window.Lenis) return;
+    const lenis = new Lenis({ duration: 1.15, smoothWheel: true, wheelMultiplier: 1, anchors: { offset: -90 } });
+    window.sembuleLenis = lenis;
+    lenis.on('scroll', ScrollTrigger.update);
+    const raf = time => lenis.raf(time * 1000);
+    gsap.ticker.add(raf);
+    gsap.ticker.lagSmoothing(0);
+    const syncLenis = () => {
+      const cls = document.documentElement.classList;
+      (cls.contains('has-lightbox') || cls.contains('intro-on')) ? lenis.stop() : lenis.start();
+    };
+    const watchViewers = new MutationObserver(syncLenis);
+    syncLenis(); // the intro may already be on
+    watchViewers.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => { watchViewers.disconnect(); gsap.ticker.remove(raf); lenis.destroy(); window.sembuleLenis = null; };
+  });
+
+  // Cursor label: a small pill that follows the pointer over things that play or open
+  mm.add(desk, () => {
+    const targets = [
+      ['[data-stream-play]', 'Watch live'],
+      ['.h-flow__card.is-active', 'View'],
+      ['.h-reel__frame', 'Play'],
+      ['.portfolio-photo', 'View'],
+      ['.h-card__media', 'Explore']
+    ];
+    const label = document.createElement('div');
+    label.className = 'm-cursor';
+    label.setAttribute('aria-hidden', 'true');
+    label.innerHTML = '<span class="m-cursor__dot"></span><span class="m-cursor__text"></span>';
+    document.body.append(label);
+    const text = label.querySelector('.m-cursor__text');
+    const xTo = gsap.quickTo(label, 'x', { duration: 0.35, ease: 'power3.out' });
+    const yTo = gsap.quickTo(label, 'y', { duration: 0.35, ease: 'power3.out' });
+    let shown = false;
+    const onMove = event => {
+      xTo(event.clientX); yTo(event.clientY);
+      const hit = targets.find(([sel]) => event.target.closest?.(sel));
+      // The showreel says Pause while it is playing
+      let word = hit?.[1];
+      if (hit && hit[0] === '.h-reel__frame') {
+        const v = document.querySelector('.h-reel__frame video');
+        word = v && !v.paused ? 'Pause' : 'Play';
+      }
+      if (word) { text.textContent = word; if (!shown) { shown = true; gsap.to(label, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(2)' }); } }
+      else if (shown) { shown = false; gsap.to(label, { scale: 0.4, opacity: 0, duration: 0.2 }); }
+    };
+    gsap.set(label, { xPercent: -50, yPercent: -50, scale: 0.4, opacity: 0 });
+    window.addEventListener('pointermove', onMove, { passive: true });
+    return () => { window.removeEventListener('pointermove', onMove); label.remove(); };
+  });
+
+  // Magnetic buttons: they lean a little towards the pointer and spring back when it leaves
+  mm.add(desk, () => {
+    const buttons = [...document.querySelectorAll('.h-btn, main .button, .h-round, .h-pill, .main-nav .button, .testimonial-arrow, .h-lightbox__nav')];
+    const off = buttons.map(btn => {
+      const xTo = gsap.quickTo(btn, 'x', { duration: 0.5, ease: 'power3.out' });
+      const yTo = gsap.quickTo(btn, 'y', { duration: 0.5, ease: 'power3.out' });
+      const move = event => {
+        const r = btn.getBoundingClientRect();
+        xTo((event.clientX - (r.left + r.width / 2)) * 0.28);
+        yTo((event.clientY - (r.top + r.height / 2)) * 0.32);
+      };
+      const leave = () => { gsap.to(btn, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.4)', overwrite: true }); };
+      btn.addEventListener('pointermove', move);
+      btn.addEventListener('pointerleave', leave);
+      return () => { btn.removeEventListener('pointermove', move); btn.removeEventListener('pointerleave', leave); gsap.set(btn, { clearProps: 'transform' }); };
+    });
+    return () => off.forEach(fn => fn());
+  });
+
   // Positions depend on images and the brand font
   window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
   document.fonts?.ready.then(() => ScrollTrigger.refresh());

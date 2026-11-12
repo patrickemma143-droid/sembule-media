@@ -1,0 +1,12 @@
+/* Shared motion styles for every page (motion.js): smooth scroll and the cursor label. */
+
+/* Lenis smooth scrolling: it does the easing, so the browser's own smooth scroll must stay off */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Cursor label: a gold pill that follows the pointer over things that play or open */
+.m-cursor { position: fixed; z-index: 90; top: 0; left: 0; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px 10px 12px; border-radius: 999px; color: #000; background: #bf9000; font-family: var(--font-body, inherit); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; pointer-events: none; box-shadow: 0 12px 30px -10px rgba(191, 144, 0, .7); will-change: transform; }
+.m-cursor__dot { width: 8px; height: 8px; border-radius: 50%; background: #04592a; box-shadow: 0 0 0 3px rgba(4, 89, 42, .35); }
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) { .m-cursor { display: none; } }

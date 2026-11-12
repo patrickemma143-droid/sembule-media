@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>/* Going-live intro: once per visit, full motion only; cleared by home.js, or by this timer if scripts fail */try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!sessionStorage.getItem("sm-intro")){document.documentElement.classList.add("intro-on");setTimeout(function(){document.documentElement.classList.remove("intro-on")},3600)}}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#000000">
   <meta name="description" content="Livestreaming, corporate events, sound and PA, documentaries and NGO work from Sembule Media, a production crew based in Kampala and working across Uganda.">
@@ -22,19 +23,20 @@
   <meta property="og:image:alt" content="Speaker on stage at a live event produced by Sembule Media">
   <meta name="twitter:card" content="summary_large_image">
   <title>Sembule Media | Livestreams, corporate events, sound and documentaries in Uganda</title>
-  <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
-  <link rel="stylesheet" href="./assets/css/home.css?v=step3-1">
+  <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/motion.css?v=step5-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
+  <link rel="stylesheet" href="./assets/css/home.css?v=step5-1">
   <script defer src="./assets/js/site.js?v=services-order-1"></script>
   <script defer src="./assets/js/vendor/gsap.min.js"></script>
   <script defer src="./assets/js/vendor/SplitText.min.js"></script>
   <script defer src="./assets/js/vendor/ScrambleTextPlugin.min.js"></script>
   <script defer src="./assets/js/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="./assets/js/home.js?v=step3-1"></script>
-  <script defer src="./assets/js/motion.js?v=motion-2"></script>
+  <script defer src="./assets/js/home.js?v=step5-1"></script>
+  <script defer src="./assets/js/vendor/lenis.min.js"></script><script defer src="./assets/js/motion.js?v=step5-1"></script>
   <script defer src="./assets/js/analytics.js"></script>
   <meta name="sembule-site-content" content="./content/site-content.json">
 </head>
 <body class="home-page home-dark">
+  <div class="h-intro" aria-hidden="true" data-intro><div class="h-intro__inner"><img class="h-intro__mark" src="./assets/brand/mark.png" width="64" height="64" alt=""><p class="h-intro__label">Going live in</p><p class="h-intro__count" data-intro-count>3</p><p class="h-intro__live" data-intro-live><span class="h-intro__dot"></span>Live</p></div><div class="h-intro__bar"><span data-intro-bar></span></div></div>
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="header-inner">
