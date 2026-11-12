@@ -531,3 +531,25 @@ html.has-lightbox { overflow: hidden; }
 }
 /* Stream viewer: a 16:9 player as large as the screen allows */
 .h-lightbox--stream .h-lightbox__stage iframe { width: min(100%, calc((100dvh - 210px) * 16 / 9)); height: auto; aspect-ratio: 16 / 9; border: 0; border-radius: 16px; background: #000; box-shadow: 0 40px 120px -40px rgba(191, 144, 0, .45); }
+
+/* ---------- What we stream: the moving row of event types ---------- */
+.visually-hidden { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; }
+.h-events { position: relative; overflow: hidden; padding: clamp(40px, 7vh, 80px) 0 clamp(32px, 5vh, 56px); border-top: 1px solid rgba(255, 255, 255, .06); border-bottom: 1px solid rgba(255, 255, 255, .06); background: #000; }
+.h-events__viewport { overflow: hidden; }
+/* At rest (reduced motion, no script): one wrapped, still list */
+.h-events__track { display: block; padding-inline: var(--page-gutter); }
+.h-events__track .h-events__list[aria-hidden="true"] { display: none; }
+.h-events__list { display: flex; flex-wrap: wrap; gap: 6px 0; margin: 0; padding: 0; list-style: none; }
+.h-events__word { display: inline-flex; align-items: center; color: var(--h-text); font-family: var(--font-display, inherit); font-size: clamp(28px, 4vw, 40px); font-weight: 700; line-height: 1.1; letter-spacing: -.03em; white-space: nowrap; }
+.h-events__word:after { width: .28em; height: .28em; margin: 0 .55em; flex: 0 0 auto; content: ""; border-radius: 50%; background: var(--h-gold); }
+.h-events__word.is-outline { color: transparent; -webkit-text-stroke: 1.5px rgba(243, 240, 232, .85); }
+/* Moving: two copies side by side, drifting left by half the track on a loop */
+.h-events.is-moving .h-events__track { display: flex; width: max-content; padding-inline: 0; will-change: transform; }
+.h-events.is-moving .h-events__list[aria-hidden="true"] { display: flex; }
+.h-events.is-moving .h-events__list { flex-wrap: nowrap; }
+.h-events.is-moving .h-events__word { font-size: clamp(44px, 7vw, 112px); line-height: 1.05; }
+.h-events__foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: clamp(20px, 3vh, 32px); }
+.h-events__note { max-width: 52ch; margin: 0; color: var(--h-muted); font-size: 15px; line-height: 1.55; }
+.h-events__pause { flex: 0 0 auto; }
+.h-events:not(.is-moving) .h-events__pause { display: none; }
+@media (max-width: 560px) { .h-events__foot { flex-direction: column; align-items: flex-start; } }

@@ -68,7 +68,7 @@
           "imageLabel": "Documentary image"
         }
       ],
-      "serviceList": "Also: photography · videography · 65-inch TV hire"
+      "serviceList": "Also: Zoom & hybrid conferences · photography · videography · 65-inch TV hire"
     },
     "aboutIntro": {
       "label": "Sembule Media · Kampala, Uganda",
@@ -146,6 +146,12 @@
         "description": "Much of your audience may never set foot in the venue. Multi-camera coverage, live switching and recording carry the event to them, and leave you a full recording when it’s over.",
         "actionLabel": "See production work",
         "actionUrl": "./portfolio.html"
+      },
+      {
+        "title": "Zoom & hybrid conferences",
+        "description": "Half your audience may be on a laptop in another city. We run Zoom meetings and hybrid conferences: remote speakers on the big screen, the room on the stream, and sound that works both ways.",
+        "actionLabel": "Request a quote",
+        "actionUrl": "./contact.html"
       },
       {
         "title": "Corporate events",

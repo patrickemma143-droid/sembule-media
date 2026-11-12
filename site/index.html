@@ -23,13 +23,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Sembule Media | Livestreams, corporate events, sound and documentaries in Uganda</title>
   <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
-  <link rel="stylesheet" href="./assets/css/home.css?v=streams-1">
+  <link rel="stylesheet" href="./assets/css/home.css?v=step3-1">
   <script defer src="./assets/js/site.js?v=services-order-1"></script>
   <script defer src="./assets/js/vendor/gsap.min.js"></script>
   <script defer src="./assets/js/vendor/SplitText.min.js"></script>
   <script defer src="./assets/js/vendor/ScrambleTextPlugin.min.js"></script>
   <script defer src="./assets/js/vendor/ScrollTrigger.min.js"></script>
-  <script defer src="./assets/js/home.js?v=streams-1"></script>
+  <script defer src="./assets/js/home.js?v=step3-1"></script>
   <script defer src="./assets/js/analytics.js"></script>
   <meta name="sembule-site-content" content="./content/site-content.json">
 </head>
@@ -183,6 +183,18 @@
         </div>
       </div>
     </section>
+    <!-- 1c. What we stream: a moving row of real event types (old site's list, plus hybrid). GSAP loop that
+         speeds up and turns with the scroll; Pause button; reduced motion and no-script: a still, wrapped list. -->
+    <section class="h-events" aria-labelledby="events-title" data-event-row>
+      <h2 class="visually-hidden" id="events-title">Events we stream and cover</h2>
+      <div class="h-events__viewport">
+        <div class="h-events__track" data-event-track><ul class="h-events__list"><li class="h-events__word">AGMs</li><li class="h-events__word is-outline">Zoom meetings</li><li class="h-events__word">YouTube live</li><li class="h-events__word is-outline">Facebook live</li><li class="h-events__word">TV broadcast</li><li class="h-events__word is-outline">Hybrid conferences</li><li class="h-events__word">Seminars</li><li class="h-events__word is-outline">Workshops</li><li class="h-events__word">Product launches</li><li class="h-events__word is-outline">Album launches</li><li class="h-events__word">Concerts</li><li class="h-events__word is-outline">Awards nights</li><li class="h-events__word">Weddings</li></ul><ul class="h-events__list" aria-hidden="true"><li class="h-events__word">AGMs</li><li class="h-events__word is-outline">Zoom meetings</li><li class="h-events__word">YouTube live</li><li class="h-events__word is-outline">Facebook live</li><li class="h-events__word">TV broadcast</li><li class="h-events__word is-outline">Hybrid conferences</li><li class="h-events__word">Seminars</li><li class="h-events__word is-outline">Workshops</li><li class="h-events__word">Product launches</li><li class="h-events__word is-outline">Album launches</li><li class="h-events__word">Concerts</li><li class="h-events__word is-outline">Awards nights</li><li class="h-events__word">Weddings</li></ul></div>
+      </div>
+      <div class="h-wrap h-events__foot">
+        <p class="h-events__note">From AGMs on Zoom to concerts on YouTube: if it happens in a room, we can put it online.</p>
+        <button class="h-pill h-events__pause" type="button" data-event-pause aria-pressed="false">Pause</button>
+      </div>
+    </section>
     <!-- 2. Services -->
     <section class="h-section h-services" aria-labelledby="services-title">
       <div class="h-wrap">
@@ -211,7 +223,7 @@
             <div class="h-card__body"><span class="h-num">04</span><h3 data-site-owns data-cms-text="home.servicesIntro.cards.3.title">Documentaries &amp; NGO work</h3><p data-site-owns data-cms-text="home.servicesIntro.cards.3.description">People support what they can see. We film the work so it can speak for itself.</p></div>
           </article>
         </div>
-        <p class="h-also" data-site-owns data-cms-text="home.servicesIntro.serviceList">Also: photography · videography · 65-inch TV hire</p>
+        <p class="h-also" data-site-owns data-cms-text="home.servicesIntro.serviceList">Also: Zoom &amp; hybrid conferences · photography · videography · 65-inch TV hire</p>
       </div>
     </section>
     <!-- 3. Showreel -->

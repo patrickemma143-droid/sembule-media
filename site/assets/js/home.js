@@ -299,6 +299,41 @@
     }));
   }
 
+  /* What we stream: a row of real event types that drifts left on a loop (GSAP), runs faster while the
+     page is scrolled and turns round when scrolling up, then settles back. Pause stops it; it also stops
+     off screen. Reduced motion or no GSAP: the CSS shows one still, wrapped list. */
+  const eventRow = document.querySelector('[data-event-row]');
+  if (eventRow && window.gsap && !reduced.matches) {
+    const track = eventRow.querySelector('[data-event-track]');
+    const pauseBtn = eventRow.querySelector('[data-event-pause]');
+    eventRow.classList.add('is-moving');
+    const loop = gsap.to(track, { xPercent: -50, duration: 46, ease: 'none', repeat: -1 });
+    let userPaused = false, onScreen = true, settle;
+    const setBtn = () => {
+      pauseBtn.textContent = userPaused ? 'Play' : 'Pause';
+      pauseBtn.setAttribute('aria-pressed', String(userPaused));
+      pauseBtn.setAttribute('aria-label', userPaused ? 'Play the moving list of events' : 'Pause the moving list of events');
+    };
+    const sync = () => { (userPaused || !onScreen || document.hidden) ? loop.pause() : loop.play(); };
+    pauseBtn.addEventListener('click', () => { userPaused = !userPaused; setBtn(); sync(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; sync(); }).observe(eventRow);
+    document.addEventListener('visibilitychange', sync);
+    if (window.ScrollTrigger) {
+      ScrollTrigger.create({
+        trigger: eventRow, start: 'top bottom', end: 'bottom top',
+        onUpdate: self => {
+          if (userPaused) return;
+          // Scroll speed adds to the drift; the direction follows the scroll
+          const boost = Math.min(Math.abs(self.getVelocity()) / 250, 5);
+          gsap.to(loop, { timeScale: (1 + boost) * (self.direction < 0 ? -1 : 1), duration: 0.25, overwrite: true });
+          clearTimeout(settle);
+          settle = setTimeout(() => gsap.to(loop, { timeScale: self.direction < 0 ? -1 : 1, duration: 1.2, ease: 'power2.out', overwrite: true }), 120);
+        }
+      });
+    }
+    setBtn();
+  }
+
   /* Showreel: plays by itself, muted, while it is on screen (browsers only autoplay muted video).
      Pause and Sound buttons sit on the frame; a pause by the visitor is respected, the reel does not
      restart itself. It stops when scrolled away. Reduced motion and Save-Data keep the click-to-play
