@@ -477,3 +477,18 @@ html.has-lightbox { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .h-lightbox[open], .h-lightbox.is-swapping .h-lightbox__stage > * { animation: none; }
 }
+
+/* ---------- Livestream first: the LIVE broadcast pill (stays up whichever story shows) ---------- */
+.h-onair { display: inline-flex; align-items: center; gap: 12px; max-width: 100%; margin: 0 0 18px; padding: 5px 16px 5px 5px; border: 1px solid rgba(255, 255, 255, .2); border-radius: 999px; color: #f3f0e8; background: rgba(0, 0, 0, .42); font-size: 14px; font-weight: 500; line-height: 1.3; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.h-onair__badge { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 8px; padding: 6px 12px 6px 10px; border-radius: 999px; color: #000; background: var(--h-gold); font-size: 12px; font-weight: 700; letter-spacing: .18em; box-shadow: 0 0 24px rgba(191, 144, 0, .45); }
+.h-onair__dot { position: relative; width: 9px; height: 9px; border-radius: 50%; background: var(--h-green); }
+.h-onair__dot:after { position: absolute; inset: -4px; content: ""; border-radius: 50%; border: 2px solid var(--h-green); opacity: 0; animation: h-onair-ping 1.6s cubic-bezier(.2, .7, .3, 1) infinite; }
+@keyframes h-onair-ping { 0% { transform: scale(.5); opacity: .9; } 100% { transform: scale(1.6); opacity: 0; } }
+.h-onair__live { display: inline-block; min-width: 3.6em; font-variant-numeric: tabular-nums; }
+/* Headline lines rise out of their own mask (GSAP SplitText adds the wrappers) */
+.h-hero__title .h-line { padding-bottom: .06em; }
+@media (max-width: 560px) {
+  .h-onair { gap: 9px; padding-right: 12px; font-size: 12px; border-radius: 20px; }
+  .h-onair__badge { padding: 5px 10px 5px 8px; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) { .h-onair__dot:after { animation: none; } }

@@ -24,6 +24,27 @@
     const index = hero.querySelector('[data-hero-index]');
     const pause = hero.querySelector('[data-hero-pause]');
     let current = 0, paused = reduced.matches, holding = false, timer, swap;
+
+    // Award-site type motion (GSAP, self-hosted): the headline rises line by line out of a mask, on load
+    // and on every story change; the LIVE badge decodes once. Without GSAP or under reduced motion the
+    // words simply stand.
+    const motionOK = () => !!window.gsap && !reduced.matches;
+    if (window.gsap && window.SplitText) gsap.registerPlugin(SplitText);
+    if (window.gsap && window.ScrambleTextPlugin) gsap.registerPlugin(ScrambleTextPlugin);
+    let titleSplit = null;
+    const revealTitle = () => {
+      if (!motionOK() || !window.SplitText) return;
+      titleSplit?.revert();
+      titleSplit = SplitText.create(title, {
+        type: 'lines', mask: 'lines', linesClass: 'h-line', autoSplit: true,
+        onSplit: self => gsap.from(self.lines, { yPercent: 115, rotate: 2, duration: 1.05, ease: 'expo.out', stagger: 0.09 })
+      });
+    };
+    const onAirWord = hero.querySelector('[data-onair-word]');
+    const decodeLive = () => {
+      if (!motionOK() || !window.ScrambleTextPlugin || !onAirWord) return;
+      gsap.to(onAirWord, { duration: 1.4, delay: 0.25, scrambleText: { text: 'LIVE', chars: 'UPPERCASE', revealDelay: 0.5, speed: 0.5 } });
+    };
     const heroSaveData = navigator.connection?.saveData === true;
 
     // Slide videos play only while their slide is showing; reduced motion and Save-Data keep the poster
@@ -107,9 +128,11 @@
       swap = setTimeout(() => {
         const data = slides[current].dataset;
         eyebrow.textContent = data.storyEyebrow || '';
+        titleSplit?.revert(); titleSplit = null;
         title.textContent = data.storyTitle || '';
         description.textContent = data.storyDescription || '';
         copy.classList.remove('is-changing');
+        revealTitle();
       }, reduced.matches ? 0 : 320);
       schedule();
     };
@@ -194,6 +217,8 @@
     reduced.addEventListener?.('change', () => syncVideos());
     setPause();
     setTally();
+    // First headline and LIVE badge: once the brand font has loaded, so the lines split where they will stay
+    (document.fonts?.ready || Promise.resolve()).then(() => { revealTitle(); decodeLive(); });
     syncVideos(true);
     schedule();
   }
