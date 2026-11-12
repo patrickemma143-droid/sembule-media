@@ -23,12 +23,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Sembule Media | Livestreams, corporate events, sound and documentaries in Uganda</title>
   <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
-  <link rel="stylesheet" href="./assets/css/home.css?v=live-hero-1">
+  <link rel="stylesheet" href="./assets/css/home.css?v=streams-1">
   <script defer src="./assets/js/site.js?v=services-order-1"></script>
   <script defer src="./assets/js/vendor/gsap.min.js"></script>
   <script defer src="./assets/js/vendor/SplitText.min.js"></script>
   <script defer src="./assets/js/vendor/ScrambleTextPlugin.min.js"></script>
-  <script defer src="./assets/js/home.js?v=live-hero-1"></script>
+  <script defer src="./assets/js/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="./assets/js/home.js?v=streams-1"></script>
   <script defer src="./assets/js/analytics.js"></script>
   <meta name="sembule-site-content" content="./content/site-content.json">
 </head>
@@ -81,6 +82,104 @@
           <button type="button" data-hero-goto="2" aria-current="false" aria-label="Show story 3: The back row came too."></button>
           <button type="button" data-hero-goto="3" aria-current="false" aria-label="Show story 4: People support what they can see."></button>
         </nav>
+        </div>
+      </div>
+    </section>
+    <!-- 1b. Streamed live: eleven real Sembule livestreams on YouTube (Nsubuga Tonny's channel). Pinned on wide
+         screens while the cards travel sideways (home.js, GSAP ScrollTrigger); a swipeable row on phones.
+         Thumbnails saved from YouTube into assets/streams; each card plays its stream in a full-screen viewer. -->
+    <section class="h-section h-streams" id="streamed-live" aria-labelledby="streams-title" data-streams>
+      <div class="h-streams__pin">
+        <div class="h-wrap h-streams__head">
+          <div>
+            <p class="h-eyebrow"><span class="h-live" aria-hidden="true"></span>Streamed live by Sembule</p>
+            <h2 id="streams-title">Uganda’s rooms, streamed to the world.</h2>
+          </div>
+          <div class="h-streams__side">
+            <p class="h-head__lede">Conferences, symposiums, awards nights and Zoom meetings we have taken live. Press any one to watch the stream.</p>
+            <p class="h-streams__count" aria-hidden="true"><strong>11</strong> streams <span class="h-streams__bar"><span data-streams-progress></span></span></p>
+          </div>
+        </div>
+        <div class="h-streams__viewport" data-streams-viewport>
+          <ul class="h-streams__track" data-streams-track>
+            <li class="h-stream" data-stream="70l33kCk8xM">
+              <button class="h-stream__btn" type="button" data-stream-play aria-label="Watch the Kampala Geopolitics 2021 stream">
+                <span class="h-stream__media"><img src="./assets/streams/70l33kCk8xM.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="h-stream__play" aria-hidden="true"></span></span>
+                <span class="h-stream__meta"><span class="h-stream__kind"><span class="h-stream__dot" aria-hidden="true"></span>Conference · 2021</span><span class="h-stream__name">Kampala Geopolitics</span></span>
+                <span class="h-stream__no" aria-hidden="true">01</span>
+              </button>
+            </li>
+            <li class="h-stream" data-stream="_W27b0US_c0">
+              <button class="h-stream__btn" type="button" data-stream-play aria-label="Watch the Uganda National Oil &amp; Gas Symposium 2021 stream">
+                <span class="h-stream__media"><img src="./assets/streams/_W27b0US_c0.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="h-stream__play" aria-hidden="true"></span></span>
+                <span class="h-stream__meta"><span class="h-stream__kind"><span class="h-stream__dot" aria-hidden="true"></span>Symposium · 2021</span><span class="h-stream__name">Uganda National Oil &amp; Gas Symposium</span></span>
+                <span class="h-stream__no" aria-hidden="true">02</span>
+              </button>
+            </li>
+            <li class="h-stream" data-stream="D0Oudyun-9Q">
+              <button class="h-stream__btn" type="button" data-stream-play aria-label="Watch the Airtel FUFA Awards 2021 stream">
+                <span class="h-stream__media"><img src="./assets/streams/D0Oudyun-9Q.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="h-stream__play" aria-hidden="true"></span></span>
+                <span class="h-stream__meta"><span class="h-stream__kind"><span class="h-stream__dot" aria-hidden="true"></span>Awards night · 2021</span><span class="h-stream__name">Airtel FUFA Awards</span></span>
+                <span class="h-stream__no" aria-hidden="true">03</span>
+              </button>
+            </li>
+            <li class="h-stream" data-stream="c390tlvgSqA">
+              <button class="h-stream__btn" type="button" data-stream-play aria-label="Watch the Pharmaceutical Society of Uganda stream">
+                <span class="h-stream__media"><img src="./assets/streams/c390tlvgSqA.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="h-stream__play" aria-hidden="true"></span></span>
+                <span class="h-stream__meta"><span class="h-stream__kind"><span class="h-stream__dot" aria-hidden="true"></span>Zoom meeting</span><span class="h-stream__name">Pharmaceutical Society of Uganda</span></span>
+                <span class="h-stream__no" aria-hidden="true">04</span>
+              </button>
+            </li>
+            <li class="h-stream" data-stream="sJKqcucfmV8">
+              <button class="h-stream__btn" type="button" data-stream-play aria-label="Watch the EDP Dialogue stream">
+                <span class="h-stream__media"><img src="./assets/streams/sJKqcucfmV8.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="h-stream__play" aria-hidden="true"></span></span>
+                <span class="h-stream__meta"><span class="h-stream__kind"><span class="h-stream__dot" aria-hidden="true"></span>Hybrid event</span><span class="h-stream__name">EDP Dialogue</span></span>
+                <span class="h-stream__no" aria-hidden="true">05</span>
+              </button>
+            </li>
+            <li class="h-stream" data-stream="yv2UmXKfMKQ">
+              <button class="h-stream__btn" type="button" data-stream-play aria-label="Watch the Recognition of Unpaid Domestic Work stream">
+                <span class="h-stream__media"><img src="./assets/streams/yv2UmXKfMKQ.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="h-stream__play" aria-hidden="true"></span></span>
+                <span class="h-stream__meta"><span class="h-stream__kind"><span class="h-stream__dot" aria-hidden="true"></span>Dialogue</span><span class="h-stream__name">Recognition of Unpaid Domestic Work</span></span>
+                <span class="h-stream__no" aria-hidden="true">06</span>
+              </button>
+            </li>
+            <li class="h-stream" data-stream="Je6huMmN3KA">
+              <button class="h-stream__btn" type="button" data-stream-play aria-label="Watch the International Conference on Gender Studies in Africa 2022 stream">
+                <span class="h-stream__media"><img src="./assets/streams/Je6huMmN3KA.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="h-stream__play" aria-hidden="true"></span></span>
+                <span class="h-stream__meta"><span class="h-stream__kind"><span class="h-stream__dot" aria-hidden="true"></span>Conference · 2022</span><span class="h-stream__name">International Conference on Gender Studies in Africa</span></span>
+                <span class="h-stream__no" aria-hidden="true">07</span>
+              </button>
+            </li>
+            <li class="h-stream" data-stream="X08wAm0QDYM">
+              <button class="h-stream__btn" type="button" data-stream-play aria-label="Watch the Ministry of Education: National Inclusive Education stream">
+                <span class="h-stream__media"><img src="./assets/streams/X08wAm0QDYM.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="h-stream__play" aria-hidden="true"></span></span>
+                <span class="h-stream__meta"><span class="h-stream__kind"><span class="h-stream__dot" aria-hidden="true"></span>Government</span><span class="h-stream__name">Ministry of Education: National Inclusive Education</span></span>
+                <span class="h-stream__no" aria-hidden="true">08</span>
+              </button>
+            </li>
+            <li class="h-stream" data-stream="L-Oi83D6mt8">
+              <button class="h-stream__btn" type="button" data-stream-play aria-label="Watch the National CSO Stakeholders’ Forum on the UPR stream">
+                <span class="h-stream__media"><img src="./assets/streams/L-Oi83D6mt8.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="h-stream__play" aria-hidden="true"></span></span>
+                <span class="h-stream__meta"><span class="h-stream__kind"><span class="h-stream__dot" aria-hidden="true"></span>Forum</span><span class="h-stream__name">National CSO Stakeholders’ Forum on the UPR</span></span>
+                <span class="h-stream__no" aria-hidden="true">09</span>
+              </button>
+            </li>
+            <li class="h-stream" data-stream="Nmb-h_CPdL4">
+              <button class="h-stream__btn" type="button" data-stream-play aria-label="Watch the Nile One Academy: Understanding Crypto Trends stream">
+                <span class="h-stream__media"><img src="./assets/streams/Nmb-h_CPdL4.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="h-stream__play" aria-hidden="true"></span></span>
+                <span class="h-stream__meta"><span class="h-stream__kind"><span class="h-stream__dot" aria-hidden="true"></span>Seminar</span><span class="h-stream__name">Nile One Academy: Understanding Crypto Trends</span></span>
+                <span class="h-stream__no" aria-hidden="true">10</span>
+              </button>
+            </li>
+            <li class="h-stream" data-stream="SwqODzdi5dc">
+              <button class="h-stream__btn" type="button" data-stream-play aria-label="Watch the Lapaire Glasses stream">
+                <span class="h-stream__media"><img src="./assets/streams/SwqODzdi5dc.jpg" width="960" height="540" loading="lazy" decoding="async" alt=""><span class="h-stream__play" aria-hidden="true"></span></span>
+                <span class="h-stream__meta"><span class="h-stream__kind"><span class="h-stream__dot" aria-hidden="true"></span>Behind the scenes</span><span class="h-stream__name">Lapaire Glasses</span></span>
+                <span class="h-stream__no" aria-hidden="true">11</span>
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
     </section>

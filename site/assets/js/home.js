@@ -223,6 +223,82 @@
     schedule();
   }
 
+  /* Streamed live: eleven real Sembule livestreams.
+     Wide screens (and full motion): the section pins and the cards travel sideways as the page scrolls
+     (GSAP ScrollTrigger, scrubbed), each photo easing from a slight zoom as it crosses the screen; a gold
+     line fills with progress. Phones, short screens and reduced motion: a native swipeable row.
+     Every card opens its YouTube stream (youtube-nocookie) in a full-screen viewer. */
+  const streams = document.querySelector('[data-streams]');
+  if (streams) {
+    const viewport = streams.querySelector('[data-streams-viewport]');
+    const track = streams.querySelector('[data-streams-track]');
+    const progress = streams.querySelector('[data-streams-progress]');
+    const items = [...streams.querySelectorAll('[data-stream]')];
+    const setProgress = p => { if (progress) progress.style.transform = `scaleX(${Math.max(0, Math.min(1, p))})`; };
+
+    if (window.gsap && window.ScrollTrigger) {
+      gsap.registerPlugin(ScrollTrigger);
+      const mm = gsap.matchMedia();
+      mm.add('(min-width: 1024px) and (min-height: 620px) and (prefers-reduced-motion: no-preference)', () => {
+        streams.classList.add('is-pinned');
+        const distance = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
+        const travel = gsap.to(track, {
+          x: () => -distance(),
+          ease: 'none', // required for a 1:1 scroll-to-travel mapping
+          scrollTrigger: {
+            trigger: streams, start: 'top top', end: () => `+=${distance()}`,
+            pin: true, scrub: 0.6, invalidateOnRefresh: true, anticipatePin: 1,
+            onUpdate: self => setProgress(self.progress)
+          }
+        });
+        items.forEach(item => {
+          gsap.fromTo(item.querySelector('img'), { scale: 1.18 }, {
+            scale: 1, ease: 'none',
+            scrollTrigger: { trigger: item, containerAnimation: travel, start: 'left right', end: 'center center', scrub: true }
+          });
+        });
+        return () => { streams.classList.remove('is-pinned'); setProgress(0); };
+      });
+      // Positions depend on images and the brand font
+      window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+      document.fonts?.ready.then(() => ScrollTrigger.refresh());
+    }
+    // Swipe row: the gold line follows the row's own scroll
+    viewport.addEventListener('scroll', () => {
+      if (streams.classList.contains('is-pinned')) return;
+      const max = viewport.scrollWidth - viewport.clientWidth;
+      setProgress(max > 0 ? viewport.scrollLeft / max : 0);
+    }, { passive: true });
+
+    // Full-screen viewer for a stream
+    const player = document.createElement('dialog');
+    player.className = 'h-lightbox h-lightbox--stream';
+    player.setAttribute('aria-label', 'Livestream');
+    player.innerHTML = `
+      <div class="h-lightbox__stage" data-sp-stage></div>
+      <div class="h-lightbox__caption"><span class="h-tag" data-sp-kind></span><p class="h-lightbox__title" data-sp-name></p><p class="h-lightbox__meta">Streamed live by Sembule Media · YouTube</p></div>
+      <button class="h-lightbox__close" type="button" data-sp-close aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>`;
+    document.body.append(player);
+    const spStage = player.querySelector('[data-sp-stage]');
+    player.querySelector('[data-sp-close]').addEventListener('click', () => player.close());
+    player.addEventListener('click', event => { if (event.target === player || event.target === spStage) player.close(); });
+    player.addEventListener('close', () => { spStage.replaceChildren(); document.documentElement.classList.remove('has-lightbox'); });
+    items.forEach(item => item.querySelector('button').addEventListener('click', () => {
+      const id = item.dataset.stream;
+      const name = item.querySelector('.h-stream__name')?.textContent || 'Sembule Media livestream';
+      const frame = document.createElement('iframe');
+      frame.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0&playsinline=1`;
+      frame.title = name;
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      frame.allowFullscreen = true;
+      spStage.replaceChildren(frame);
+      player.querySelector('[data-sp-kind]').textContent = item.querySelector('.h-stream__kind')?.textContent.trim() || '';
+      player.querySelector('[data-sp-name]').textContent = name;
+      player.showModal();
+      document.documentElement.classList.add('has-lightbox');
+    }));
+  }
+
   /* Showreel: plays by itself, muted, while it is on screen (browsers only autoplay muted video).
      Pause and Sound buttons sit on the frame; a pause by the visitor is respected, the reel does not
      restart itself. It stops when scrolled away. Reduced motion and Save-Data keep the click-to-play
