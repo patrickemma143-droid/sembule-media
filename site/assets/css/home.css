@@ -593,3 +593,11 @@ html.intro-on .h-enter { animation-play-state: paused; } /* the hero's own entra
   .h-partners__list[aria-hidden="true"] { display: none; }
   .h-partners__list img { transition: none; }
 }
+
+/* Hero without wording (data-copy-hidden on .h-hero): the pictures carry the first screen.
+   The h1 stays in the page for screen readers, search and the OS bridge; the rest is hidden. */
+.h-hero[data-copy-hidden] .h-hero__ghost,
+.h-hero[data-copy-hidden] .h-onair,
+.h-hero[data-copy-hidden] .h-eyebrow,
+.h-hero[data-copy-hidden] .h-hero__lede { display: none; }
+.h-hero[data-copy-hidden] .h-hero__title { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
