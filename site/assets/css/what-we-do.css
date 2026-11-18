@@ -1,0 +1,165 @@
+/* What we do: four service cards on a warm off-white stage, right after the hero.
+   Default (no script, reduced motion): a readable grid. With .is-live (what-we-do.js): a full-screen,
+   pinned stage where the cards rise, tilt, settle in the centre and leave upward with the scroll.
+   Colours stay inside the brand: black ink, gold and green tints, a stone neutral. */
+
+.wwd {
+  --wwd-ink: #0b0c0c;
+  --wwd-page: #f6f4ee;
+  position: relative;
+  color: var(--wwd-ink);
+  background: var(--wwd-page);
+  overflow: hidden;
+}
+
+/* ---------- Static layout (default) ---------- */
+.wwd__stage { position: relative; padding: clamp(72px, 10vw, 128px) clamp(16px, 4vw, 56px); }
+.wwd__type { display: none; }
+.wwd__title {
+  margin: 0 0 clamp(28px, 4vw, 48px);
+  font-family: var(--font-display, inherit);
+  font-size: clamp(44px, 8vw, 120px);
+  font-weight: 700;
+  line-height: .86;
+  letter-spacing: -.06em;
+  text-transform: uppercase;
+}
+.wwd__stack { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(14px, 2vw, 24px); }
+.wwd__card {
+  display: flex;
+  min-height: 320px;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  padding: clamp(18px, 2.2vw, 32px);
+  overflow: hidden;
+  color: var(--wwd-ink);
+  background: var(--card, #eadfca);
+  box-shadow: 0 10px 28px rgba(25, 30, 33, .09), 0 2px 8px rgba(25, 30, 33, .055);
+}
+.wwd__head h3 {
+  margin: 0;
+  font-family: var(--font-display, inherit);
+  font-size: clamp(30px, 3.4vw, 48px);
+  font-weight: 700;
+  line-height: .82;
+  letter-spacing: -.065em;
+  text-transform: uppercase;
+}
+.wwd__head h3 span { display: block; }
+.wwd__head p { width: 88%; margin: clamp(10px, 1.2vw, 18px) 0 0; font-size: clamp(14px, 1.1vw, 16px); font-weight: 500; line-height: 1.35; letter-spacing: -.01em; }
+.wwd__foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.wwd__foot ul { margin: 0; padding: 0; list-style: none; font-size: clamp(15px, 1.4vw, 20px); font-weight: 700; line-height: 1.12; letter-spacing: -.035em; }
+.wwd__num { display: block; color: #04592a; font-family: var(--font-display, inherit); font-size: clamp(40px, 4.6vw, 68px); font-weight: 700; line-height: .75; letter-spacing: -.07em; }
+.wwd__mark, .wwd__index { display: none; }
+
+/* ---------- Full-screen scroll stage (what-we-do.js adds .is-live) ---------- */
+.wwd.is-live .wwd__stage {
+  --progress: 0;
+  container-type: size;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  padding: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Huge blurred background words, partly cropped, drifting apart as the cards change */
+.wwd.is-live .wwd__type {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  overflow: hidden;
+  color: #080808;
+  font-family: var(--font-display, inherit);
+  font-weight: 700;
+  line-height: .69;
+  letter-spacing: -.085em;
+  opacity: .58;
+  filter: blur(clamp(5px, .85cqw, 13px));
+  pointer-events: none;
+  user-select: none;
+}
+.wwd__word { position: absolute; display: block; font-size: clamp(84px, 20.5cqw, 305px); white-space: nowrap; will-change: transform; }
+.wwd__word--1 { top: 2.5%; left: 1%; }
+.wwd__word--2 { top: 40.5%; right: 1%; }
+.wwd__word--3 { top: 73%; left: 25%; }
+
+/* The section's heading stays for screen readers; the background words carry it visually */
+.wwd.is-live .wwd__title { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+.wwd.is-live .wwd__stack { position: absolute; inset: 0; z-index: 2; display: block; perspective: 1100px; }
+.wwd.is-live .wwd__card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(35.8cqw, 57cqh);
+  min-height: 0;
+  aspect-ratio: 1.03 / 1;
+  gap: 0;
+  padding: clamp(15px, 2.2cqw, 34px);
+  opacity: 0;
+  transform: translate3d(-50%, 125%, 0) rotate(8deg) scale(.95);
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+.wwd.is-live .wwd__card:first-child { opacity: 1; transform: translate3d(-50%, -50%, 0); }
+.wwd.is-live .wwd__head h3 { font-size: clamp(25px, 4.15cqw, 61px); line-height: .8; letter-spacing: -.07em; }
+.wwd.is-live .wwd__head p { width: 82%; margin-top: clamp(8px, 1.25cqw, 18px); font-size: clamp(11px, 1.02cqw, 15px); line-height: 1.22; }
+.wwd.is-live .wwd__foot ul { font-size: clamp(12px, 1.5cqw, 22px); line-height: 1.06; letter-spacing: -.045em; }
+.wwd.is-live .wwd__num { font-size: clamp(31px, 4.8cqw, 70px); }
+
+/* A small vertical label on the right edge: brand green, a gold live dot */
+.wwd.is-live .wwd__mark {
+  position: absolute;
+  z-index: 5;
+  top: 42%;
+  right: 0;
+  display: flex;
+  width: clamp(26px, 2.6cqw, 40px);
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 4px 12px;
+  color: #f3f0e8;
+  background: #04592a;
+}
+.wwd__dot { width: 8px; height: 8px; flex: none; border-radius: 50%; background: #bf9000; box-shadow: 0 0 0 3px rgba(191, 144, 0, .28); }
+.wwd__mark-text { font-size: clamp(9px, .72cqw, 11px); font-weight: 700; line-height: 1; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; writing-mode: vertical-rl; }
+
+/* Progress: 01 —— 04, the line fills with the scroll */
+.wwd.is-live .wwd__index {
+  position: absolute;
+  z-index: 4;
+  right: clamp(46px, 4.4cqw, 72px);
+  bottom: clamp(18px, 3cqh, 32px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(11px, .8cqw, 13px);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+}
+.wwd__index i { position: relative; display: block; width: clamp(28px, 3.6cqw, 56px); height: 1px; overflow: hidden; background: rgba(0, 0, 0, .2); }
+.wwd__index i::after { position: absolute; inset: 0; background: var(--wwd-ink); content: ""; transform: scaleX(var(--progress)); transform-origin: left; }
+
+@media (max-width: 700px) {
+  .wwd.is-live .wwd__type { filter: blur(6px); }
+  .wwd.is-live .wwd__word { font-size: 28cqw; }
+  .wwd.is-live .wwd__word--1 { top: 10%; left: -10%; }
+  .wwd.is-live .wwd__word--2 { top: 43%; right: -5%; }
+  .wwd.is-live .wwd__word--3 { top: 71%; left: 6%; }
+  .wwd.is-live .wwd__card { width: min(73cqw, 49cqh); padding: clamp(17px, 5cqw, 25px); }
+  .wwd.is-live .wwd__head h3 { font-size: clamp(27px, 8.4cqw, 44px); }
+  .wwd.is-live .wwd__head p { font-size: clamp(11px, 3cqw, 13px); }
+  .wwd.is-live .wwd__foot ul { font-size: clamp(12px, 3.3cqw, 17px); }
+  .wwd.is-live .wwd__num { font-size: clamp(34px, 10cqw, 50px); }
+  .wwd.is-live .wwd__index { right: 44px; }
+}
+
+/* The dark homepage colours headings and text cream; inside the light stage everything is ink */
+.home-dark .wwd h2, .home-dark .wwd h3, .home-dark .wwd p, .home-dark .wwd li { color: var(--wwd-ink); }

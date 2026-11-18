@@ -25,11 +25,13 @@
   <title>Sembule Media | Livestreams, corporate events, sound and documentaries in Uganda</title>
   <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/motion.css?v=step5-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
   <link rel="stylesheet" href="./assets/css/home.css?v=broadcast-1">
+  <link rel="stylesheet" href="./assets/css/what-we-do.css?v=wwd-2">
   <script defer src="./assets/js/site.js?v=services-order-1"></script>
   <script defer src="./assets/js/vendor/gsap.min.js"></script>
   <script defer src="./assets/js/vendor/SplitText.min.js"></script>
   <script defer src="./assets/js/vendor/ScrambleTextPlugin.min.js"></script>
   <script defer src="./assets/js/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="./assets/js/what-we-do.js?v=wwd-1"></script>
   <script defer src="./assets/js/home.js?v=intro-film-2"></script>
   <script defer src="./assets/js/vendor/lenis.min.js"></script><script defer src="./assets/js/motion.js?v=step5-1"></script>
   <script defer src="./assets/js/analytics.js"></script>
@@ -102,6 +104,63 @@
           <button type="button" data-hero-goto="6" aria-current="false" aria-label="Show story 7: People support what they can see."></button>
         </nav>
         </div>
+      </div>
+    </section>
+    <!-- 1a. What we do: four service cards that rise, tilt, settle in the centre and leave upward as the page
+         scrolls (what-we-do.js, GSAP ScrollTrigger, pinned for about 3.3 screens). Without script or with
+         reduced motion it is a plain, readable grid. Brand tints only (gold, green, stone). -->
+    <section class="wwd" id="what-we-do" aria-labelledby="wwd-title" data-wwd>
+      <div class="wwd__stage" data-wwd-stage>
+        <div class="wwd__type" aria-hidden="true">
+          <span class="wwd__word wwd__word--1" data-wwd-word>WHAT</span>
+          <span class="wwd__word wwd__word--2" data-wwd-word>WE</span>
+          <span class="wwd__word wwd__word--3" data-wwd-word>DO</span>
+        </div>
+        <h2 class="wwd__title" id="wwd-title">What we do</h2>
+        <div class="wwd__stack">
+          <article class="wwd__card" style="--card:#eadfca" data-wwd-card>
+            <header class="wwd__head">
+              <h3><span>Live</span><span>streaming</span></h3>
+              <p>Your event on YouTube and Facebook as it happens, from three to six cameras, with the full recording afterwards.</p>
+            </header>
+            <footer class="wwd__foot">
+              <ul><li>YouTube Live</li><li>Facebook Live</li><li>Multi-camera</li></ul>
+              <span class="wwd__num" aria-hidden="true">01</span>
+            </footer>
+          </article>
+          <article class="wwd__card" style="--card:#d6e3d9" data-wwd-card>
+            <header class="wwd__head">
+              <h3><span>Zoom &amp;</span><span>hybrid</span></h3>
+              <p>Remote speakers on the big screen, the room on the stream, and sound that works both ways.</p>
+            </header>
+            <footer class="wwd__foot">
+              <ul><li>Zoom meetings</li><li>Hybrid conferences</li><li>Remote speakers</li></ul>
+              <span class="wwd__num" aria-hidden="true">02</span>
+            </footer>
+          </article>
+          <article class="wwd__card" style="--card:#e7e2d4" data-wwd-card>
+            <header class="wwd__head">
+              <h3><span>Sound</span><span>&amp; PA</span></h3>
+              <p>Clear sound for the room and the stream, set up and run by our own crew. When it works, nobody notices.</p>
+            </header>
+            <footer class="wwd__foot">
+              <ul><li>PA systems</li><li>Live mixing</li><li>Wireless mics</li></ul>
+              <span class="wwd__num" aria-hidden="true">03</span>
+            </footer>
+          </article>
+          <article class="wwd__card" style="--card:#efe4c6" data-wwd-card>
+            <header class="wwd__head">
+              <h3><span>Corporate</span><span>events</span></h3>
+              <p>Conferences, AGMs and launches covered end to end: cameras, sound, screens and the stream.</p>
+            </header>
+            <footer class="wwd__foot">
+              <ul><li>Conferences</li><li>AGMs</li><li>Launches</li></ul>
+              <span class="wwd__num" aria-hidden="true">04</span>
+            </footer>
+          </article>
+        </div>
+        <div class="wwd__mark" aria-hidden="true"><span class="wwd__dot"></span><span class="wwd__mark-text">Live from Kampala</span></div>
+        <div class="wwd__index" aria-hidden="true"><span data-wwd-current>01</span><i data-wwd-line></i><span>04</span></div>
       </div>
     </section>
     <!-- 1b. Streamed live: eleven real Sembule livestreams on YouTube (Nsubuga Tonny's channel). Pinned on wide
