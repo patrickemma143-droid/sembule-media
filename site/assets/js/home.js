@@ -12,34 +12,48 @@
     window.addEventListener('scroll', sync, { passive: true });
   }
 
-  /* "Going live" intro (step 5): 3, 2, 1, LIVE, then the black screen wipes up to the hero.
-     Switched on by the inline script in <head> (once per visit, full motion only). Resolves
-     window.sembuleIntro when done, so the hero's own entrance plays after it. */
+  /* "Going live" intro film: a camera screen counts 3, 2, 1 and shows the Sembule logo, then the
+     film wipes up to the hero. Switched on by the inline script in <head> (once per visit, full motion
+     only); the film's source is set by the inline script after it. Resolves window.sembuleIntro when
+     done, so the hero's own entrance plays after it. If the film can't start quickly, it gets out of the way. */
   const introEl = document.querySelector('[data-intro]');
   const html = document.documentElement;
   window.sembuleIntro = new Promise(resolve => {
-    if (!introEl || !html.classList.contains('intro-on') || !window.gsap) { html.classList.remove('intro-on'); resolve(); return; }
-    const count = introEl.querySelector('[data-intro-count]');
-    const live = introEl.querySelector('[data-intro-live]');
+    const film = introEl?.querySelector('[data-intro-video]');
+    if (!introEl || !film || !html.classList.contains('intro-on') || !window.gsap) { html.classList.remove('intro-on'); resolve(); return; }
     const bar = introEl.querySelector('[data-intro-bar]');
-    const done = () => {
-      html.classList.remove('intro-on');
-      try { sessionStorage.setItem('sm-intro', '1'); } catch (e) { /* private mode: it simply shows again */ }
-      resolve();
+    const skipBtn = introEl.querySelector('[data-intro-skip]');
+    let finished = false;
+    const tick = () => {
+      const d = film.duration;
+      if (d) {
+        gsap.set(bar, { scaleX: Math.min(1, film.currentTime / d) });
+        if (film.currentTime > d - 0.35) finish(); // the wipe starts on the logo's last beat
+      }
     };
-    const tl = gsap.timeline({ onComplete: done });
-    tl.to(bar, { scaleX: 1, duration: 1.9, ease: 'none' }, 0);
-    ['3', '2', '1'].forEach((n, i) => {
-      tl.call(() => { count.textContent = n; }, null, i * 0.5)
-        .fromTo(count, { yPercent: 40, opacity: 0, scale: 0.9 }, { yPercent: 0, opacity: 1, scale: 1, duration: 0.3, ease: 'expo.out' }, i * 0.5)
-        .to(count, { yPercent: -30, opacity: 0, duration: 0.18, ease: 'power2.in' }, i * 0.5 + 0.32);
-    });
-    tl.to(live, { opacity: 1, scale: 1, yPercent: -50, duration: 0.45, ease: 'back.out(2.2)' }, 1.5)
-      .to(introEl, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.9, ease: 'expo.inOut' }, 2.15);
-    // A click or key skips it
-    const skip = () => { tl.progress(1); };
-    introEl.addEventListener('click', skip, { once: true });
-    window.addEventListener('keydown', skip, { once: true });
+    const onKey = event => { if (['Escape', 'Enter', ' '].includes(event.key)) { event.preventDefault(); finish(true); } };
+    function finish(fast) {
+      if (finished) return;
+      finished = true;
+      clearTimeout(stall);
+      gsap.ticker.remove(tick);
+      window.removeEventListener('keydown', onKey);
+      try { sessionStorage.setItem('sm-intro', '1'); } catch (e) { /* private mode: it simply shows again */ }
+      gsap.to(introEl, {
+        clipPath: 'inset(0% 0% 100% 0%)', duration: fast ? 0.6 : 0.9, ease: 'expo.inOut',
+        onComplete: () => { film.pause(); film.removeAttribute('src'); film.load(); html.classList.remove('intro-on'); gsap.set(introEl, { clearProps: 'clipPath' }); resolve(); }
+      });
+    }
+    // Slow connection or a blocked autoplay: don't hold the visitor at a black screen
+    const stall = setTimeout(() => { if (film.paused || film.currentTime < 0.1) finish(true); }, 3000);
+    film.addEventListener('ended', () => finish());
+    film.addEventListener('error', () => finish(true));
+    const started = film.play();
+    if (started?.catch) started.catch(() => finish(true));
+    gsap.ticker.add(tick);
+    skipBtn?.addEventListener('click', () => finish(true));
+    film.addEventListener('click', () => finish(true));
+    window.addEventListener('keydown', onKey);
   });
 
   /* Hero stories: crossfade, numbered markers, pause control */
