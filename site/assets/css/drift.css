@@ -169,12 +169,13 @@
 .dd-mixer__tbar::after { position: absolute; top: -.25em; left: 38%; width: 2.4em; height: 1.7em; border-radius: .35em; background: linear-gradient(180deg, #cfcfcf, #8d8d8d); content: ""; }
 
 /* 9. Run of show on paper */
-.dd-paper { display: flex; flex-direction: column; gap: .65em; padding: 1.8em 1.6em; color: #161616; background: #f3f0e8; }
-.dd-paper h4 { margin: 0 0 .3em; color: #111; font-size: 1.05em; font-weight: 700; letter-spacing: -.02em; }
-.dd-paper p { display: flex; gap: .8em; margin: 0; color: #333; font-size: .74em; line-height: 1.2; }
-.dd-paper p b { flex: none; width: 3.2em; color: var(--dd-green); }
-.dd-paper p.is-now { color: #000; font-weight: 700; }
-.dd-paper p.is-now b { color: var(--dd-gold); }
+.dd-paper { display: flex; flex-direction: column; justify-content: space-between; gap: .8em; padding: 1.7em 1.6em 1.5em; color: #161616; background: #f3f0e8; }
+.home-dark .dd-paper .dd-paper__title { margin: 0; color: #0b0c0c; font-size: 1.35em; font-weight: 700; line-height: 1; letter-spacing: -.035em; text-transform: uppercase; }
+.dd-paper ul { display: grid; gap: .65em; margin: 0; padding: 0; list-style: none; }
+.home-dark .dd-paper li { display: flex; gap: .7em; color: #1b1b1b; font-size: .8em; font-weight: 600; line-height: 1.25; }
+.dd-paper li b { flex: none; width: 1.7em; color: var(--dd-green); }
+.home-dark .dd-paper .dd-paper__foot { margin: 0; padding-top: .7em; border-top: 1px solid rgba(0, 0, 0, .12); color: #000; font-size: .8em; font-weight: 700; }
+.dd-paper__foot::before { display: inline-block; width: .55em; height: .55em; margin-right: .5em; border-radius: 50%; background: var(--dd-gold); content: ""; }
 
 /* 10. Crew pass */
 .dd-pass { display: flex; flex-direction: column; justify-content: space-between; padding: 1.3em; color: var(--dd-ink); background: linear-gradient(150deg, #04592a, #023d1d); }
@@ -257,3 +258,6 @@ body.home-page { overflow-x: clip; }
 .dd-mixer::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, .55)); pointer-events: none; }
 .dd-mixer__tag { position: absolute; z-index: 1; left: .8em; bottom: .7em; display: inline-flex; align-items: center; gap: .4em; padding: .3em .6em; border-radius: 99em; color: #000; background: var(--dd-gold); font-size: .62em; font-weight: 700; letter-spacing: .14em; }
 .dd-mixer__tag i { width: .55em; height: .55em; border-radius: 50%; background: #04592a; }
+
+/* The What we do card is real content: on phones it is drawn larger than the decorative objects */
+@media (max-width: 760px) { .dd__item--content { --k: .78; } }

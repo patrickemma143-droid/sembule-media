@@ -75,7 +75,8 @@
     const delays = animate && !midFlight ? waveDelays() : items.map(() => 0);
     if (animate) lastSwitch = now;
     // On narrow screens the header always stays centred: offset left it would run off the edge
-    const hc = w < 760 ? { ...HEADER[next], x: 50, center: true } : HEADER[next];
+    // and sits a little lower, below the What we do card
+    const hc = w < 760 ? { ...HEADER[next], x: 50, y: 58, center: true } : HEADER[next];
     header.classList.toggle('is-left', !hc.center);
     const hx = (hc.x / 100) * w - (hc.center ? header.offsetWidth / 2 : 0);
     const hy = (hc.y / 100) * h - (hc.center ? header.offsetHeight / 2 : 0);

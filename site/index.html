@@ -25,7 +25,7 @@
   <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/motion.css?v=step5-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
   <link rel="stylesheet" href="./assets/css/home.css?v=broadcast-1">
   <link rel="stylesheet" href="./assets/css/what-we-do.css?v=wwd-2">
-  <link rel="stylesheet" href="./assets/css/drift.css?v=drift-5">
+  <link rel="stylesheet" href="./assets/css/drift.css?v=drift-6">
   <script defer src="./assets/js/site.js?v=services-order-1"></script>
   <script defer src="./assets/js/vendor/gsap.min.js"></script>
   <script defer src="./assets/js/vendor/SplitText.min.js"></script>
@@ -33,7 +33,7 @@
   <script defer src="./assets/js/vendor/ScrollTrigger.min.js"></script>
   <script defer src="./assets/js/what-we-do.js?v=wwd-1"></script>
   <script defer src="./assets/js/home.js?v=intro-film-2"></script>
-  <script defer src="./assets/js/drift.js?v=drift-3"></script>
+  <script defer src="./assets/js/drift.js?v=drift-4"></script>
   <script defer src="./assets/js/vendor/lenis.min.js"></script><script defer src="./assets/js/motion.js?v=step5-1"></script>
   <script defer src="./assets/js/analytics.js"></script>
   <meta name="sembule-site-content" content="./content/site-content.json">
@@ -75,11 +75,6 @@
         <div class="dd__header" data-drift-header>
           <p class="dd__live dd__in" style="--d:0ms"><i aria-hidden="true"></i>Live production · Kampala</p>
           <h1 class="dd__in" style="--d:0ms" data-site-owns>We take your event live.</h1>
-          <p class="dd__lede dd__in" style="--d:80ms" data-site-owns>Livestreams to YouTube, Facebook and Zoom, hybrid conferences, sound and PA. Cameras, mics and crew, arranged around your day.</p>
-          <div class="dd__cta dd__in" style="--d:140ms">
-            <a class="dd__btn dd__btn--gold" href="./contact.html">Check your date</a>
-            <a class="dd__btn dd__btn--ghost" href="#showreel">Watch the showreel</a>
-          </div>
         </div>
 
         <div class="dd__item" style="--w:238" data-drift-item="player" aria-hidden="true">
@@ -120,15 +115,18 @@
         <div class="dd__item" style="--w:184" data-drift-item="mixer" aria-hidden="true">
           <div class="dd__art dd-mixer"><video src="./assets/video/hero-desk-mixer.mp4" poster="./assets/video/hero-desk-mixer.jpg" muted loop playsinline preload="metadata" width="420" height="420" data-drift-video></video><span class="dd-mixer__tag"><i></i>PGM</span></div>
         </div>
-        <div class="dd__item" style="--w:274" data-drift-item="paper" aria-hidden="true">
+        <!-- The paper card carries the hero description, so it is real content (not aria-hidden). No <p> after the h1 in this
+             section: the OS bridge writes its hero summary into the first one it finds. -->
+        <div class="dd__item dd__item--content" style="--w:274" data-drift-item="paper">
           <div class="dd__art dd-paper">
-            <h4>Run of show</h4>
-            <p><b>07:30</b>Crew call, load-in</p>
-            <p><b>09:00</b>Sound check, cameras up</p>
-            <p><b>09:45</b>Stream test to YouTube</p>
-            <p class="is-now"><b>10:00</b>We go live</p>
-            <p><b>12:30</b>Q&amp;A, remote speakers</p>
-            <p><b>13:00</b>Recording handed over</p>
+            <div class="dd-paper__title">What we do</div>
+            <ul>
+              <li><b>01</b>Livestreams to YouTube, Facebook and Zoom</li>
+              <li><b>02</b>Hybrid conferences</li>
+              <li><b>03</b>Sound and PA</li>
+              <li><b>04</b>Cameras, mics and crew</li>
+            </ul>
+            <div class="dd-paper__foot">Arranged around your day.</div>
           </div>
         </div>
         <div class="dd__item" style="--w:184" data-drift-item="pass" aria-hidden="true">
