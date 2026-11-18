@@ -142,11 +142,11 @@
 .dd-call__bar i { width: .7em; height: .7em; border-radius: 50%; background: #3a3d3a; }
 .dd-call__bar i:first-child { background: var(--dd-gold); }
 .dd-call__bar span { margin-left: auto; color: rgba(243, 240, 232, .6); font-size: .62em; font-weight: 700; letter-spacing: .12em; }
-.dd-call__grid { display: grid; flex: 1; grid-template-columns: 1fr 1fr; gap: .35em; padding: .45em; }
-.dd-call__grid > * { overflow: hidden; border-radius: .35em; background: #232623 center / cover no-repeat; }
-.dd-call__grid .is-speaking { box-shadow: inset 0 0 0 .15em var(--dd-gold); }
-.dd-call__avatar { display: grid; place-items: center; color: var(--dd-ink); font-size: .9em; font-weight: 700; background: #04592a; }
-.dd-call__avatar:nth-child(4) { background: #2e2a1c; color: var(--dd-gold); }
+.dd-call__grid { display: grid; flex: 1; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: .4em; padding: .5em; }
+.dd-plat { display: flex; min-width: 0; flex-direction: column; align-items: center; justify-content: center; gap: .45em; padding: .4em .2em; border-radius: .45em; background: #1b1e1b; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05); text-align: center; }
+.dd-plat svg { width: 2.1em; height: 2.1em; flex: none; }
+.dd-plat b { color: rgba(243, 240, 232, .82); font-size: .56em; font-weight: 700; line-height: 1.15; letter-spacing: .01em; }
+.dd-plat.is-live { background: #23180c; box-shadow: inset 0 0 0 .12em var(--dd-gold); }
 
 /* 6. Folder: the gig rider */
 .dd-folder { overflow: visible; border-radius: .5em .9em .9em .9em; background: linear-gradient(160deg, #d6a312, var(--dd-gold)); }
@@ -246,3 +246,7 @@ html.intro-on .dd__item { transition: none !important; }
   .dd.is-on .dd__in { transition: opacity 300ms ease; }
   .dd__live i { animation: none; }
 }
+
+/* Safety: nothing on the homepage may make it scroll sideways. "clip" (not "hidden") so the pinned
+   sections and position: sticky keep working. */
+body.home-page { overflow-x: clip; }
