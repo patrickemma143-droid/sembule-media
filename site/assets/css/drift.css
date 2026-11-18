@@ -283,7 +283,7 @@ body.home-page { overflow-x: clip; }
 }
 .dd__desk { z-index: 1; }
 /* On phones the headline sits at 58% of the height, so the film is drawn taller to keep the camera behind it */
-@media (max-width: 760px) { .dd__bg { height: 116%; } }
+@media (max-width: 760px) { .dd__bg { height: 102%; } }
 
 /* ---------- Liquid glass ----------
    The cards are frosted panes over the moving film: the background blurs and brightens through them,
@@ -361,3 +361,69 @@ body.home-page { overflow-x: clip; }
   }
   .dd-folder::before { -webkit-backdrop-filter: none; backdrop-filter: none; background: #8a6a08; }
 }
+
+/* ---------- Hero, livestream-first: a plain line under the headline, one gold button ---------- */
+.dd__header { width: 460px; gap: 16px; }
+.dd__sub { max-width: 34ch; color: rgba(243, 240, 232, .82); font-size: clamp(15px, 1.15vw, 18px); font-weight: 500; line-height: 1.45; text-wrap: balance; }
+.dd__book {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+  padding: 0 26px;
+  border-radius: 999px;
+  color: #000;
+  background: linear-gradient(180deg, #d9a812, #bf9000);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 0 0 6px rgba(191, 144, 0, .14), 0 18px 40px -14px rgba(191, 144, 0, .8);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  pointer-events: auto;
+  transition: transform .2s cubic-bezier(.22, 1, .36, 1), box-shadow .3s ease;
+}
+.dd__book span { transition: transform .3s cubic-bezier(.22, 1, .36, 1); }
+.dd__book:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 0 0 8px rgba(191, 144, 0, .18), 0 24px 46px -14px rgba(191, 144, 0, .9); }
+.dd__book:hover span { transform: translateX(3px); }
+.dd__book:active { transform: scale(.97); }
+.dd__book:focus-visible { outline: 2px solid #f3f0e8; outline-offset: 4px; }
+
+/* The layout switch steps back: quiet glass, so the only gold on the first screen is the booking button */
+.dd__modes { padding: 4px; gap: 4px; }
+.dd__modes button { height: 36px; padding: 0 12px; font-size: 12.5px; }
+.dd__modes button[aria-pressed="true"] { color: #f3f0e8; background: rgba(255, 255, 255, .14); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3); }
+
+/* ---------- ON AIR sign: a studio light on the desk ---------- */
+.dd-onair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .15em;
+  border-radius: 1em;
+  color: #bf9000;
+  background:
+    radial-gradient(80% 70% at 50% 45%, rgba(191, 144, 0, .28), rgba(191, 144, 0, 0) 70%),
+    rgba(10, 8, 2, .7);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), inset 0 0 0 1px rgba(191, 144, 0, .45), 0 0 2.4em -.4em rgba(191, 144, 0, .7), 0 1.6em 3em -1.4em rgba(0, 0, 0, .85);
+  animation: dd-onair 2.4s ease-in-out infinite;
+}
+.dd-onair b { font-size: 1.85em; font-weight: 700; line-height: .95; letter-spacing: .06em; text-shadow: 0 0 .5em rgba(191, 144, 0, .9), 0 0 1.4em rgba(191, 144, 0, .5); }
+.dd-onair i { width: .55em; height: .55em; margin-bottom: .35em; border-radius: 50%; background: #bf9000; box-shadow: 0 0 .8em #bf9000; }
+@keyframes dd-onair { 50% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), inset 0 0 0 1px rgba(191, 144, 0, .6), 0 0 3.4em -.2em rgba(191, 144, 0, .9), 0 1.6em 3em -1.4em rgba(0, 0, 0, .85); } }
+@media (prefers-reduced-motion: reduce) { .dd-onair { animation: none; } }
+
+/* ---------- Phones: a calm first screen. Four cards and the ON AIR light; the rest stay off ---------- */
+@media (max-width: 760px) {
+  .dd__item[data-drift-item="mark"], .dd__item[data-drift-item="cursor"],
+  .dd__item[data-drift-item="pass"], .dd__item[data-drift-item="mixer"] { display: none; }
+  .dd__item--content { --k: .66; }
+  .dd__header { width: min(340px, calc(100vw - 32px)); gap: 12px; }
+  .dd__sub { font-size: 15px; }
+  .dd__book { min-height: 50px; font-size: 15px; }
+}
+@media (max-width: 760px) { .dd__live { font-size: 10.5px; letter-spacing: .14em; gap: 6px; } }
+@media (max-width: 760px) { .dd__item[data-drift-item="folder"] { --w: 104 !important; } }
+@media (min-width: 761px) { .dd__header { width: clamp(360px, 31vw, 460px); } }

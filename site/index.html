@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="./assets/css/what-we-do.css?v=wwd-3">
   <link rel="stylesheet" href="./assets/css/service-wheel.css?v=svc-5">
   <link rel="stylesheet" href="./assets/css/work-accordion.css?v=wk-1">
-  <link rel="stylesheet" href="./assets/css/drift.css?v=drift-10">
+  <link rel="stylesheet" href="./assets/css/drift.css?v=drift-15">
   <link rel="stylesheet" href="./assets/css/glass.css?v=glass-2">
   <script defer src="./assets/js/site.js?v=services-order-1"></script>
   <script defer src="./assets/js/vendor/gsap.min.js"></script>
@@ -38,7 +38,7 @@
   <script defer src="./assets/js/home.js?v=streams-glass-1"></script>
   <script defer src="./assets/js/service-wheel.js?v=svc-4"></script>
   <script defer src="./assets/js/work-accordion.js?v=wk-1"></script>
-  <script defer src="./assets/js/drift.js?v=drift-8"></script>
+  <script defer src="./assets/js/drift.js?v=drift-11"></script>
   <script defer src="./assets/js/vendor/lenis.min.js"></script><script defer src="./assets/js/motion.js?v=step5-1"></script>
   <script defer src="./assets/js/analytics.js"></script>
   <meta name="sembule-site-content" content="./content/site-content.json">
@@ -82,8 +82,11 @@
       <div class="dd__bg-shade" aria-hidden="true"></div>
       <div class="dd__desk" data-drift-desk>
         <div class="dd__header" data-drift-header>
-          <p class="dd__live dd__in" style="--d:0ms"><i aria-hidden="true"></i>Live production · Kampala</p>
+          <p class="dd__live dd__in" style="--d:0ms"><i aria-hidden="true"></i>Livestream · Live production · Media</p>
           <h1 class="dd__in" style="--d:0ms" data-site-owns>We take your event live.</h1>
+          <!-- A div, not a <p>: the OS bridge writes its hero summary into the first <p> after the h1 -->
+          <div class="dd__sub dd__in" style="--d:80ms" data-site-owns>Your event streamed live to YouTube, Facebook and Zoom, with the cameras, sound and crew to run it.</div>
+          <a class="dd__book dd__in" style="--d:140ms" href="./contact.html">Book a livestream <span aria-hidden="true">→</span></a>
         </div>
 
         <div class="dd__item" style="--w:238" data-drift-item="player" aria-hidden="true">
@@ -112,8 +115,8 @@
             </div>
           </div>
         </div>
-        <div class="dd__item" style="--w:110" data-drift-item="folder" aria-hidden="true">
-          <div class="dd__art dd-folder"><span>RIDER</span></div>
+        <div class="dd__item" style="--w:132" data-drift-item="folder" aria-hidden="true">
+          <div class="dd__art dd-onair"><i></i><b>ON</b><b>AIR</b></div>
         </div>
         <div class="dd__item" style="--w:184" data-drift-item="mixer" aria-hidden="true">
           <div class="dd__art dd-mixer"><video src="./assets/video/hero-desk-mixer.mp4" poster="./assets/video/hero-desk-mixer.jpg" muted loop playsinline preload="metadata" width="420" height="420" data-drift-video></video><span class="dd-mixer__tag"><i></i>PGM</span></div>

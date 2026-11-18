@@ -25,13 +25,14 @@
     scatter: {
       paper: [5, 14, -5],      folder: [24, 17, -8],   player: [16.8, 52, 5],  pass: [3.5, 55, -9],
       photo: [78.4, 14, 5],    mark: [70, 18, 8],      call: [68, 51, -5],     mixer: [85.3, 55, 9],
-      cursor: [61, 67, -6]
+      cursor: [61, 72, -6]
     },
     // Phones keep the looser layout that fits a tall, narrow screen
+    // Phones: a calm first screen. What we do and the switcher photo above the headline, the platform
+    // panel and the player below it, the ON AIR light between them; the other objects are hidden in CSS.
     scatterPhone: {
-      player: [-2.5, -2.5, -15], mark: [20, 15, 5], cursor: [72.5, 75, 0],
-      call: [80, 60, 15], folder: [90, 50, 5], mixer: [9.5, 55, 15],
-      paper: [5, 15, 10], pass: [-2.5, 65, -35], photo: [65, 20, -5]
+      paper: [3, 9, -4], photo: [57, 11, 5], call: [3, 69, -5], player: [61, 69, 5], folder: [42.9, 73.5, 0],
+      mark: [0, 0, 0], cursor: [0, 0, 0], pass: [0, 0, 0], mixer: [0, 0, 0]
     },
     align: {
       player: [76.5, -5, 0], mark: [64.5, 6, 0], lens: [0, 47.5, 0], cursor: [63.5, 23, 0],
@@ -85,7 +86,7 @@
     if (animate) lastSwitch = now;
     // On narrow screens the header always stays centred: offset left it would run off the edge
     // and sits a little lower, below the What we do card
-    const hc = w < 760 ? { ...HEADER[next], x: 50, y: 58, center: true } : HEADER[next];
+    const hc = w < 760 ? { ...HEADER[next], x: 50, y: 51, center: true } : HEADER[next];
     header.classList.toggle('is-left', !hc.center);
     const hx = (hc.x / 100) * w - (hc.center ? header.offsetWidth / 2 : 0);
     const hy = (hc.y / 100) * h - (hc.center ? header.offsetHeight / 2 : 0);
@@ -145,7 +146,7 @@
     let onScreen = false;
     const sync = () => {
       const run = onScreen && !document.hidden && !reduced.matches && !saveData;
-      videos.forEach(video => { if (run) { video.play()?.catch(() => {}); } else { video.pause(); } });
+      videos.forEach(video => { if (run && video.offsetParent !== null) { video.play()?.catch(() => {}); } else { video.pause(); } });
     };
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; sync(); }, { threshold: 0.1 }).observe(root);
