@@ -232,3 +232,19 @@
 }
 .svc-chip__short { display: none; }
 @media (max-width: 380px) { .svc-chip__long { display: none; } .svc-chip__short { display: inline; } }
+
+/* Homepage "What we produce": one line of words and a shorter carousel. The section no longer has to fill
+   a whole screen; the frame is lower than 16:9 and the cards are sized to fit it. */
+.h-services { min-height: 0 !important; padding-block: clamp(56px, 7vh, 88px); }
+.h-head--solo { display: block; margin-bottom: clamp(20px, 3vh, 32px); }
+.h-head--solo h2 { max-width: 18ch; }
+@media (min-width: 1024px) {
+  .svc-wheel--inline .svc-wheel__frame { aspect-ratio: auto; height: clamp(480px, 64vh, 580px); min-height: 0; }
+  .svc-wheel--inline .svc-wheel__stage { min-height: 0; padding: 32px 40px; }
+  .svc-wheel--inline .svc-wheel__cards { width: min(100%, 340px); }
+}
+@media (max-width: 1023px) {
+  .svc-wheel--inline .svc-wheel__list { min-height: 300px; }
+  .svc-wheel--inline .svc-wheel__stage { min-height: 0; padding: 32px 16px 40px; }
+  .svc-wheel--inline .svc-wheel__cards { width: min(100%, 320px); }
+}

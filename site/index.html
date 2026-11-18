@@ -25,7 +25,7 @@
   <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/motion.css?v=step5-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
   <link rel="stylesheet" href="./assets/css/home.css?v=broadcast-1">
   <link rel="stylesheet" href="./assets/css/what-we-do.css?v=wwd-3">
-  <link rel="stylesheet" href="./assets/css/service-wheel.css?v=svc-4">
+  <link rel="stylesheet" href="./assets/css/service-wheel.css?v=svc-5">
   <link rel="stylesheet" href="./assets/css/drift.css?v=drift-10">
   <script defer src="./assets/js/site.js?v=services-order-1"></script>
   <script defer src="./assets/js/vendor/gsap.min.js"></script>
@@ -312,12 +312,13 @@
     <!-- 2. Services -->
     <section class="h-section h-services" aria-labelledby="services-title">
       <div class="h-wrap">
-        <div class="h-head">
+        <!-- One line, the site's own (data-site-owns): the OS bridge writes its old services title here otherwise.
+             No <p> may follow the h2 in this section: the bridge writes its services intro into the first one. -->
+        <div class="h-head h-head--solo">
           <div>
             <p class="h-eyebrow" data-cms-text="home.servicesIntro.label">What we produce</p>
-            <h2 id="services-title" data-cms-text="home.servicesIntro.title">What you’re really hiring is a day that goes to plan.</h2>
+            <h2 id="services-title" data-site-owns>Nobody notices us. That’s the point.</h2>
           </div>
-          <p class="h-head__lede" data-site-owns data-cms-text="home.servicesIntro.description">Anyone can rent a camera or a speaker. What you’re hiring is a crew that has planned the room, done the sound check and stays calm when the programme changes.</p>
         </div>
         <!-- Service wheel (same as the Services page; service-wheel.js / .css). Replaces the four cards and the
              "Also:" line. No h3 here, so the OS bridge finds no service cards to rewrite in this section. -->
@@ -344,7 +345,7 @@
               <span class="svc-card__live" aria-hidden="true"><i></i>On air · Sembule</span>
               <div class="svc-card__cap">
                 <span class="svc-card__tag"><b>01</b> · Livestreaming</span>
-                <p class="svc-card__text">Your event live on YouTube and Facebook, from three to six cameras.</p>
+                <div class="svc-card__text">Your event live on YouTube and Facebook, from three to six cameras.</div>
                 <a class="svc-card__link" href="./services.html#livestream">See the service →</a>
               </div>
             </div>
@@ -355,7 +356,7 @@
               <span class="svc-card__live" aria-hidden="true"><i></i>On air · Sembule</span>
               <div class="svc-card__cap">
                 <span class="svc-card__tag"><b>02</b> · Zoom &amp; hybrid</span>
-                <p class="svc-card__text">Remote speakers on the big screen, the room on the stream.</p>
+                <div class="svc-card__text">Remote speakers on the big screen, the room on the stream.</div>
                 <a class="svc-card__link" href="./services.html#zoom-hybrid">See the service →</a>
               </div>
             </div>
@@ -366,7 +367,7 @@
               <span class="svc-card__live" aria-hidden="true"><i></i>On air · Sembule</span>
               <div class="svc-card__cap">
                 <span class="svc-card__tag"><b>03</b> · Corporate events</span>
-                <p class="svc-card__text">Conferences, AGMs and launches, covered end to end.</p>
+                <div class="svc-card__text">Conferences, AGMs and launches, covered end to end.</div>
                 <a class="svc-card__link" href="./services.html#events">See the service →</a>
               </div>
             </div>
@@ -377,7 +378,7 @@
               <span class="svc-card__live" aria-hidden="true"><i></i>On air · Sembule</span>
               <div class="svc-card__cap">
                 <span class="svc-card__tag"><b>04</b> · Sound &amp; PA</span>
-                <p class="svc-card__text">Clear sound for the room and the stream. When it works, nobody notices.</p>
+                <div class="svc-card__text">Clear sound for the room and the stream. When it works, nobody notices.</div>
                 <a class="svc-card__link" href="./services.html#sound">See the service →</a>
               </div>
             </div>
@@ -388,7 +389,7 @@
               <span class="svc-card__live" aria-hidden="true"><i></i>On air · Sembule</span>
               <div class="svc-card__cap">
                 <span class="svc-card__tag"><b>05</b> · Documentaries &amp; NGO</span>
-                <p class="svc-card__text">People support what they can see. We film the work so it speaks for itself.</p>
+                <div class="svc-card__text">People support what they can see. We film the work so it speaks for itself.</div>
                 <a class="svc-card__link" href="./services.html#documentaries">See the service →</a>
               </div>
             </div>
@@ -399,7 +400,7 @@
               <span class="svc-card__live" aria-hidden="true"><i></i>On air · Sembule</span>
               <div class="svc-card__cap">
                 <span class="svc-card__tag"><b>06</b> · Photography &amp; videography</span>
-                <p class="svc-card__text">The day in pictures and film, edited and delivered.</p>
+                <div class="svc-card__text">The day in pictures and film, edited and delivered.</div>
                 <a class="svc-card__link" href="./services.html#photography">See the service →</a>
               </div>
             </div>
@@ -410,7 +411,7 @@
               <span class="svc-card__live" aria-hidden="true"><i></i>On air · Sembule</span>
               <div class="svc-card__cap">
                 <span class="svc-card__tag"><b>07</b> · 65-inch TV hire</span>
-                <p class="svc-card__text">Big screens for slides, the stream and remote speakers.</p>
+                <div class="svc-card__text">Big screens for slides, the stream and remote speakers.</div>
                 <a class="svc-card__link" href="./services.html#display-hire">See the service →</a>
               </div>
             </div>
@@ -418,7 +419,7 @@
         </div>
       </div>
     </div>
-    <p class="visually-hidden" role="status" aria-live="polite" data-svc-status></p>
+    <div class="visually-hidden" role="status" aria-live="polite" data-svc-status></div>
         </div>
       </div>
     </section>
