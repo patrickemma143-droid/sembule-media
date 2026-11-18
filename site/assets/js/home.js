@@ -281,7 +281,23 @@
     const track = streams.querySelector('[data-streams-track]');
     const progress = streams.querySelector('[data-streams-progress]');
     const items = [...streams.querySelectorAll('[data-stream]')];
-    const setProgress = p => { if (progress) progress.style.transform = `scaleX(${Math.max(0, Math.min(1, p))})`; };
+    // The backdrop glows with a blurred copy of the stream nearest the middle; two layers cross-fade
+    const ambients = [...streams.querySelectorAll('[data-streams-ambient]')];
+    let ambientIndex = -1, ambientLayer = 0;
+    const setAmbient = p => {
+      if (ambients.length !== 2 || !items.length) return;
+      const i = Math.round(Math.max(0, Math.min(1, p)) * (items.length - 1));
+      if (i === ambientIndex) return;
+      ambientIndex = i;
+      const src = items[i].querySelector('img')?.getAttribute('src');
+      if (!src) return;
+      ambientLayer = 1 - ambientLayer;
+      ambients[ambientLayer].style.backgroundImage = `url("${src}")`;
+      ambients[ambientLayer].classList.add('is-on');
+      ambients[1 - ambientLayer].classList.remove('is-on');
+    };
+    setAmbient(0);
+    const setProgress = p => { if (progress) progress.style.transform = `scaleX(${Math.max(0, Math.min(1, p))})`; setAmbient(p); };
 
     if (window.gsap && window.ScrollTrigger) {
       gsap.registerPlugin(ScrollTrigger);
