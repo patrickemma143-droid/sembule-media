@@ -1,0 +1,116 @@
+/* Liquid glass, carried through the rest of the homepage (loaded last on index.html).
+   One recipe everywhere: a translucent pane that blurs and lifts what is behind it, a bright rim on the
+   top edge, a thin inner line, a soft corner sheen and a deep shadow. Frames round photos and video are
+   glass borders, so the picture stays full and sharp inside them. Brand colours only.
+   Reduced transparency (or no backdrop blur): solid panes with the same rims. */
+
+:root {
+  --g-rim: inset 0 1px 0 rgba(255, 255, 255, .42), inset 0 0 0 1px rgba(255, 255, 255, .12);
+  --g-sheen: radial-gradient(120% 90% at 8% 0%, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0) 52%);
+  --g-lift: 0 40px 80px -40px rgba(0, 0, 0, .85);
+  --g-blur: blur(18px) saturate(165%);
+}
+
+/* ---------- What we do: tinted glass cards on the light stage; the big blurred words show through ---------- */
+.wwd__card {
+  background:
+    radial-gradient(120% 80% at 10% 0%, rgba(255, 255, 255, .7), rgba(255, 255, 255, 0) 55%),
+    color-mix(in srgb, var(--card, #eadfca) 66%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .9),
+    inset 0 0 0 1px rgba(255, 255, 255, .55),
+    0 24px 50px -24px rgba(25, 30, 33, .28),
+    0 2px 8px rgba(25, 30, 33, .06);
+}
+.wwd.is-live .wwd__card { border-radius: 22px; }
+.wwd__media { border-radius: 14px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .5); }
+
+/* ---------- Showreel: a glass rim round the film ---------- */
+.h-reel__frame {
+  border: clamp(6px, .8vw, 10px) solid rgba(255, 255, 255, .07);
+  background-clip: padding-box;
+  -webkit-backdrop-filter: var(--g-blur);
+  backdrop-filter: var(--g-blur);
+  box-shadow: var(--g-rim), 0 60px 140px -60px rgba(191, 144, 0, .5);
+}
+
+/* ---------- About: glass frame on the photo, glass tiles for the facts ---------- */
+.h-about__media {
+  border: 8px solid rgba(255, 255, 255, .07);
+  background-clip: padding-box;
+  -webkit-backdrop-filter: var(--g-blur);
+  backdrop-filter: var(--g-blur);
+  box-shadow: var(--g-rim), 0 50px 120px -60px rgba(191, 144, 0, .45);
+}
+.h-facts { gap: 12px; padding-top: 0; border-top: 0; }
+.h-facts li {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: var(--g-sheen), rgba(255, 255, 255, .05);
+  -webkit-backdrop-filter: var(--g-blur);
+  backdrop-filter: var(--g-blur);
+  box-shadow: var(--g-rim);
+}
+.h-facts strong { color: #f3f0e8; }
+
+/* ---------- Clients: the light tiles keep the logos legible, now with a glass edge and sheen ---------- */
+.client-logo-set li {
+  background:
+    radial-gradient(120% 90% at 10% 0%, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 55%),
+    rgba(243, 240, 232, .94);
+  box-shadow: inset 0 1px 0 #fff, inset 0 0 0 1px rgba(255, 255, 255, .6), 0 14px 30px -18px rgba(0, 0, 0, .6);
+}
+
+/* ---------- Partners: the strip becomes a glass band ---------- */
+.h-partners {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .015)), #050605;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), inset 0 -1px 0 rgba(255, 255, 255, .05);
+  border-block-color: transparent;
+}
+
+/* ---------- Testimonials: glass edges on the photo stack, the words in a glass panel ---------- */
+.testimonial-photo {
+  border: 6px solid rgba(255, 255, 255, .08);
+  background-clip: padding-box;
+  box-shadow: var(--g-rim), 0 30px 60px -24px rgba(0, 0, 0, .7);
+}
+.testimonial-copy {
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: 28px;
+  background: var(--g-sheen), rgba(255, 255, 255, .05);
+  -webkit-backdrop-filter: var(--g-blur);
+  backdrop-filter: var(--g-blur);
+  box-shadow: var(--g-rim), var(--g-lift);
+}
+
+/* ---------- Closing call to action: one large glass panel ---------- */
+.h-cta__inner {
+  max-width: min(1000px, calc(100% - 32px));
+  padding: clamp(36px, 5vw, 72px) clamp(20px, 4vw, 64px);
+  border-radius: clamp(28px, 3.5vw, 48px);
+  background:
+    radial-gradient(90% 70% at 50% 0%, rgba(191, 144, 0, .14), rgba(191, 144, 0, 0) 70%),
+    var(--g-sheen),
+    rgba(255, 255, 255, .05);
+  -webkit-backdrop-filter: var(--g-blur);
+  backdrop-filter: var(--g-blur);
+  box-shadow: var(--g-rim), var(--g-lift);
+}
+
+/* ---------- Fallbacks ---------- */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .h-facts li, .testimonial-copy, .h-cta__inner { background-color: #141614; }
+  .wwd__card { background: var(--card, #eadfca); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .wwd__card, .h-reel__frame, .h-about__media, .h-facts li, .testimonial-copy, .h-cta__inner { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .wwd__card { background: var(--card, #eadfca); }
+  .h-facts li, .testimonial-copy, .h-cta__inner { background: #141614; }
+}
+
+/* Breathing room inside the call-to-action panel */
+.h-cta__inner { gap: 16px; }
+.h-cta__inner .h-head__lede { margin-top: 4px; }
+.h-cta__inner .h-actions { margin-top: 14px; }

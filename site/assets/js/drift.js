@@ -19,9 +19,18 @@
 
   // x, y in % of the desk; rotation in degrees. Same order as the objects in the markup.
   const LAYOUTS = {
+    // Wide screens: two mirrored columns that keep inside the desk. Each side has a large card high up,
+    // a pair low down (one at the edge, one leaning in toward the headline) and a small piece tucked
+    // between the large card and the headline; the pointer sits between the words and the buttons.
     scatter: {
-      player: [-2.5, -2.5, -15], mark: [20, 15, 5], lens: [72.5, 5, 0], cursor: [72.5, 75, 0],
-      call: [80, 60, 15], folder: [90, 50, 5], mic: [2.5, 45, -10], mixer: [9.5, 55, 15],
+      paper: [5, 14, -5],      folder: [24, 17, -8],   player: [16.8, 52, 5],  pass: [3.5, 55, -9],
+      photo: [78.4, 14, 5],    mark: [70, 18, 8],      call: [68, 51, -5],     mixer: [85.3, 55, 9],
+      cursor: [61, 67, -6]
+    },
+    // Phones keep the looser layout that fits a tall, narrow screen
+    scatterPhone: {
+      player: [-2.5, -2.5, -15], mark: [20, 15, 5], cursor: [72.5, 75, 0],
+      call: [80, 60, 15], folder: [90, 50, 5], mixer: [9.5, 55, 15],
       paper: [5, 15, 10], pass: [-2.5, 65, -35], photo: [65, 20, -5]
     },
     align: {
@@ -81,8 +90,13 @@
     const hx = (hc.x / 100) * w - (hc.center ? header.offsetWidth / 2 : 0);
     const hy = (hc.y / 100) * h - (hc.center ? header.offsetHeight / 2 : 0);
     place(header, hx, hy, 0, animate, 0); // the header is the lead: it moves first
+    // Wide screens: the objects scale with the desk (smaller on short laptop screens) so they never
+    // crowd the edges; phones keep the scale set in drift.css
+    if (w >= 760) root.style.setProperty('--k', Math.max(0.62, Math.min(0.85, h / 860, w / 1650)).toFixed(3));
+    else root.style.removeProperty('--k');
+    const set = w < 760 && next === 'scatter' ? LAYOUTS.scatterPhone : LAYOUTS[next];
     items.forEach((el, i) => {
-      const [x, y, r] = LAYOUTS[next][el.dataset.driftItem];
+      const [x, y, r] = set[el.dataset.driftItem];
       place(el, (x / 100) * w, (y / 100) * h, r, animate, delays[i]);
     });
   }
