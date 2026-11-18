@@ -25,7 +25,7 @@
   <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/motion.css?v=step5-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
   <link rel="stylesheet" href="./assets/css/home.css?v=broadcast-1">
   <link rel="stylesheet" href="./assets/css/what-we-do.css?v=wwd-2">
-  <link rel="stylesheet" href="./assets/css/drift.css?v=drift-1">
+  <link rel="stylesheet" href="./assets/css/drift.css?v=drift-2">
   <script defer src="./assets/js/site.js?v=services-order-1"></script>
   <script defer src="./assets/js/vendor/gsap.min.js"></script>
   <script defer src="./assets/js/vendor/SplitText.min.js"></script>
@@ -33,7 +33,7 @@
   <script defer src="./assets/js/vendor/ScrollTrigger.min.js"></script>
   <script defer src="./assets/js/what-we-do.js?v=wwd-1"></script>
   <script defer src="./assets/js/home.js?v=intro-film-2"></script>
-  <script defer src="./assets/js/drift.js?v=drift-1"></script>
+  <script defer src="./assets/js/drift.js?v=drift-2"></script>
   <script defer src="./assets/js/vendor/lenis.min.js"></script><script defer src="./assets/js/motion.js?v=step5-1"></script>
   <script defer src="./assets/js/analytics.js"></script>
   <meta name="sembule-site-content" content="./content/site-content.json">
@@ -73,10 +73,10 @@
     <section class="dd" data-drift aria-label="Sembule Media">
       <div class="dd__desk" data-drift-desk>
         <div class="dd__header" data-drift-header>
-          <p class="dd__live"><i aria-hidden="true"></i>Live production · Kampala</p>
-          <h1 data-site-owns>We take your event live.</h1>
-          <p class="dd__lede" data-site-owns>Livestreams to YouTube, Facebook and Zoom, hybrid conferences, sound and PA. Cameras, mics and crew, arranged around your day.</p>
-          <div class="dd__cta">
+          <p class="dd__live dd__in" style="--d:0ms"><i aria-hidden="true"></i>Live production · Kampala</p>
+          <h1 class="dd__in" style="--d:0ms" data-site-owns>We take your event live.</h1>
+          <p class="dd__lede dd__in" style="--d:80ms" data-site-owns>Livestreams to YouTube, Facebook and Zoom, hybrid conferences, sound and PA. Cameras, mics and crew, arranged around your day.</p>
+          <div class="dd__cta dd__in" style="--d:140ms">
             <a class="dd__btn dd__btn--gold" href="./contact.html">Check your date</a>
             <a class="dd__btn dd__btn--ghost" href="#showreel">Watch the showreel</a>
           </div>
@@ -141,7 +141,7 @@
           </div>
         </div>
         <div class="dd__item" style="--w:274" data-drift-item="photo" aria-hidden="true">
-          <div class="dd__art dd-photo"><img src="./assets/work/hero-live-performance-640.jpg" width="640" height="427" alt=""><span>Crusade, live on YouTube</span></div>
+          <div class="dd__art dd-photo"><video src="./assets/video/hero-desk-switcher.mp4" poster="./assets/video/hero-desk-switcher.jpg" muted loop playsinline preload="metadata" width="560" height="490" data-drift-video></video><span>Live switching, show day</span></div>
         </div>
 
         <div class="dd__modes" role="group" aria-label="Arrange the desk">

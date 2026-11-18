@@ -1,7 +1,7 @@
 // Drift hero: eleven studio objects that glide between three layouts (Scatter / Align / Cluster).
 // Each object (and the header) sits at top:0 left:0 and is placed only by translate(x, y) rotate(r), where
 // x and y are percentages of the desk. Positions are fixed per mode, so a CSS transform transition with a
-// power3.inOut curve does the morph; no measuring. Objects nearest the middle of the list move first.
+// power3.inOut curve does the morph. The header leads; objects follow in a wave from the desk's centre.
 // Resizing re-places everything at once. Reduced motion: layouts snap with no morph.
 // Loaded after home.js: on the first visit the desk opens from a tight cluster into Scatter as the intro film wipes away.
 (() => {
@@ -15,7 +15,7 @@
 
   const DURATION = 1250;
   const EASE = 'cubic-bezier(0.65, 0, 0.35, 1)'; // about power3.inOut
-  const STAGGER = 110;                           // ms, centre-out spread
+  const STAGGER = 180;                           // ms, total spread of the centre-out wave
 
   // x, y in % of the desk; rotation in degrees. Same order as the objects in the markup.
   const LAYOUTS = {
@@ -41,9 +41,25 @@
     cluster: { x: 50, y: 47.5, center: true }
   };
 
-  const mid = (items.length - 1) / 2;
-  const delays = items.map((_, i) => (Math.abs(i - mid) / (mid || 1)) * STAGGER);
   let mode = 'scatter';
+  let lastSwitch = -Infinity;
+
+  // The wave: objects nearest the middle of the desk (where they sit now) move first, and the gaps
+  // between starts shrink as it spreads outward, so the group reads as one gesture, not a queue.
+  const waveDelays = () => {
+    const w = desk.offsetWidth, h = desk.offsetHeight;
+    const dist = items.map(el => {
+      const r = el.getBoundingClientRect(), d = desk.getBoundingClientRect();
+      return Math.hypot(r.left + r.width / 2 - d.left - w / 2, r.top + r.height / 2 - d.top - h / 2);
+    });
+    const order = dist.map((d, i) => [d, i]).sort((a, b) => a[0] - b[0]).map(([, i]) => i);
+    const out = new Array(items.length);
+    order.forEach((itemIndex, rank) => {
+      const t = rank / Math.max(1, items.length - 1);
+      out[itemIndex] = STAGGER * (1 - Math.pow(1 - t, 2)); // ease-out on the delays
+    });
+    return out;
+  };
 
   const place = (el, x, y, r, animate, delay) => {
     el.style.transition = animate ? `transform ${DURATION}ms ${EASE} ${Math.round(delay)}ms` : 'none';
@@ -53,12 +69,17 @@
   function layout(next, animate) {
     const w = desk.offsetWidth;
     const h = desk.offsetHeight;
+    // A switch made while the last one is still moving re-targets everything at once: no second wait
+    const now = performance.now();
+    const midFlight = now - lastSwitch < DURATION + STAGGER;
+    const delays = animate && !midFlight ? waveDelays() : items.map(() => 0);
+    if (animate) lastSwitch = now;
     // On narrow screens the header always stays centred: offset left it would run off the edge
     const hc = w < 760 ? { ...HEADER[next], x: 50, center: true } : HEADER[next];
     header.classList.toggle('is-left', !hc.center);
     const hx = (hc.x / 100) * w - (hc.center ? header.offsetWidth / 2 : 0);
     const hy = (hc.y / 100) * h - (hc.center ? header.offsetHeight / 2 : 0);
-    place(header, hx, hy, 0, animate, STAGGER);
+    place(header, hx, hy, 0, animate, 0); // the header is the lead: it moves first
     items.forEach((el, i) => {
       const [x, y, r] = LAYOUTS[next][el.dataset.driftItem];
       place(el, (x / 100) * w, (y / 100) * h, r, animate, delays[i]);
@@ -89,5 +110,25 @@
   root.classList.add('is-ready');
   buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.driftMode === 'scatter')));
   const opening = window.sembuleIntro || Promise.resolve();
-  opening.then(() => requestAnimationFrame(() => requestAnimationFrame(() => setMode('scatter'))));
+  opening.then(() => requestAnimationFrame(() => requestAnimationFrame(() => {
+    root.classList.add('is-on');   // header entrance, together with the desk opening out
+    setMode('scatter');
+  })));
+
+  // The switcher clip on the photo card: muted loop, only while the hero is on screen, never with
+  // reduced motion or Save-Data (the poster stays).
+  const video = root.querySelector('[data-drift-video]');
+  if (video) {
+    const saveData = navigator.connection?.saveData;
+    let onScreen = false;
+    const sync = () => {
+      const run = onScreen && !document.hidden && !reduced.matches && !saveData;
+      if (run) { video.play()?.catch(() => {}); } else { video.pause(); }
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; sync(); }, { threshold: 0.1 }).observe(root);
+    } else { onScreen = true; sync(); }
+    document.addEventListener('visibilitychange', sync);
+    reduced.addEventListener?.('change', sync);
+  }
 })();
