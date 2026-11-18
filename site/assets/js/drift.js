@@ -115,15 +115,15 @@
     setMode('scatter');
   })));
 
-  // The switcher clip on the photo card: muted loop, only while the hero is on screen, never with
-  // reduced motion or Save-Data (the poster stays).
-  const video = root.querySelector('[data-drift-video]');
-  if (video) {
+  // The clips on the desk (control room on the photo card, the switcher close-up on the mixer card):
+  // muted loops, only while the hero is on screen, never with reduced motion or Save-Data (posters stay).
+  const videos = [...root.querySelectorAll('[data-drift-video]')];
+  if (videos.length) {
     const saveData = navigator.connection?.saveData;
     let onScreen = false;
     const sync = () => {
       const run = onScreen && !document.hidden && !reduced.matches && !saveData;
-      if (run) { video.play()?.catch(() => {}); } else { video.pause(); }
+      videos.forEach(video => { if (run) { video.play()?.catch(() => {}); } else { video.pause(); } });
     };
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; sync(); }, { threshold: 0.1 }).observe(root);

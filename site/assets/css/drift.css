@@ -250,3 +250,10 @@ html.intro-on .dd__item { transition: none !important; }
 /* Safety: nothing on the homepage may make it scroll sideways. "clip" (not "hidden") so the pinned
    sections and position: sticky keep working. */
 body.home-page { overflow-x: clip; }
+
+/* Vision mixer card: the switcher close-up loops inside it, a gold PGM tally on top */
+.dd-mixer { padding: 0; background: #121312; }
+.dd-mixer video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.dd-mixer::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, .55)); pointer-events: none; }
+.dd-mixer__tag { position: absolute; z-index: 1; left: .8em; bottom: .7em; display: inline-flex; align-items: center; gap: .4em; padding: .3em .6em; border-radius: 99em; color: #000; background: var(--dd-gold); font-size: .62em; font-weight: 700; letter-spacing: .14em; }
+.dd-mixer__tag i { width: .55em; height: .55em; border-radius: 50%; background: #04592a; }
