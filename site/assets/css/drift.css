@@ -261,3 +261,9 @@ body.home-page { overflow-x: clip; }
 
 /* The What we do card is real content: on phones it is drawn larger than the decorative objects */
 @media (max-width: 760px) { .dd__item--content { --k: .78; } }
+
+/* The livestream player card shows a picture on its screen, with the gold level bars over its foot */
+.dd-player__screen { position: relative; flex: 1 1 auto; min-height: 0; margin: .8em 0; overflow: hidden; border-radius: .5em; background: #0b0d0b; }
+.dd-player__screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.dd-player__screen::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, .65)); }
+.dd-player__screen .dd-player__bars { position: absolute; z-index: 1; right: .6em; bottom: .5em; left: .6em; height: 34%; gap: .25em; }

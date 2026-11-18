@@ -163,3 +163,9 @@
 
 /* The dark homepage colours headings and text cream; inside the light stage everything is ink */
 .home-dark .wwd h2, .home-dark .wwd h3, .home-dark .wwd p, .home-dark .wwd li { color: var(--wwd-ink); }
+
+/* A card can carry a photo between its words and its list (Sound & PA). It takes whatever room the
+   square card has left, so it is a wide strip on phones and a generous frame on desktop. */
+.wwd__media { min-height: 150px; margin: 16px 0; overflow: hidden; background: #1a1c1a; }
+.wwd__media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.wwd.is-live .wwd__media { flex: 1 1 auto; min-height: 0; margin: clamp(8px, 1.3cqw, 18px) 0; }
