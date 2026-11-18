@@ -4,6 +4,13 @@
     "hero": {
       "slides": [
         {
+          "eyebrow": "Livestreams · YouTube · Facebook · Zoom",
+          "title": "Live from your room to every screen.",
+          "description": "We put your event on YouTube, Facebook and Zoom as it happens, then hand you the full recording.",
+          "image": "./assets/work/hero-live-broadcast.jpg",
+          "imageAlt": "Camera screen showing a presenter live on a broadcast, the presenter blurred behind the camera"
+        },
+        {
           "eyebrow": "Livestreams · Zoom · hybrid events",
           "title": "Half your audience isn’t in the room.",
           "description": "We stream conferences and meetings live to YouTube, Facebook and Zoom, with remote speakers on the big screen and a full recording afterwards.",

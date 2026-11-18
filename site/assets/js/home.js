@@ -136,10 +136,13 @@
       void marker.offsetWidth; // restart the fill from empty
       marker.classList.add('is-running');
     };
+    // The stories wait for the intro film, so the first picture gets its full time once the film wipes away
+    let onAir = false;
     const schedule = () => {
       clearTimeout(timer);
       // While the pointer or keyboard focus is in the hero the story holds and its line stops filling
       hero.classList.toggle('is-holding', holding);
+      if (!onAir) return;
       if (paused || holding || document.hidden) {
         if (paused || document.hidden) markers.forEach(marker => marker.classList.remove('is-running'));
         return;
@@ -264,7 +267,7 @@
     // First headline and LIVE badge: once the brand font has loaded, so the lines split where they will stay
     Promise.all([document.fonts?.ready || Promise.resolve(), window.sembuleIntro]).then(() => { revealTitle(); decodeLive(); });
     syncVideos(true);
-    schedule();
+    window.sembuleIntro.then(() => { onAir = true; schedule(); });
   }
 
   /* Streamed live: eleven real Sembule livestreams.
