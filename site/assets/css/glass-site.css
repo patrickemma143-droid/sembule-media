@@ -157,3 +157,39 @@
   box-shadow: var(--gs-rim), 0 50px 100px -40px rgba(191, 144, 0, .55), 0 30px 60px -30px rgba(0, 0, 0, .8);
 }
 .site-dark .page-hero--stage h1, .site-dark .page-hero__kicker { max-width: 12ch; font-size: clamp(42px, 5vw, 78px); line-height: .98; letter-spacing: -.045em; text-wrap: balance; }
+
+/* ---------- Footer, every page: five columns (brand, Work, Plan with us, Policies, Contact) ---------- */
+.footer-main--five { grid-template-columns: minmax(0, 1.5fr) repeat(4, minmax(0, 1fr)); gap: 40px 32px; padding-block: clamp(56px, 7vw, 88px); }
+.footer-main--five .footer-brand p { color: rgba(243, 240, 232, .66); font-size: 14px; line-height: 1.6; }
+.footer-main--five .footer-brand .footer-tag { margin-top: 22px; color: #f3f0e8; font-family: var(--font-display, inherit); font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+.footer-main--five .footer-brand .footer-tag + p { margin-top: 8px; }
+.footer-main--five .footer-col h2 { margin-bottom: 18px; color: #bf9000; font-size: 11px; letter-spacing: .2em; }
+.footer-main--five .footer-col a { margin: 0 0 12px; color: rgba(243, 240, 232, .88); font-size: 14.5px; transition: color .2s ease; }
+.footer-main--five .footer-col a:hover { color: #bf9000; text-decoration: none; }
+.footer-contact a[href^="tel:"] { color: #f3f0e8; font-size: 16px; font-weight: 700; letter-spacing: .01em; }
+.footer-contact address { margin-top: 6px; color: rgba(243, 240, 232, .6); font-size: 14px; font-style: normal; line-height: 1.6; }
+.footer-bottom a { text-decoration: none; }
+.footer-bottom a:hover { color: #bf9000; }
+@media (max-width: 1100px) {
+  .footer-main--five { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .footer-main--five .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .footer-main--five { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
+  .footer-main--five .footer-contact { grid-column: 1 / -1; }
+  .footer-main--five .footer-col a { min-height: 32px; display: flex; align-items: center; margin-bottom: 4px; }
+}
+
+/* ---------- Policy pages: a contents list, readable lists, anchors clear of the sticky header ---------- */
+.site-dark .legal-content h2 { scroll-margin-top: 110px; color: #f3f0e8; }
+.site-dark .legal-content ul { padding-left: 1.2em; }
+.site-dark .legal-content li { margin: 0 0 10px; line-height: 1.65; }
+.site-dark .legal-content li strong { color: #f3f0e8; }
+.legal-toc { margin: 0 0 8px; padding: 20px 24px; border-radius: 20px; background: rgba(255, 255, 255, .04); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), inset 0 0 0 1px rgba(255, 255, 255, .08); }
+.legal-toc p { margin: 0 0 10px; color: #bf9000; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.legal-toc ol { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px 20px; margin: 0; padding-left: 1.3em; }
+.site-dark .legal-toc li { margin: 0; color: rgba(243, 240, 232, .5); }
+.site-dark .legal-toc a { color: rgba(243, 240, 232, .88); text-decoration: none; }
+.site-dark .legal-toc a:hover { color: #bf9000; }
+.site-dark .legal-content .legal-updated { margin-top: 40px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, .1); color: rgba(243, 240, 232, .5); font-size: 13px; }
+.site-dark .page-hero .page-hero__line { max-width: 52ch; margin-top: 14px; color: rgba(243, 240, 232, .72); font-size: clamp(16px, 1.3vw, 19px); line-height: 1.5; }
