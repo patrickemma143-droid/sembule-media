@@ -130,3 +130,30 @@
     background: #121412;
   }
 }
+
+/* ---------- Services hero: two short lines and a film in a glass frame ---------- */
+.site-dark .page-hero--stage h1 { max-width: 14ch; margin-bottom: 0; }
+.site-dark .page-hero__kicker {
+  margin: .08em 0 0;
+  color: #bf9000;
+  font-family: var(--font-display, inherit);
+  font-size: clamp(40px, 5.6vw, 84px);
+  font-weight: 700;
+  line-height: .98;
+  letter-spacing: -.045em;
+  text-shadow: 0 0 40px rgba(191, 144, 0, .35);
+}
+.site-dark .page-hero__line { max-width: 36ch; margin: clamp(18px, 2.4vw, 28px) 0 0; color: rgba(243, 240, 232, .76); font-size: clamp(16px, 1.25vw, 19px); line-height: 1.5; }
+.site-dark .page-hero__visual--film video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 8px solid rgba(255, 255, 255, .08);
+  border-radius: clamp(28px, 3vw, 44px);
+  background: #3a3210 center / cover no-repeat;
+  background-clip: padding-box;
+  box-shadow: var(--gs-rim), 0 50px 100px -40px rgba(191, 144, 0, .55), 0 30px 60px -30px rgba(0, 0, 0, .8);
+}
+.site-dark .page-hero--stage h1, .site-dark .page-hero__kicker { max-width: 12ch; font-size: clamp(42px, 5vw, 78px); line-height: .98; letter-spacing: -.045em; text-wrap: balance; }
