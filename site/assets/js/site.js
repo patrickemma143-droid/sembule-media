@@ -76,6 +76,24 @@
     owned.forEach(({ node }) => watcher.observe(node, { childList: true, characterData: true, subtree: true }));
   }
 
+  // The website owns its contact details too: the main phone/WhatsApp (+256 761 109 308) and
+  // info@sembulemedia.com. The OS bridge rewrites every wa.me and mailto link from the OS brand
+  // settings; until those match, put the site's own link and label back (same loop guard as above).
+  const contacts = [...document.querySelectorAll('a[href*="wa.me"], a[href^="mailto:"], a[href^="tel:"]')]
+    .map(node => ({ node, href: node.getAttribute('href'), text: node.textContent, label: node.getAttribute('aria-label') }));
+  if (contacts.length && 'MutationObserver' in window) {
+    let restores = 0;
+    const keepContacts = () => contacts.forEach(item => {
+      if (restores >= 200) return;
+      const { node } = item;
+      if (node.getAttribute('href') !== item.href) { restores += 1; node.setAttribute('href', item.href); }
+      if (node.textContent !== item.text) { restores += 1; node.textContent = item.text; }
+      if (item.label !== null && node.getAttribute('aria-label') !== item.label) { restores += 1; node.setAttribute('aria-label', item.label); }
+    });
+    const contactWatcher = new MutationObserver(keepContacts);
+    contacts.forEach(({ node }) => contactWatcher.observe(node, { attributes: true, attributeFilter: ['href', 'aria-label'], childList: true, characterData: true, subtree: true }));
+  }
+
   // Pages with a full-bleed film hero (body.has-film-hero): the header floats over the film and
   // turns to glass once the page scrolls, as on the homepage.
   if (document.body.classList.contains('has-film-hero')) {
@@ -361,7 +379,7 @@
         ['Venue', data.get('venue')], ['Audience size', data.get('audience_size')],
         ['Budget range', data.get('budget')], ['Project details', data.get('message')]
       ].filter(([, value]) => value).map(([label, value]) => `${label}: ${value}`);
-      const url = `https://wa.me/256774345634?text=${encodeURIComponent(`Hello Sembule Media, I would like to plan a production.\n\n${fields.join('\n')}`)}`;
+      const url = `https://wa.me/256761109308?text=${encodeURIComponent(`Hello Sembule Media, I would like to plan a production.\n\n${fields.join('\n')}`)}`;
       window.open(url, '_blank', 'noopener,noreferrer');
       if (status) status.textContent = 'WhatsApp opened with your enquiry. Review and send it there.';
     });
