@@ -49,11 +49,9 @@ RewriteRule ^(wp-admin|wp-includes|wp-content|wp-json)(/.*)?$ - [G,L,NC]
 RewriteRule ^(wp-login|xmlrpc|wp-cron|wp-signup|wp-trackback)\.php$ - [G,L,NC]
 </IfModule>
 
-# 4. Only sembulemedia.com may be indexed. The Hostinger preview address (and any other host
-#    name pointing at these files) is marked noindex, so Google never lists a duplicate site.
+# 4. Security headers. (No X-Robots-Tag here: on Hostinger the host check could not tell the live
+#    domain from the preview, and it marked sembulemedia.com noindex. The preview address is retired.)
 <IfModule mod_headers.c>
-SetEnvIfNoCase Host ^(www\.)?sembulemedia\.com$ SM_LIVE
-Header set X-Robots-Tag "noindex, nofollow" env=!SM_LIVE
 Header always set X-Content-Type-Options "nosniff"
 Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
