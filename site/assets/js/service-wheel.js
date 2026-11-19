@@ -60,7 +60,7 @@
   function go(index, { announce = false } = {}) {
     current = ((index % n) + n) % n;
     render();
-    if (announce && status) status.textContent = `Showing ${current + 1} of ${n}: ${chips[current].textContent.trim()}`;
+    if (announce && status) status.textContent = `Showing ${current + 1} of ${n}: ${(chips[current].querySelector(".svc-chip__long") || chips[current]).textContent.trim()}`;
     schedule();
   }
 

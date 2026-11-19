@@ -220,3 +220,15 @@
   .svc-chip, .svc-card, .svc-card__live, .svc-card__tag { -webkit-backdrop-filter: none; backdrop-filter: none; }
   .svc-card { background: #1a1c1a; }
 }
+
+/* Inside a homepage section: the section already has its own padding and width */
+.svc-wheel--inline { padding: 0; margin-top: clamp(28px, 4vw, 48px); }
+
+/* Small phones: tighter pills so the longest name fits; a clean ellipsis if one still cannot */
+.svc-chip span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 380px) {
+  .svc-chip { left: 12px; max-width: calc(100% - 24px); gap: 9px; padding: 0 14px 0 12px; font-size: 11.5px; letter-spacing: .02em; }
+  .svc-chip svg { width: 16px; height: 16px; }
+}
+.svc-chip__short { display: none; }
+@media (max-width: 380px) { .svc-chip__long { display: none; } .svc-chip__short { display: inline; } }
