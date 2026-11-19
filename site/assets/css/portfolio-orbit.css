@@ -100,3 +100,26 @@
   .pf-card img { height: 58px; }
   .pf-orbit__copy { width: 64%; }
 }
+
+/* ---------- Calmer, organised version: eight smaller cards, a quieter headline, a gentle entrance ---------- */
+.pf-orbit__stage { inset: clamp(96px, 14vh, 120px) 2vw clamp(70px, 10vh, 90px); }
+.pf-card { width: 168px; margin: -64px 0 0 -84px; padding: 6px 6px 10px; border-radius: 20px; }
+.pf-card img { height: 82px; border-radius: 15px; }
+.pf-card strong { margin-top: 8px; font-size: 13px; }
+.site-dark .pf-orbit h1 { font-size: clamp(34px, 4.4vw, 64px); }
+.pf-orbit__copy { width: min(500px, 72%); }
+.pf-orbit__desc { max-width: 30ch; }
+.pf-orbit .pf-card { opacity: 0; }
+.pf-orbit.is-ready .pf-card { opacity: 1; transition: opacity 1.2s ease, box-shadow .3s ease; }
+@media (max-width: 640px) {
+  .pf-orbit__stage { inset: 92px 0 56px; }
+  .pf-card { width: 118px; margin: -50px 0 0 -59px; }
+  .pf-card img { height: 58px; }
+}
+@media (prefers-reduced-motion: reduce) { .pf-orbit.is-ready .pf-card { transition: none; } }
+@media (max-width: 640px) {
+  .pf-orbit__stage { inset: 92px -14px 56px; }
+  .pf-orbit__copy { width: 56%; }
+  .site-dark .pf-orbit h1 { font-size: clamp(30px, 8.6vw, 38px); }
+  .pf-orbit__desc { font-size: 13.5px; }
+}
