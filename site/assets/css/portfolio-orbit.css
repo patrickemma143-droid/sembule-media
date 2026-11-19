@@ -1,0 +1,102 @@
+/* Portfolio hero: real work on frosted glass cards orbiting a wide oval round the headline
+   (portfolio-orbit.js). Full screen, dark, borderless. The words in the middle never take the pointer,
+   so a drag can start anywhere. */
+
+.pf-orbit {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 560px;
+  overflow: hidden;
+  isolation: isolate;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  touch-action: pan-y;               /* phones: sideways drags move the cards, vertical swipes still scroll */
+}
+.pf-orbit.is-dragging { cursor: grabbing; }
+@media (hover: hover) and (pointer: fine) { .pf-orbit { touch-action: none; } }
+
+/* The stage the path is mapped onto: the hero minus the floating header */
+.pf-orbit__stage { position: absolute; inset: clamp(70px, 10vh, 96px) 0 clamp(8px, 2vh, 24px); }
+.pf-orbit__guide { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.pf-orbit__guide path { fill: none; stroke: none; }
+.pf-orbit.show-path .pf-orbit__guide path { stroke: rgba(191, 144, 0, .25); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+
+/* ---------- Centre copy ---------- */
+.pf-orbit__copy {
+  position: absolute;
+  z-index: 40;
+  top: 50%;
+  left: 50%;
+  width: min(560px, 80%);
+  text-align: center;
+  transform: translate(-50%, -46%);
+  pointer-events: none;
+}
+.pf-orbit__copy::before {           /* a soft pool of dark keeps the words clear of passing cards */
+  position: absolute;
+  z-index: -1;
+  inset: -18% -14%;
+  content: "";
+  background: radial-gradient(closest-side, rgba(3, 4, 3, .82), rgba(3, 4, 3, 0));
+}
+.pf-orbit__eyebrow { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 14px; color: #bf9000; font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.pf-orbit__eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: #bf9000; box-shadow: 0 0 0 4px rgba(191, 144, 0, .2); }
+.site-dark .pf-orbit h1 {
+  max-width: none;
+  margin: 0;
+  color: #f3f0e8;
+  font-family: var(--font-display, inherit);
+  font-size: clamp(36px, 6vw, 80px);
+  font-weight: 700;
+  line-height: .96;
+  letter-spacing: -.055em;
+  text-wrap: balance;
+}
+.pf-orbit__desc { max-width: 34ch; margin: 18px auto 0; color: rgba(243, 240, 232, .7); font-size: clamp(14px, 1.3vw, 17px); line-height: 1.55; }
+
+/* ---------- Work cards: frosted glass with the photo on top ---------- */
+.pf-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 196px;
+  margin: -78px 0 0 -98px;           /* centred on the path */
+  padding: 7px 7px 11px;
+  border-radius: 22px;
+  background:
+    radial-gradient(120% 80% at 10% 0%, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 55%),
+    rgba(255, 255, 255, .07);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .42), inset 0 0 0 1px rgba(255, 255, 255, .12), 0 24px 50px -22px rgba(0, 0, 0, .85);
+  will-change: transform;
+  transition: box-shadow .3s ease;
+}
+.pf-card:hover { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), inset 0 0 0 1px rgba(191, 144, 0, .55), 0 30px 60px -22px rgba(191, 144, 0, .45); }
+.pf-card img { display: block; width: 100%; height: 98px; object-fit: cover; border-radius: 16px; pointer-events: none; -webkit-user-drag: none; }
+.pf-card strong { display: block; margin: 9px 4px 0; overflow: hidden; color: #f3f0e8; font-size: 13.5px; font-weight: 700; letter-spacing: -.01em; text-overflow: ellipsis; white-space: nowrap; }
+.pf-card span { display: flex; align-items: center; gap: 6px; margin: 3px 4px 0; overflow: hidden; color: rgba(243, 240, 232, .6); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.pf-card span::before { width: 6px; height: 6px; flex: none; border-radius: 50%; background: #bf9000; content: ""; }
+
+@media (max-width: 640px) {
+  .pf-card { width: 140px; margin: -58px 0 0 -70px; padding: 5px 5px 8px; border-radius: 18px; }
+  .pf-card img { height: 70px; border-radius: 13px; }
+  .pf-card strong { margin-top: 7px; font-size: 12px; }
+  .pf-card span { font-size: 10px; }
+  .pf-orbit__copy { width: 74%; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .pf-card { -webkit-backdrop-filter: none; backdrop-filter: none; background: #151715; }
+}
+
+/* Phones: half the cards (every other one) and a little smaller, so the loop breathes round the words */
+@media (max-width: 640px) {
+  .pf-card:nth-of-type(even) { display: none; }
+  .pf-card { width: 118px; margin: -50px 0 0 -59px; }
+  .pf-card img { height: 58px; }
+  .pf-orbit__copy { width: 64%; }
+}
