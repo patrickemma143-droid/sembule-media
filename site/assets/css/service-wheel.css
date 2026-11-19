@@ -1,0 +1,222 @@
+/* Service wheel (Services page): a list of services rolls past on a green glass panel while the photo
+   cards change beside it. Plain CSS + service-wheel.js. Brand colours only: green, gold, black, cream.
+   Without the script it is a readable list beside the first card. */
+
+.svc-wheel {
+  --svc-green: #04592a;
+  --svc-gold: #bf9000;
+  --svc-ink: #f3f0e8;
+  --svc-item: 66px;
+  padding: clamp(24px, 5vw, 72px) clamp(16px, 4vw, 48px) clamp(40px, 6vw, 88px);
+}
+.svc-wheel__frame {
+  position: relative;
+  display: grid;
+  max-width: 1320px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: clamp(28px, 4vw, 56px);
+  background: #070807;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .16),
+    inset 0 0 0 1px rgba(255, 255, 255, .08),
+    0 40px 90px -40px rgba(0, 0, 0, .9);
+  isolation: isolate;
+}
+@media (min-width: 1024px) {
+  .svc-wheel__frame { grid-template-columns: 40% 1fr; aspect-ratio: 16 / 9; min-height: 600px; }
+}
+
+/* ---------- Left: the list on green glass ---------- */
+.svc-wheel__list {
+  position: relative;
+  z-index: 3;
+  min-height: 360px;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 70% at 0% 0%, rgba(255, 255, 255, .16), rgba(255, 255, 255, 0) 55%),
+    radial-gradient(90% 60% at 100% 100%, rgba(191, 144, 0, .16), rgba(191, 144, 0, 0) 60%),
+    linear-gradient(160deg, #077a3c, var(--svc-green) 45%, #023d1d);
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, .1);
+}
+.svc-wheel__list::before, .svc-wheel__list::after {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  left: 0;
+  height: 22%;
+  content: "";
+  pointer-events: none;
+}
+.svc-wheel__list::before { top: 0; background: linear-gradient(180deg, #066a36 15%, rgba(6, 106, 54, 0)); }
+.svc-wheel__list::after { bottom: 0; background: linear-gradient(0deg, #023d1d 15%, rgba(2, 61, 29, 0)); }
+.svc-wheel__track { position: absolute; inset: 0; }
+
+.svc-chip {
+  --d: 0;
+  position: absolute;
+  top: 50%;
+  left: clamp(20px, 5vw, 64px);
+  display: inline-flex;
+  max-width: calc(100% - 40px);
+  height: 52px;
+  align-items: center;
+  gap: 14px;
+  padding: 0 26px 0 20px;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(243, 240, 232, .66);
+  background: rgba(255, 255, 255, .06);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  backdrop-filter: blur(10px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), inset 0 0 0 1px rgba(255, 255, 255, .16);
+  font: 600 14px/1 var(--font-body, inherit);
+  letter-spacing: .04em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transform: translateY(calc(-50% + var(--d) * var(--svc-item)));
+  transition: transform 760ms cubic-bezier(.22, 1, .36, 1), opacity 600ms ease, background .5s ease, color .5s ease, box-shadow .5s ease;
+}
+.svc-chip svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; opacity: .7; }
+.svc-chip:hover { color: var(--svc-ink); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), inset 0 0 0 1px rgba(255, 255, 255, .34); }
+.svc-chip.is-active {
+  z-index: 1;
+  color: #000;
+  background: linear-gradient(180deg, #d9a812, var(--svc-gold));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 -1px 0 rgba(0, 0, 0, .15), 0 14px 34px -12px rgba(191, 144, 0, .75);
+}
+.svc-chip.is-active svg { opacity: 1; }
+.svc-chip:focus-visible { outline: 2px solid var(--svc-ink); outline-offset: 3px; }
+.svc-chip.is-wrapping { transition: none; }
+
+/* ---------- Right: the cards on a dark stage lit by the current photo ---------- */
+.svc-wheel__stage {
+  position: relative;
+  display: grid;
+  min-height: 540px;
+  place-items: center;
+  overflow: hidden;
+  padding: clamp(40px, 6vw, 72px) clamp(20px, 4vw, 48px);
+}
+.svc-wheel__ambient {
+  position: absolute;
+  z-index: 0;
+  inset: -12%;
+  background: center / cover no-repeat;
+  filter: blur(60px) saturate(1.5) brightness(.6);
+  opacity: 0;
+  transition: opacity 900ms ease;
+}
+.svc-wheel__ambient.is-on { opacity: .75; }
+.svc-wheel__stage::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  content: "";
+  background: radial-gradient(70% 70% at 50% 50%, rgba(7, 8, 7, 0), rgba(7, 8, 7, .65));
+  pointer-events: none;
+}
+
+.svc-wheel__cards { position: relative; z-index: 1; width: min(100%, 420px); aspect-ratio: 4 / 5; }
+.svc-card {
+  position: absolute;
+  inset: 0;
+  padding: 8px;
+  border-radius: clamp(26px, 3vw, 40px);
+  background:
+    radial-gradient(120% 80% at 10% 0%, rgba(255, 255, 255, .28), rgba(255, 255, 255, 0) 50%),
+    rgba(255, 255, 255, .08);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .5),
+    inset 0 0 0 1px rgba(255, 255, 255, .16),
+    0 40px 70px -30px rgba(0, 0, 0, .9);
+  transform-origin: 50% 50%;
+  transition: transform 680ms cubic-bezier(.34, 1.28, .64, 1), opacity 520ms ease;
+  will-change: transform, opacity;
+}
+.svc-card__media { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: clamp(20px, 2.4vw, 32px); background: #111; }
+.svc-card__media img { display: block; width: 100%; height: 100%; object-fit: cover; transition: filter 700ms ease, transform 1200ms cubic-bezier(.22, 1, .36, 1); }
+.svc-card:not(.is-active) .svc-card__media img { filter: grayscale(1) blur(2px) brightness(.7); transform: scale(1.04); }
+
+.svc-card__live {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: rgba(243, 240, 232, .88);
+  background: rgba(0, 0, 0, .28);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  transition: opacity .3s ease;
+}
+.svc-card__live i { width: 8px; height: 8px; border-radius: 50%; background: var(--svc-gold); box-shadow: 0 0 10px var(--svc-gold); }
+.svc-card__cap {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  gap: 12px;
+  padding: 120px clamp(20px, 2.6vw, 34px) clamp(22px, 2.6vw, 32px);
+  background: linear-gradient(0deg, rgba(0, 0, 0, .9), rgba(0, 0, 0, .45) 55%, rgba(0, 0, 0, 0));
+  transition: opacity 500ms ease, transform 600ms cubic-bezier(.22, 1, .36, 1);
+}
+.svc-card:not(.is-active) .svc-card__cap, .svc-card:not(.is-active) .svc-card__live { opacity: 0; }
+.svc-card:not(.is-active) .svc-card__cap { transform: translateY(14px); }
+.svc-card__tag {
+  width: fit-content;
+  padding: 7px 14px;
+  border-radius: 999px;
+  color: var(--svc-ink);
+  background: rgba(255, 255, 255, .14);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3), inset 0 0 0 1px rgba(255, 255, 255, .18);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.svc-card__tag b { color: var(--svc-gold); }
+.svc-wheel .svc-card__text { margin: 0; color: #fff; font-family: var(--font-display, inherit); font-size: clamp(20px, 2vw, 25px); font-weight: 600; line-height: 1.18; letter-spacing: -.02em; }
+.svc-card__link { width: fit-content; color: var(--svc-gold); font-size: 14px; font-weight: 700; text-decoration: none; }
+.svc-card__link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.svc-card__link:focus-visible { outline: 2px solid var(--svc-gold); outline-offset: 4px; border-radius: 4px; }
+
+/* Before the script runs (or without it): the list is a plain stack and only the first card shows */
+.svc-wheel:not(.is-ready) .svc-wheel__track { position: static; display: grid; gap: 10px; padding: 32px clamp(20px, 5vw, 64px); }
+.svc-wheel:not(.is-ready) .svc-chip { position: static; transform: none; width: fit-content; }
+.svc-wheel:not(.is-ready) .svc-card:not(:first-child) { display: none; }
+
+@media (max-width: 1023px) {
+  .svc-wheel { --svc-item: 60px; }
+  .svc-wheel__list { min-height: 380px; }
+  .svc-wheel__cards { width: min(100%, 360px); }
+  .svc-chip { height: 48px; padding: 0 22px 0 18px; font-size: 13px; }
+}
+@media (max-width: 560px) {
+  .svc-wheel__list { min-height: 340px; }
+  .svc-wheel__stage { min-height: 480px; padding: 40px 16px; }
+  .svc-chip { left: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-chip, .svc-card, .svc-card__media img, .svc-card__cap, .svc-wheel__ambient { transition: none; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .svc-chip, .svc-card, .svc-card__live, .svc-card__tag { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .svc-card { background: #1a1c1a; }
+}
