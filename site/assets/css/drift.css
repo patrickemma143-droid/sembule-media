@@ -284,3 +284,80 @@ body.home-page { overflow-x: clip; }
 .dd__desk { z-index: 1; }
 /* On phones the headline sits at 58% of the height, so the film is drawn taller to keep the camera behind it */
 @media (max-width: 760px) { .dd__bg { height: 116%; } }
+
+/* ---------- Liquid glass ----------
+   The cards are frosted panes over the moving film: the background blurs and brightens through them,
+   each keeps a whisper of its own colour (green, gold, clear), a bright rim catches the light along the
+   top edge, a soft sheen sits in the top-left corner, and a deep shadow lifts them off the desk.
+   Lens, mic and pointer stay solid objects. */
+.dd-player, .dd-mark, .dd-call, .dd-folder, .dd-mixer, .dd-paper, .dd-pass, .dd-photo {
+  --tint: rgba(255, 255, 255, .05);
+  --blur: 18px;
+  background:
+    radial-gradient(120% 85% at 8% 0%, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 52%),
+    linear-gradient(165deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .02) 55%, rgba(255, 255, 255, .06)),
+    var(--tint);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(170%) brightness(1.08);
+  backdrop-filter: blur(var(--blur)) saturate(170%) brightness(1.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .42),
+    inset 0 -1px 0 rgba(255, 255, 255, .07),
+    inset 0 0 0 1px rgba(255, 255, 255, .13),
+    inset 0 -1.2em 2.4em -1.6em rgba(255, 255, 255, .10),
+    0 1.8em 3.6em -1.5em rgba(0, 0, 0, .85),
+    0 .3em .8em -.3em rgba(0, 0, 0, .5);
+}
+.dd-player { --tint: rgba(4, 89, 42, .46); }
+.dd-mark   { --tint: rgba(243, 240, 232, .12); }
+.dd-call   { --tint: rgba(8, 10, 8, .42); }
+.dd-folder { --tint: rgba(191, 144, 0, .46); }
+.dd-mixer  { --tint: rgba(255, 255, 255, .05); }
+.dd-paper  { --tint: rgba(243, 240, 232, .07); }
+.dd-pass   { --tint: rgba(4, 89, 42, .52); }
+.dd-photo  { --tint: rgba(243, 240, 232, .1); }
+
+/* Inside the glass: inner panes are lighter glass too */
+.dd-call__bar { background: rgba(255, 255, 255, .05); box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .08); }
+.dd-call__bar i { background: rgba(255, 255, 255, .22); }
+.dd-plat { background: rgba(255, 255, 255, .06); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), inset 0 0 0 1px rgba(255, 255, 255, .06); }
+.dd-plat.is-live { background: rgba(191, 144, 0, .16); box-shadow: inset 0 0 0 .12em var(--dd-gold), inset 0 1px 0 rgba(255, 255, 255, .2); }
+.dd-player__screen { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .12); }
+
+/* Folder: the tab is glass of the same tint; the label reads light */
+.dd-folder::before { background: rgba(214, 163, 18, .5); -webkit-backdrop-filter: blur(var(--blur)); backdrop-filter: blur(var(--blur)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4); }
+.dd-folder span { color: #f3f0e8; }
+
+/* Mixer: the clip sits inset in a glass rim */
+.dd-mixer video { inset: .45em; width: calc(100% - .9em); height: calc(100% - .9em); border-radius: .65em; }
+.dd-mixer::after { inset: .45em; border-radius: .65em; }
+
+/* What we do: clear glass, light words, gold numbers */
+.home-dark .dd-paper .dd-paper__title { color: #f3f0e8; }
+.home-dark .dd-paper li { color: rgba(243, 240, 232, .86); }
+.dd-paper li b { color: var(--dd-gold); }
+.home-dark .dd-paper .dd-paper__foot { color: #f3f0e8; border-top-color: rgba(255, 255, 255, .16); }
+
+/* Pass: the lanyard slot is cut through the glass */
+.dd-pass::before { background: rgba(0, 0, 0, .55); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .6); }
+
+/* Photo frame: glass mount, light caption */
+.dd-photo { border-radius: .7em; }
+.dd-photo img, .dd-photo video { border-radius: .45em; }
+.dd-photo span { color: rgba(243, 240, 232, .85); }
+
+/* Phones: a lighter blur keeps the glass smooth while three clips play */
+@media (max-width: 760px) {
+  .dd-player, .dd-mark, .dd-call, .dd-folder, .dd-mixer, .dd-paper, .dd-pass, .dd-photo { --blur: 10px; }
+}
+/* No backdrop blur, or the visitor asked for less transparency: solid panes with the same tints and rims */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .dd-player, .dd-mark, .dd-call, .dd-folder, .dd-mixer, .dd-paper, .dd-pass, .dd-photo { background-color: #121412; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .dd-player, .dd-mark, .dd-call, .dd-folder, .dd-mixer, .dd-paper, .dd-pass, .dd-photo {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background-color: #121412;
+  }
+  .dd-folder::before { -webkit-backdrop-filter: none; backdrop-filter: none; background: #8a6a08; }
+}
