@@ -123,3 +123,15 @@
   .site-dark .pf-orbit h1 { font-size: clamp(30px, 8.6vw, 38px); }
   .pf-orbit__desc { font-size: 13.5px; }
 }
+
+/* Background film behind the orbit, held back by a dark shade so the glass and the words stay readable */
+.pf-orbit__bg { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; background: #120c04 center / cover no-repeat; pointer-events: none; }
+.pf-orbit__shade {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(48% 42% at 50% 52%, rgba(3, 4, 3, .78), rgba(3, 4, 3, .45) 70%, rgba(3, 4, 3, .7)),
+    linear-gradient(180deg, rgba(3, 4, 3, .75), rgba(3, 4, 3, .25) 30%, rgba(3, 4, 3, .35) 70%, rgba(3, 4, 3, .95));
+}

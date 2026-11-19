@@ -114,8 +114,17 @@
     render();
     requestAnimationFrame(frame);
   }
-  const start = () => { if (!running && onScreen && !document.hidden) { running = true; lastT = 0; requestAnimationFrame(frame); } };
-  const stop = () => { running = false; };
+  // Background film: loaded only when it will play (small file on phones); none with reduced motion or
+  // Save-Data, when the still stays. It plays and rests with the orbit (on screen, tab visible).
+  const bg = root.querySelector('[data-orbit-bg]');
+  const bgAllowed = bg && !reduced.matches && !navigator.connection?.saveData;
+  if (bgAllowed) bg.src = matchMedia('(max-width: 760px)').matches ? bg.dataset.srcSmall : bg.dataset.srcLarge;
+  const bgPlay = () => { if (bgAllowed) bg.play()?.catch(() => {}); };
+  const bgPause = () => { if (bgAllowed) bg.pause(); };
+  if (bgAllowed) bg.addEventListener('canplay', () => { if (onScreen && !document.hidden) bgPlay(); }, { once: true });
+
+  const start = () => { if (onScreen && !document.hidden) bgPlay(); if (!running && onScreen && !document.hidden) { running = true; lastT = 0; requestAnimationFrame(frame); } };
+  const stop = () => { running = false; bgPause(); };
 
   // Hover: slow everything while the pointer is over a card
   cards.forEach(card => {
@@ -129,7 +138,7 @@
     dragging = true; dragSpeed = 0;
     last = { x: e.clientX, y: e.clientY, t: performance.now() };
     root.classList.add('is-dragging');
-    root.setPointerCapture(e.pointerId);
+    try { root.setPointerCapture(e.pointerId); } catch (err) { /* pointer already gone */ }
   });
   root.addEventListener('pointermove', e => {
     if (!dragging || !last) return;
@@ -149,7 +158,7 @@
     if (!dragging) return;
     dragging = false; last = null;
     root.classList.remove('is-dragging');
-    if (root.hasPointerCapture?.(e.pointerId)) root.releasePointerCapture(e.pointerId);
+    try { if (root.hasPointerCapture?.(e.pointerId)) root.releasePointerCapture(e.pointerId); } catch (err) { /* already released */ }
   };
   root.addEventListener('pointerup', endDrag);
   root.addEventListener('pointercancel', endDrag);
