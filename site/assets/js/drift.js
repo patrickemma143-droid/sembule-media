@@ -116,11 +116,18 @@
     setMode('scatter');
   })));
 
-  // The clips on the desk (control room on the photo card, the switcher close-up on the mixer card):
+  // The background film behind the desk gets its source only when it will play: the small file on
+  // phones, none at all with reduced motion or Save-Data (its still image stays).
+  const saveData = navigator.connection?.saveData;
+  const bg = root.querySelector('[data-drift-bg]');
+  if (bg && !reduced.matches && !saveData) {
+    bg.src = matchMedia('(max-width: 900px)').matches ? bg.dataset.srcSmall : bg.dataset.srcLarge;
+  }
+
+  // The clips (background film, control room on the photo card, switcher close-up on the mixer card):
   // muted loops, only while the hero is on screen, never with reduced motion or Save-Data (posters stay).
-  const videos = [...root.querySelectorAll('[data-drift-video]')];
+  const videos = [...root.querySelectorAll('[data-drift-video], [data-drift-bg]')].filter(v => v.getAttribute('src') || v.src);
   if (videos.length) {
-    const saveData = navigator.connection?.saveData;
     let onScreen = false;
     const sync = () => {
       const run = onScreen && !document.hidden && !reduced.matches && !saveData;

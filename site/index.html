@@ -25,7 +25,7 @@
   <link rel="preload" href="./assets/fonts/Axiforma-Regular.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="./assets/fonts/Axiforma-SemiBold.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="./assets/css/fonts.css?v=brand-fonts-1"><link rel="stylesheet" href="./assets/css/motion.css?v=step5-1"><link rel="stylesheet" href="./assets/css/site.css?v=social-footer-20261008">
   <link rel="stylesheet" href="./assets/css/home.css?v=broadcast-1">
   <link rel="stylesheet" href="./assets/css/what-we-do.css?v=wwd-3">
-  <link rel="stylesheet" href="./assets/css/drift.css?v=drift-7">
+  <link rel="stylesheet" href="./assets/css/drift.css?v=drift-9">
   <script defer src="./assets/js/site.js?v=services-order-1"></script>
   <script defer src="./assets/js/vendor/gsap.min.js"></script>
   <script defer src="./assets/js/vendor/SplitText.min.js"></script>
@@ -33,7 +33,7 @@
   <script defer src="./assets/js/vendor/ScrollTrigger.min.js"></script>
   <script defer src="./assets/js/what-we-do.js?v=wwd-1"></script>
   <script defer src="./assets/js/home.js?v=intro-film-2"></script>
-  <script defer src="./assets/js/drift.js?v=drift-4"></script>
+  <script defer src="./assets/js/drift.js?v=drift-5"></script>
   <script defer src="./assets/js/vendor/lenis.min.js"></script><script defer src="./assets/js/motion.js?v=step5-1"></script>
   <script defer src="./assets/js/analytics.js"></script>
   <meta name="sembule-site-content" content="./content/site-content.json">
@@ -71,6 +71,10 @@
          Scatter / Align / Cluster. The h1 and lede are the site's own copy (data-site-owns), so the OS bridge
          cannot overwrite them. The previous photo-slideshow hero is in git history (commit ce5550b). -->
     <section class="dd" data-drift aria-label="Sembule Media">
+      <!-- Background film: a presenter live on camera, framed so the camera sits behind the headline.
+           The source is set by drift.js (small file on phones); still image with reduced motion or Save-Data. -->
+      <video class="dd__bg" muted loop playsinline preload="none" poster="./assets/video/hero-bg-studio.jpg" aria-hidden="true" data-drift-bg data-src-small="./assets/video/hero-bg-studio-640.mp4" data-src-large="./assets/video/hero-bg-studio.mp4"></video>
+      <div class="dd__bg-shade" aria-hidden="true"></div>
       <div class="dd__desk" data-drift-desk>
         <div class="dd__header" data-drift-header>
           <p class="dd__live dd__in" style="--d:0ms"><i aria-hidden="true"></i>Live production · Kampala</p>

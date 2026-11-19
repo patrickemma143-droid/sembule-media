@@ -44,7 +44,7 @@
   z-index: -1;
   inset: -40px -60px;
   content: "";
-  background: radial-gradient(closest-side, rgba(6, 7, 6, .82), rgba(6, 7, 6, 0));
+  background: radial-gradient(closest-side, rgba(6, 7, 6, .5), rgba(6, 7, 6, 0));
 }
 .dd__live {
   display: inline-flex;
@@ -267,3 +267,20 @@ body.home-page { overflow-x: clip; }
 .dd-player__screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
 .dd-player__screen::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, .65)); }
 .dd-player__screen .dd-player__bars { position: absolute; z-index: 1; right: .6em; bottom: .5em; left: .6em; height: 34%; gap: .25em; }
+
+/* Background film behind the desk: camera centred behind the headline, held well back by a dark,
+   slightly green shade so the objects and the words stay in front */
+.dd__bg { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; pointer-events: none; }
+.dd__bg-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(42% 38% at 50% 50%, rgba(6, 7, 6, .18), rgba(6, 7, 6, .55) 70%, rgba(6, 7, 6, .82) 100%),
+    linear-gradient(180deg, rgba(6, 7, 6, .55), rgba(6, 7, 6, .25) 35%, rgba(6, 7, 6, .35) 65%, rgba(6, 7, 6, .8)),
+    rgba(4, 89, 42, .12);
+}
+.dd__desk { z-index: 1; }
+/* On phones the headline sits at 58% of the height, so the film is drawn taller to keep the camera behind it */
+@media (max-width: 760px) { .dd__bg { height: 116%; } }
